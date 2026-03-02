@@ -32,7 +32,7 @@ New-VMSwitch -Name "EXT-INT"  -NetAdapterName "Wi-Fi" -AllowManagementOS $true
 #  Main VM Creation Function
 # -----------------------------------------------------------------------------
 
-function New-AZLab_VM
+function New-Lab_VM
 {
     <#
     .SYNOPSIS
@@ -78,15 +78,15 @@ function New-AZLab_VM
 
     .EXAMPLE
         # Create single VM from ISO
-        New-AZLab_VM -VMNames "ANC-RRAS01" -HyperVSwitch "EXT-INT" -AdapterCount 4 -ISOPath $vmiso_path
+        New-Lab_VM -VMNames "ANC-RRAS01" -HyperVSwitch "EXT-INT" -AdapterCount 4 -ISOPath $vmiso_path
 
     .EXAMPLE
         # Create two DCs from Server Core golden image
-        New-AZLab_VM -VMNames "DC01","DC02" -HyperVSwitch "ANC-Net" -RAM_GB 4 -GeneralizedImageCore
+        New-Lab_VM -VMNames "DC01","DC02" -HyperVSwitch "ANC-Net" -RAM_GB 4 -GeneralizedImageCore
 
     .EXAMPLE
         # File server with 6 data disks and dynamic memory
-        New-AZLab_VM -VMNames "FS01" -HyperVSwitch "JUN-Net" -RAM_GB 6 -nonOSdiskcount 6 -nonOSdisksize 200 -DynamicMemory -GeneralizedImageDE
+        New-Lab_VM -VMNames "FS01" -HyperVSwitch "JUN-Net" -RAM_GB 6 -nonOSdiskcount 6 -nonOSdisksize 200 -DynamicMemory -GeneralizedImageDE
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'ISOPath')]
@@ -284,7 +284,7 @@ function New-AZLab_VM
 }
 
 # Example call (commented)
-# New-AZLab_VM -VMNames "ANC-RRAS01" -HyperVSwitch EXT-INT -AdapterCount 4 -ISOPath $vmiso_path
+# New-Lab_VM -VMNames "ANC-RRAS01" -HyperVSwitch EXT-INT -AdapterCount 4 -ISOPath $vmiso_path
 
 # -----------------------------------------------------------------------------
 #  Add extra data disks to existing VM
