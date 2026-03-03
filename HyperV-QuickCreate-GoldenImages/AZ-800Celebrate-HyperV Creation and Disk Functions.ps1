@@ -346,9 +346,9 @@ function Add-Disks2VM{
 
 
 
-# -----------------------------------------------------------------------------
+# ===============================================================
 #  Initialize any Raw Offline Disks - RUN AS ADMIN
-# -----------------------------------------------------------------------------
+# ==============================================================
 function Initialize-RawOfflineDisks {
     <#
     .SYNOPSIS
@@ -395,19 +395,21 @@ function Initialize-RawOfflineDisks {
 }
 
 
-# -----------------------------------------------------------------------------
+# ===============================================================
 #  Reset Lab – Destructive – Removes everything - RUN AS ADMIN
-# -----------------------------------------------------------------------------
+#================================================================
 
 function _ResetLabNow {
     <#
     .SYNOPSIS
         Force-stop and completely delete ALL virtual machines and ALL .vhdx files 
-        in the default Virtual Hard Disks folder.
+        in the default Virtual Hard Disks folder. Deletes VMs and Disks.  Will also
+        ask "Remove Lab VMSwitches?".  If you answer yes, lab VM switches will be destroyed.  
 
     .DESCRIPTION
         Extremely destructive function — use only when you want to start from scratch.
         No confirmation is asked when called without -Confirm.
+        "Remove Lab VMSwitches?".  If you answer yes, lab VM switches will be destroyed.  
 
     .EXAMPLE
         _ResetLabNow
@@ -426,6 +428,13 @@ function _ResetLabNow {
 
     # Delete VMs
     Get-VM | Remove-VM -Confirm:$false -Force -Verbose *>&1
+    $test = Read-host "Remove Lab VMSwitches?"
+    if($test.toupper() -equal "YES"){
+        Get-VMSwitch | Where-Object -Property name -NotLike "Default Switch" | Remove-VMSwitch -Force -Verbose *>&1
+    
+    }else{
+        Write-Verbose "VM Switches Not Removed" -Verbose *>&1
+    }
 
 }
 
@@ -435,3 +444,4 @@ function _ResetLabNow {
 # ==============================================================================================================================
 Get-VM | Save-VM -Verbose *>&1
 Get-VM | Start-VM -Verbose *>&1
+
