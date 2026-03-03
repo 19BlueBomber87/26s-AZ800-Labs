@@ -256,6 +256,12 @@ Restart-Service RemoteAccess -Force -Verbose
 
 netsh routing ip nat show interface
 
-
+# ========================================================
+# Step  9 -Create 1 VM per LAN - Test Confirm DCHP and Internet Connectivity.  
+# ========================================================
+New-Lab_VM yahoo1 -HyperVSwitch ER-Net -GeneralizedImageCore
+New-Lab_VM yahoo2 -HyperVSwitch ANC-Net -GeneralizedImageCore
+New-Lab_VM yahoo3 -HyperVSwitch Nome-Net -GeneralizedImageCore
+New-Lab_VM yahoo4 -HyperVSwitch Jun-Net -GeneralizedImageCore
 
 
