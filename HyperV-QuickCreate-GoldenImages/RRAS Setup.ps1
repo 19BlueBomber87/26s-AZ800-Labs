@@ -4,11 +4,13 @@
 # Author:   Mark Kruse
 # Purpose:  Prepare golden images via SysPrep
 # Location: Anchorage, Alaska lab environment
-# =============================================================================
-# ===================================================
-# Step 1 - Create RRAS Server with 5 network adapters
+# ==========================================================================================================================================================
 # Use link below to get 'New-Lab_VM' command
 # https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-QuickCreate-GoldenImages/AZ-800Celebrate-HyperV%20Creation%20and%20Disk%20Functions.ps1
+# ==========================================================================================================================================================
+
+# ===================================================
+# Step 1 - Create RRAS Server with 5 network adapters
 # ===================================================
 New-Lab_VM -VMNames RRAS01 -HyperVSwitch ER-NET -RAM_GB 4GB -AdapterCount 5 -GeneralizedImageDE
 # ===================================================
@@ -271,6 +273,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
+
 
 
 
