@@ -259,9 +259,10 @@ netsh routing ip nat show interface
 # ========================================================
 # Step  9 -Create 1 VM per LAN - Test Confirm DCHP and Internet Connectivity.  
 # ========================================================
-New-Lab_VM yahoo1 -HyperVSwitch ER-Net -GeneralizedImageCore
-New-Lab_VM yahoo2 -HyperVSwitch ANC-Net -GeneralizedImageCore
-New-Lab_VM yahoo3 -HyperVSwitch Nome-Net -GeneralizedImageCore
-New-Lab_VM yahoo4 -HyperVSwitch Jun-Net -GeneralizedImageCore
+New-Lab_VM ER-DC01 -HyperVSwitch ER-Net -GeneralizedImageCore
+New-Lab_VM ANC-DC01 -HyperVSwitch ANC-Net -GeneralizedImageCore
+New-Lab_VM Nome-DC01 -HyperVSwitch Nome-Net -GeneralizedImageCore
+New-Lab_VM JUN-DC01 -HyperVSwitch Jun-Net -GeneralizedImageCore
+
 
 
