@@ -27,9 +27,9 @@ New-VMSwitch -Name "JUN-Net"  -SwitchType Private -Verbose *>&1
 New-VMSwitch -Name "Linux-Net" -SwitchType Private -Verbose *>&1
 New-VMSwitch -Name "EXT-INT"  -NetAdapterName "Wi-Fi" -AllowManagementOS $true
 #>
-
+# ALL FUNCTIONS NEED TO BE RUN AS ADMIN
 # -----------------------------------------------------------------------------
-#  Main VM Creation Function
+#  Main VM Creation Function - RUN AS ADMIN
 # -----------------------------------------------------------------------------
 
 function New-Lab_VM
@@ -287,7 +287,7 @@ function New-Lab_VM
 # New-AZLab_VM -VMNames "ANC-RRAS01" -HyperVSwitch EXT-INT -AdapterCount 4 -ISOPath $vmiso_path
 
 # -----------------------------------------------------------------------------
-#  Add extra data disks to existing VM
+#  Add extra data disks to existing VM - RUN AS ADMIN
 # -----------------------------------------------------------------------------
 
 function Add-Disks2VM{
@@ -346,7 +346,9 @@ function Add-Disks2VM{
 
 
 
-
+# -----------------------------------------------------------------------------
+#  Initialize any Raw Offline Disks - RUN AS ADMIN
+# -----------------------------------------------------------------------------
 function Initialize-RawOfflineDisks {
     <#
     .SYNOPSIS
@@ -394,7 +396,7 @@ function Initialize-RawOfflineDisks {
 
 
 # -----------------------------------------------------------------------------
-#  Reset Lab – Destructive – Removes everything
+#  Reset Lab – Destructive – Removes everything - RUN AS ADMIN
 # -----------------------------------------------------------------------------
 
 function _ResetLabNow {
@@ -424,4 +426,5 @@ function _ResetLabNow {
 
     # Delete VMs
     Get-VM | Remove-VM -Confirm:$false -Force -Verbose *>&1
+
 }
