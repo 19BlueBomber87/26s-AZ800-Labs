@@ -429,7 +429,7 @@ function _ResetLabNow {
     # Delete VMs
     Get-VM | Remove-VM -Confirm:$false -Force -Verbose *>&1
     $test = Read-host "Remove Lab VMSwitches?"
-    if($test.toupper() -eq "YES"){
+    if($test.toupper() -EQ "YES"){
         Get-VMSwitch | Where-Object -Property name -NotLike "Default Switch" | Remove-VMSwitch -Force -Verbose *>&1
     
     }else{
@@ -444,5 +444,6 @@ function _ResetLabNow {
 # ==============================================================================================================================
 Get-VM | Save-VM -Verbose *>&1
 Get-VM | Start-VM -Verbose *>&1
+
 
 
