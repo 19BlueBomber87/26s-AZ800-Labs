@@ -264,6 +264,14 @@ New-Lab_VM ANC-DC01 -HyperVSwitch ANC-Net -GeneralizedImageCore
 New-Lab_VM Nome-DC01 -HyperVSwitch Nome-Net -GeneralizedImageCore
 New-Lab_VM JUN-DC01 -HyperVSwitch Jun-Net -GeneralizedImageCore
 
+#Configure servers to respond to ping
+Get-NetFirewallRule -DisplayName "*Echo Request*" | Format-Table Name, Enabled, Direction, Action
+New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
+    -Direction Inbound `
+    -Protocol ICMPv4 `
+    -IcmpType 8 `
+    -Action Allow
+
 
 
 
