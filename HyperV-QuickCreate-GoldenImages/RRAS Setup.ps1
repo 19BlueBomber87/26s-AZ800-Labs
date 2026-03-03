@@ -131,7 +131,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
 # Step  6 -Install DHCP and Remote Access Roles
 # ========================================================
 
-Install-WindowsFeature -Name DHCP, RemoteAccess -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
+Install-WindowsFeature -Name DHCP, RemoteAccess -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
 
 # ========================================================
 # Step  7 -Configure DHCP - Set DHCP Scopes - 1 DHCP Scope Per LAN
@@ -251,4 +251,5 @@ Restart-Service RemoteAccess -Force -Verbose
 # 5. Verify NAT is now installed and interfaces are listed
 
 netsh routing ip nat show interface
+
 
