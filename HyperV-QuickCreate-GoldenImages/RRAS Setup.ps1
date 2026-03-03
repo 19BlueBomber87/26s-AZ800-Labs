@@ -234,7 +234,7 @@ New-NetNat -Name "NAT-Nome" -InternalIPInterfaceAddressPrefix "192.168.88.0/24" 
 New-NetNat -Name "NAT-JUN" -InternalIPInterfaceAddressPrefix "192.168.99.0/24" -Verbose
 
 # NAT for fourth LAN (e.g., ER-NET 192.168.100.0/24)
-New-NetNat -Name "NAT-Linux" -InternalIPInterfaceAddressPrefix "192.168.55.0/24" -Verbose
+New-NetNat -Name "NAT-ER" -InternalIPInterfaceAddressPrefix "192.168.100.0/24" -Verbose
 
 # 1. Install/enable the NAT protocol in RRAS
 netsh routing ip nat install
@@ -263,6 +263,7 @@ New-Lab_VM ER-DC01 -HyperVSwitch ER-Net -GeneralizedImageCore
 New-Lab_VM ANC-DC01 -HyperVSwitch ANC-Net -GeneralizedImageCore
 New-Lab_VM Nome-DC01 -HyperVSwitch Nome-Net -GeneralizedImageCore
 New-Lab_VM JUN-DC01 -HyperVSwitch Jun-Net -GeneralizedImageCore
+
 
 
 
