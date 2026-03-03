@@ -428,3 +428,8 @@ function _ResetLabNow {
     Get-VM | Remove-VM -Confirm:$false -Force -Verbose *>&1
 
 }
+
+# -----------------------------------------------------------------------------
+#  Save Lab - RUN AS ADMIN
+# -----------------------------------------------------------------------------
+Get-VM | Save-VM -Verbose *>&1
