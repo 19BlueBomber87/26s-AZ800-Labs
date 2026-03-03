@@ -22,11 +22,11 @@
 # -----------------------------------------------------------------------------
 #  Virtual Switch Creation (one-time setup – run once) - RUN AS ADMIN
 # -----------------------------------------------------------------------------
-New-VMSwitch -Name "ANC-Net"  -SwitchType Private -Verbose *>&1
-New-VMSwitch -Name "Nome-Net" -SwitchType Private -Verbose *>&1
-New-VMSwitch -Name "JUN-Net"  -SwitchType Private -Verbose *>&1
-New-VMSwitch -Name "Linux-Net" -SwitchType Private -Verbose *>&1
-New-VMSwitch -Name "EXT-INT"  -NetAdapterName "Wi-Fi" -AllowManagementOS $true # 
+# New-VMSwitch -Name "ANC-Net"  -SwitchType Private -Verbose *>&1
+# New-VMSwitch -Name "Nome-Net" -SwitchType Private -Verbose *>&1
+# New-VMSwitch -Name "JUN-Net"  -SwitchType Private -Verbose *>&1
+# New-VMSwitch -Name "Linux-Net" -SwitchType Private -Verbose *>&1
+# New-VMSwitch -Name "EXT-INT"  -NetAdapterName "Wi-Fi" -AllowManagementOS $true # 
 # ALL FUNCTIONS NEED TO BE RUN AS ADMIN
 # -----------------------------------------------------------------------------
 #  Main VM Creation Function - RUN AS ADMIN
@@ -444,6 +444,7 @@ function _ResetLabNow {
 # ==============================================================================================================================
 Get-VM | Save-VM -Verbose *>&1
 Get-VM | Start-VM -Verbose *>&1
+
 
 
 
