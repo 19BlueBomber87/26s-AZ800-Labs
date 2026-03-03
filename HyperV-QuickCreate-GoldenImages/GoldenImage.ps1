@@ -1,5 +1,5 @@
 # =============================================================================
-# Hyper-V Lab Creation & Management Scripts
+# Hyper-V Lab - Prepare Golden Image with SysPrep
 # =============================================================================
 # Author:   Mark Kruse
 # Purpose:  Prepare golden images via SysPrep
@@ -92,4 +92,5 @@ New-Lab_VM -VMNames yahoo -HyperVSwitch ext-int -GeneralizedImageCore -RAM_GB 2G
 # GUI                                    
 # You can copy and rename the golden image with the GUI.  
 # ============================================
+
 # 
