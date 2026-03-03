@@ -429,7 +429,10 @@ function _ResetLabNow {
 
 }
 
-# -----------------------------------------------------------------------------
-#  Save Lab - RUN AS ADMIN
-# -----------------------------------------------------------------------------
+# ==============================================================================================================================
+# Save Lab - RUN AS ADMIN - Saving/resuming a running state = fast resume + preserved work + lower peak load (and often lower cost)
+# Full boot: slow (minutes for heavy VMs), high initial CPU/disk/IO spike as OS/services reload.
+# ==============================================================================================================================
 Get-VM | Save-VM -Verbose *>&1
+Get-VM | Start-VM -Verbose *>&1
+
