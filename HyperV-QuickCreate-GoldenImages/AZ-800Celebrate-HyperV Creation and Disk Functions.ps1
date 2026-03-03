@@ -1,9 +1,12 @@
 # =============================================================================
-# Hyper-V Lab Creation 
+# Hyper-V Lab Creation - Quick Create Tools for Hyper-V VMs
 # =============================================================================
 # Author:   Mark Kruse
-# Purpose:  Quick Create Tools- Create VMs from ISO or golden images,
-#           add extra network adapters and data disks.  Also a tool to Initialize Raw Offline Disks quickly
+# Purpose:  Quick Create Tools- A tool to Create VMs from ISO or golden images.  This tool allows to control the number of network adapters attached to the VM at creation time.  
+#           A tool to add extra disks to a VM.  
+#           A tool to 'Initialize Raw Offline Disks' quickly and creates logical drives formatted with NTFS and assigns drive letter.
+#           A Tool to quickly delete all VMs and their disks.
+#          
 # Location: Anchorage, Alaska lab environment
 # =============================================================================
 
@@ -435,4 +438,5 @@ function _ResetLabNow {
 # ==============================================================================================================================
 Get-VM | Save-VM -Verbose *>&1
 Get-VM | Start-VM -Verbose *>&1
+
 
