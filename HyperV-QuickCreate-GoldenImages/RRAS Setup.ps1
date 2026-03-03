@@ -242,12 +242,13 @@ netsh routing ip nat add interface "EXT-INT" full
 netsh routing ip nat add interface "ANC-NET" private
 netsh routing ip nat add interface "Nome-NET" private
 netsh routing ip nat add interface "JUN-NET" private
-# Add more if you have a fourth LAN, e.g.:
+netsh routing ip nat add interface "ER-NET" private
+# Add more if you have a 5th LAN, e.g.:
 # netsh routing ip nat add interface "Linux-NET" private
-
 # 4. Restart RRAS service to apply changes
 Restart-Service RemoteAccess -Force -Verbose
 
 # 5. Verify NAT is now installed and interfaces are listed
 
 netsh routing ip nat show interface
+
