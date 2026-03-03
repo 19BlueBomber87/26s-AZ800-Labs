@@ -7,6 +7,8 @@
 # =============================================================================
 # ===================================================
 # Step 1 - Create RRAS Server with 5 network adapters
+# Use link below to get 'New-Lab_VM' command
+# https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-QuickCreate-GoldenImages/AZ-800Celebrate-HyperV%20Creation%20and%20Disk%20Functions.ps1
 # ===================================================
 New-Lab_VM -VMNames RRAS01 -HyperVSwitch ER-NET -RAM_GB 4GB -AdapterCount 5 -GeneralizedImageDE
 # ===================================================
@@ -253,6 +255,7 @@ Restart-Service RemoteAccess -Force -Verbose
 # 5. Verify NAT is now installed and interfaces are listed
 
 netsh routing ip nat show interface
+
 
 
 
