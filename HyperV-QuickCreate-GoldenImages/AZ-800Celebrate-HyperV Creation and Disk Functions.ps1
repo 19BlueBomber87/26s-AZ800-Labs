@@ -25,7 +25,7 @@
 function CreateLabSwitches {
     <#
     .SYNOPSIS
-        Creates the standard lab private virtual switches (ANC-Net, Nome-Net, JUN-Net, Linux-Net)
+        Creates the standard lab private virtual switches (ANC-Net, Nome-Net, JUN-Net, ER-Net)
         and one external switch (EXT-INT) bound to the Wi-Fi adapter with host management allowed.
         Skips creation if a switch with the same name already exists.
         Extremely non-destructive — safe to run multiple times.
@@ -44,7 +44,7 @@ function CreateLabSwitches {
         "ANC-Net",
         "Nome-Net",
         "JUN-Net",
-        "Linux-Net"
+        "ER-Net"
     )
 
     foreach ($name in $privateSwitches) {
@@ -499,5 +499,6 @@ function SaveAllRunningVMs {
 
     Write-Host "All running VMs have been saved." -ForegroundColor Green
 }
+
 
 
