@@ -229,7 +229,7 @@ New-NetNat -Name "NAT-Nome" -InternalIPInterfaceAddressPrefix "192.168.88.0/24" 
 # NAT for third LAN (e.g., JUN-NET 192.168.99.0/24)
 New-NetNat -Name "NAT-JUN" -InternalIPInterfaceAddressPrefix "192.168.99.0/24" -Verbose
 
-# NAT for fourth LAN (e.g., Linux-NET 192.168.55.0/24)
+# NAT for fourth LAN (e.g., ER-NET 192.168.100.0/24)
 New-NetNat -Name "NAT-Linux" -InternalIPInterfaceAddressPrefix "192.168.55.0/24" -Verbose
 
 # 1. Install/enable the NAT protocol in RRAS
@@ -249,4 +249,5 @@ netsh routing ip nat add interface "JUN-NET" private
 Restart-Service RemoteAccess -Force -Verbose
 
 # 5. Verify NAT is now installed and interfaces are listed
+
 netsh routing ip nat show interface
