@@ -92,5 +92,3 @@ New-Lab_VM -VMNames yahoo -HyperVSwitch ext-int -GeneralizedImageCore -RAM_GB 2G
 # GUI                                    
 # You can copy and rename the golden image with the GUI.  
 # ============================================
-
-# 
