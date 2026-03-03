@@ -209,6 +209,8 @@ Set-DhcpServerv4OptionValue -ScopeId "192.168.100.0" -DnsServer $DnsServer, $Dns
 # Activate the scope
 Set-DhcpServerv4Scope -ScopeId "192.168.100.0" -State Active  -Verbose *>&1
 
+# Check
+Get-DhcpServerv4Scope
 
 # ========================================================
 # Step  8 -Configure Routing - Use GUI or Powershell
@@ -251,5 +253,6 @@ Restart-Service RemoteAccess -Force -Verbose
 # 5. Verify NAT is now installed and interfaces are listed
 
 netsh routing ip nat show interface
+
 
 
