@@ -82,11 +82,11 @@ function New-Lab_VM
 
     .EXAMPLE
         # Create two DCs from Server Core golden image
-        New-Lab_VM -VMNames "DC01","DC02" -HyperVSwitch "ANC-Net" -RAM_GB 4 -GeneralizedImageCore
+        New-Lab_VM -VMNames "DC01","DC02" -HyperVSwitch "ANC-Net" -RAM_GB 4GB -GeneralizedImageCore
 
     .EXAMPLE
         # File server with 6 data disks and dynamic memory
-        New-Lab_VM -VMNames "FS01" -HyperVSwitch "JUN-Net" -RAM_GB 6 -nonOSdiskcount 6 -nonOSdisksize 200 -DynamicMemory -GeneralizedImageDE
+        New-Lab_VM -VMNames "FS01" -HyperVSwitch "JUN-Net" -RAM_GB 6GB -nonOSdiskcount 6 -nonOSdisksize 200 -DynamicMemory -GeneralizedImageDE
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'ISOPath')]
