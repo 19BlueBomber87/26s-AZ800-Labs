@@ -10,27 +10,66 @@
 # Location: Anchorage, Alaska lab environment
 # =============================================================================
 
-# -----------------------------------------------------------------------------
+# ===============================================================
 #  Preparation Steps – Golden Image Creation (manual / one-time commands)
-# -----------------------------------------------------------------------------
+# ===============================================================
 # Sysprep the reference machine
 # C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
-
 # After shutdown → Copy .vhdx → rename to GoldenImage-*.vhdx
-#>
 
-# -----------------------------------------------------------------------------
-#  Virtual Switch Creation (one-time setup – run once) - RUN AS ADMIN
-# -----------------------------------------------------------------------------
-# New-VMSwitch -Name "ANC-Net"  -SwitchType Private -Verbose *>&1
-# New-VMSwitch -Name "Nome-Net" -SwitchType Private -Verbose *>&1
-# New-VMSwitch -Name "JUN-Net"  -SwitchType Private -Verbose *>&1
-# New-VMSwitch -Name "Linux-Net" -SwitchType Private -Verbose *>&1
-# New-VMSwitch -Name "EXT-INT"  -NetAdapterName "Wi-Fi" -AllowManagementOS $true # 
-# ALL FUNCTIONS NEED TO BE RUN AS ADMIN
-# -----------------------------------------------------------------------------
+# ===============================================================
+# CreateLabSwitches – Creates the standard lab private switches + external
+#================================================================
+function CreateLabSwitches {
+    <#
+    .SYNOPSIS
+        Creates the standard lab private virtual switches (ANC-Net, Nome-Net, JUN-Net, Linux-Net)
+        and one external switch (EXT-INT) bound to the Wi-Fi adapter with host management allowed.
+        Skips creation if a switch with the same name already exists.
+        Extremely non-destructive — safe to run multiple times.
+    .DESCRIPTION
+        Builds the networking foundation for the lab environment.
+        Uses private switches for isolated lab segments and one external switch for internet/host access.
+        No parameters required — just run it.
+    .EXAMPLE
+        CreateLabSwitches
+    .EXAMPLE
+        CreateLabSwitches -Confirm    # (Confirm has no real effect here)
+    #>
+
+    # Private lab switches (isolated networks)
+    $privateSwitches = @(
+        "ANC-Net",
+        "Nome-Net",
+        "JUN-Net",
+        "Linux-Net"
+    )
+
+    foreach ($name in $privateSwitches) {
+        if (-not (Get-VMSwitch -Name $name -ErrorAction SilentlyContinue)) {
+            Write-Verbose "Creating private switch: $name" -Verbose
+            New-VMSwitch -Name $name -SwitchType Private -Verbose *>&1
+        } else {
+            Write-Verbose "Switch $name already exists — skipping" -Verbose
+        }
+    }
+
+    # External switch (bound to Wi-Fi adapter, host can share connection)
+    $extName = "EXT-INT"
+    $adapterName = "Wi-Fi"   # ← change this if your Wi-Fi adapter has a different name
+
+    if (-not (Get-VMSwitch -Name $extName -ErrorAction SilentlyContinue)) {
+        Write-Verbose "Creating external switch: $extName (using adapter: $adapterName)" -Verbose
+        New-VMSwitch -Name $extName -NetAdapterName $adapterName -AllowManagementOS $true -Verbose *>&1
+    } else {
+        Write-Verbose "External switch $extName already exists — skipping" -Verbose
+    }
+
+    Write-Host "Lab switches creation complete." -ForegroundColor Green
+}
+# ===============================================================
 #  Main VM Creation Function - RUN AS ADMIN
-# -----------------------------------------------------------------------------
+# ===============================================================
 
 function New-Lab_VM
 {
@@ -286,9 +325,9 @@ function New-Lab_VM
 # Example call (commented)
 # New-AZLab_VM -VMNames "ANC-RRAS01" -HyperVSwitch EXT-INT -AdapterCount 4 -ISOPath $vmiso_path
 
-# -----------------------------------------------------------------------------
+# ===============================================================
 #  Add extra data disks to existing VM - RUN AS ADMIN
-# -----------------------------------------------------------------------------
+# ===============================================================
 
 function Add-Disks2VM{
     <#
@@ -342,8 +381,6 @@ function Add-Disks2VM{
         Add-VMHardDiskDrive -VMName $VMName -Path $disk.path -Verbose *>&1
     }
 }
-
-
 
 
 # ===============================================================
@@ -444,7 +481,3 @@ function _ResetLabNow {
 # ==============================================================================================================================
 Get-VM | Save-VM -Verbose *>&1
 Get-VM | Start-VM -Verbose *>&1
-
-
-
-
