@@ -13,7 +13,7 @@
 # ===============================================================
 #  Preparation Steps – Golden Image Creation (manual / one-time commands)
 # ===============================================================
-# These are steps to make configure Golden Image -> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-QuickCreate-GoldenImages/GoldenImage.ps1
+# These are steps to configure a Golden Image -> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-QuickCreate-GoldenImages/GoldenImage.ps1
 # Sysprep the reference machine
 # C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
 # After shutdown → Copy .vhdx → rename to GoldenImage-ServerCore.vhdx or GoldenImage-DesktopExperience.vhdx and move to C:\GoldenImages
