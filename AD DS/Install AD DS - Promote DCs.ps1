@@ -200,9 +200,8 @@ Install-ADDSForest `
 -InstallDns:$true `
 -LogPath "C:\Windows\NTDS" `
 -NoRebootOnCompletion:$false `
--SiteName "EagleRiver" `
 -SysvolPath "C:\Windows\SYSVOL" `
--SafeModeAdministratorPassword  $DSRMPassword ` #(ConvertTo-SecureString "YourPasswordHere" -AsPlainTe)
+-SafeModeAdministratorPassword  $DSRMPassword ` #(ConvertTo-SecureString "YourPasswordHere" -AsPlainText)
 -Force:$true
 
 # ANC-DC01, NOME-DC01 and ER-DC01 share a Schema
@@ -301,3 +300,4 @@ $remoteUser = Get-ADUser -Identity "Megaman" -Server "minecraftmoose.com"  # or 
 # Now add it to the group
 Add-ADGroupMember -Identity "forest2DL" -Members $remoteUser -Verbose
 Add-ADGroupMember -Identity "Administrators" -Members $remoteUser -Verbose
+
