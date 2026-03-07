@@ -6,7 +6,7 @@
 # Location: Anchorage, Alaska lab environment
 # =============================================================================
 New-Lab_VM -VMNames GoldenImage-ServerCore -HyperVSwitch EXT-INT -ISOPath C:\ISO\20348.169.210806-2348.fe_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
-New-Lab_VM-VMNames GoldenImage-DesktopExperience -HyperVSwitch EXT-INT -ISOPath C:\ISO\20348.169.210806-2348.fe_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
+New-Lab_VM -VMNames GoldenImage-DesktopExperience -HyperVSwitch EXT-INT -ISOPath C:\ISO\20348.169.210806-2348.fe_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
 
 #enter Audit Mode - At the very first OOBE screen CTRL + SHIFT + F3
 #intsall Updates
@@ -92,3 +92,4 @@ New-Lab_VM -VMNames yahoo -HyperVSwitch ext-int -GeneralizedImageCore -RAM_GB 2G
 # GUI                                    
 # You can copy and rename the golden image with the GUI.  
 # ============================================
+
