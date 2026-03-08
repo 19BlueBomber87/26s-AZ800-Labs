@@ -28,7 +28,7 @@ New-VMSwitch -Name LINUX-NET -SwitchType Private -Verbose *>&1
 # Step 3 - Disable ipv6 and Change network adapter names
 # ========================================================
 $adapters = Get-NetAdapter
-$NewAdapterNames = "EXT-INT", "ANC-NET", "Nome-NET", "JUN-NET", "ER-NET, "LINUX-NET";
+$NewAdapterNames = "EXT-INT", "ANC-NET", "Nome-NET", "JUN-NET", "ER-NET", "LINUX-NET"
 $index = 0
 foreach($adapter in $adapters){
     Rename-NetAdapter -Name $adapter.Name -NewName $NewAdapterNames[$index]
@@ -274,6 +274,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
+
 
 
 
