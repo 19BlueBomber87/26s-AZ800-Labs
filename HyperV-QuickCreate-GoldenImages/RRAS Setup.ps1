@@ -123,6 +123,9 @@ Set-DnsClientServerAddress -InterfaceAlias ANC-NET -ServerAddresses 8.8.8.8 -Ver
 New-NetIPAddress -InterfaceAlias ER-NET -IPAddress 192.168.100.1 -PrefixLength 24 -Verbose *>&1
 Set-DnsClientServerAddress -InterfaceAlias ANC-NET -ServerAddresses 8.8.8.8 -Verbose *>&1
 
+New-NetIPAddress -InterfaceAlias ER-NET -IPAddress 192.168.11.1 -PrefixLength 24 -Verbose *>&1
+Set-DnsClientServerAddress -InterfaceAlias ANC-NET -ServerAddresses 8.8.8.8 -Verbose *>&1
+
 
 #Configure server to respond to ping
 Get-NetFirewallRule -DisplayName "*Echo Request*" | Format-Table Name, Enabled, Direction, Action
@@ -217,6 +220,28 @@ Set-DhcpServerv4Scope -ScopeId "192.168.100.0" -State Active  -Verbose *>&1
 # Check
 Get-DhcpServerv4Scope
 
+$DhcpServer = $env:COMPUTERNAME
+$ScopeName  = "yahoomoose.com DCHP Scope"
+$ScopeStart = "192.168.11.1"
+$ScopeEnd   = "192.168.11.254"
+$SubnetMask = "255.255.255.0"
+$Gateway    = "192.168.11.1"
+$DnsServer  = "192.168.11.7"   # adjust as needed
+$DomainName = "yahoomoose.com" # adjust as needed
+
+# Create DHCP scope
+Add-DhcpServerv4Scope -Name $ScopeName -StartRange $ScopeStart -EndRange $ScopeEnd -SubnetMask $SubnetMask -Verbose *>&1
+Add-DhcpServerv4ExclusionRange -ScopeId "192.168.11.0" -StartRange "192.168.11.1" -EndRange "192.168.11.9" -Verbose *>&1
+# Configure scope options
+Set-DhcpServerv4OptionValue -ScopeId "192.168.11.0" -Router $Gateway -Verbose *>&1
+Set-DhcpServerv4OptionValue -ScopeId "192.168.11.0" -DnsServer $DnsServer -DnsDomain $DomainName -Verbose *>&1
+
+# Activate the scope
+Set-DhcpServerv4Scope -ScopeId "192.168.11.0" -State Active  -Verbose *>&1
+
+Write-Verbose -Message "DHCP configuration complete." -Verbose *>&1
+
+
 # ========================================================
 # Step  8 -Configure Routing - Use GUI or Powershell
 # ========================================================
@@ -239,6 +264,10 @@ New-NetNat -Name "NAT-JUN" -InternalIPInterfaceAddressPrefix "192.168.99.0/24" -
 # NAT for fourth LAN (e.g., ER-NET 192.168.100.0/24)
 New-NetNat -Name "NAT-ER" -InternalIPInterfaceAddressPrefix "192.168.100.0/24" -Verbose
 
+# NAT for fourth LAN (e.g., LINUX-NET 192.168.11.0/24)
+New-NetNat -Name "NAT-LINUX" -InternalIPInterfaceAddressPrefix "192.168.11.0/24" -Verbose
+
+
 # 1. Install/enable the NAT protocol in RRAS
 netsh routing ip nat install
 
@@ -250,6 +279,8 @@ netsh routing ip nat add interface "ANC-NET" private
 netsh routing ip nat add interface "Nome-NET" private
 netsh routing ip nat add interface "JUN-NET" private
 netsh routing ip nat add interface "ER-NET" private
+netsh routing ip nat add interface "LINUX-NET" private
+
 # Add more if you have a 5th LAN, e.g.:
 # netsh routing ip nat add interface "Linux-NET" private
 # 4. Restart RRAS service to apply changes
@@ -266,6 +297,7 @@ New-Lab_VM ER-DC01 -HyperVSwitch ER-Net -GeneralizedImageCore
 New-Lab_VM ANC-DC01 -HyperVSwitch ANC-Net -GeneralizedImageCore
 New-Lab_VM Nome-DC01 -HyperVSwitch Nome-Net -GeneralizedImageCore
 New-Lab_VM JUN-DC01 -HyperVSwitch Jun-Net -GeneralizedImageCore
+New-MMF_VM -VMNames linux01 -HyperVSwitch linux-net -RAM_GB 2GB -ISOPath C:\ISO\ubuntu-24.04.3-live-server-amd64.iso
 
 #Configure servers to respond to ping
 Get-NetFirewallRule -DisplayName "*Echo Request*" | Format-Table Name, Enabled, Direction, Action
@@ -274,6 +306,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
+
 
 
 
