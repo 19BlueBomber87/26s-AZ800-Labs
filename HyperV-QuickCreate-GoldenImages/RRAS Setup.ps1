@@ -12,7 +12,7 @@
 # ===================================================
 # Step 1 - Create RRAS Server with 5 network adapters
 # ===================================================
-New-Lab_VM -VMNames RRAS01 -HyperVSwitch ER-NET -RAM_GB 4GB -AdapterCount 5 -GeneralizedImageDE
+New-Lab_VM -VMNames YAHOO-RRAS01 -HyperVSwitch ER-NET -RAM_GB 4GB -AdapterCount 5 -GeneralizedImageDE
 # ===================================================
 # Step 2 - Create Hyper-V Switches
 # One external switch for path way to internet
@@ -22,12 +22,13 @@ New-VMSwitch -Name "EXT-INT"  -NetAdapterName "Wi-Fi" -AllowManagementOS $true
 New-VMSwitch -Name ANC-NET -SwitchType Private -Verbose *>&1
 New-VMSwitch -Name Nome-NET -SwitchType Private -Verbose *>&1
 New-VMSwitch -Name JUN-NET -SwitchType Private -Verbose *>&1
+New-VMSwitch -Name LINUX-NET -SwitchType Private -Verbose *>&1
 
 # ========================================================
 # Step 3 - Disable ipv6 and Change network adapter names
 # ========================================================
 $adapters = Get-NetAdapter
-$NewAdapterNames = "EXT-INT", "ANC-NET", "Nome-NET", "JUN-NET", "ER-NET"
+$NewAdapterNames = "EXT-INT", "ANC-NET", "Nome-NET", "JUN-NET", "ER-NET, LINUX-NET"
 $index = 0
 foreach($adapter in $adapters){
     Rename-NetAdapter -Name $adapter.Name -NewName $NewAdapterNames[$index]
@@ -273,6 +274,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
+
 
 
 
