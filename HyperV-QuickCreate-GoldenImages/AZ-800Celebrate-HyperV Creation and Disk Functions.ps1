@@ -44,7 +44,8 @@ function CreateLabSwitches {
         "ANC-Net",
         "Nome-Net",
         "JUN-Net",
-        "ER-Net"
+        "ER-Net",
+        "LINUX-Net"
     )
 
     foreach ($name in $privateSwitches) {
@@ -499,6 +500,7 @@ function SaveAllRunningVMs {
 
     Write-Host "All running VMs have been saved." -ForegroundColor Green
 }
+
 
 
 
