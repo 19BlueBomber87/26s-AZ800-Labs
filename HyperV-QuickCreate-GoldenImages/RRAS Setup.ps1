@@ -297,7 +297,7 @@ New-Lab_VM ER-DC01 -HyperVSwitch ER-Net -GeneralizedImageCore
 New-Lab_VM ANC-DC01 -HyperVSwitch ANC-Net -GeneralizedImageCore
 New-Lab_VM Nome-DC01 -HyperVSwitch Nome-Net -GeneralizedImageCore
 New-Lab_VM JUN-DC01 -HyperVSwitch Jun-Net -GeneralizedImageCore
-New-MMF_VM -VMNames linux01 -HyperVSwitch linux-net -RAM_GB 2GB -ISOPath C:\ISO\ubuntu-24.04.3-live-server-amd64.iso
+New-Lab_VM -VMNames linux01 -HyperVSwitch linux-net -RAM_GB 2GB -ISOPath C:\ISO\ubuntu-24.04.3-live-server-amd64.iso
 
 #Configure servers to respond to ping
 Get-NetFirewallRule -DisplayName "*Echo Request*" | Format-Table Name, Enabled, Direction, Action
@@ -306,6 +306,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
+
 
 
 
