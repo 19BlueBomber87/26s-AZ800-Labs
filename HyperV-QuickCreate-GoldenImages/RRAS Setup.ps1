@@ -300,8 +300,7 @@ netsh routing ip nat add interface "LINUX-NET" private
 Restart-Service RemoteAccess -Force -Verbose
 
 # 5. Verify NAT is now installed and interfaces are listed
-
-netsh routing ip nat show interface
+Get-NetNat
 
 # ========================================================
 # Step  9 -Create 1 VM per LAN - Test Confirm DCHP and Internet Connectivity.  
@@ -319,6 +318,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
+
 
 
 
