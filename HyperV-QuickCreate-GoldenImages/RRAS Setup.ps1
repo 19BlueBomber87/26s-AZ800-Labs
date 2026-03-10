@@ -115,16 +115,16 @@ New-NetIPAddress -InterfaceAlias ANC-NET -IPAddress 192.168.77.1 -PrefixLength 2
 Set-DnsClientServerAddress -InterfaceAlias ANC-NET -ServerAddresses 8.8.8.8 -Verbose *>&1
 
 New-NetIPAddress -InterfaceAlias Nome-NET -IPAddress 192.168.88.1 -PrefixLength 24 -Verbose *>&1
-Set-DnsClientServerAddress -InterfaceAlias ANC-NET -ServerAddresses 8.8.8.8 -Verbose *>&1
+Set-DnsClientServerAddress -InterfaceAlias NOME-NET -ServerAddresses 8.8.8.8 -Verbose *>&1
 
 New-NetIPAddress -InterfaceAlias JUN-NET -IPAddress 192.168.99.1 -PrefixLength 24 -Verbose *>&1
-Set-DnsClientServerAddress -InterfaceAlias ANC-NET -ServerAddresses 8.8.8.8 -Verbose *>&1
+Set-DnsClientServerAddress -InterfaceAlias JUN-NET -ServerAddresses 8.8.8.8 -Verbose *>&1
 
 New-NetIPAddress -InterfaceAlias ER-NET -IPAddress 192.168.100.1 -PrefixLength 24 -Verbose *>&1
-Set-DnsClientServerAddress -InterfaceAlias ANC-NET -ServerAddresses 8.8.8.8 -Verbose *>&1
+Set-DnsClientServerAddress -InterfaceAlias ER-NET -ServerAddresses 8.8.8.8 -Verbose *>&1
 
-New-NetIPAddress -InterfaceAlias ER-NET -IPAddress 192.168.11.1 -PrefixLength 24 -Verbose *>&1
-Set-DnsClientServerAddress -InterfaceAlias ANC-NET -ServerAddresses 8.8.8.8 -Verbose *>&1
+New-NetIPAddress -InterfaceAlias LINUX-NET -IPAddress 192.168.11.1 -PrefixLength 24 -Verbose *>&1
+Set-DnsClientServerAddress -InterfaceAlias LINUX-NET -ServerAddresses 8.8.8.8 -Verbose *>&1
 
 
 #Configure server to respond to ping
@@ -306,6 +306,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
+
 
 
 
