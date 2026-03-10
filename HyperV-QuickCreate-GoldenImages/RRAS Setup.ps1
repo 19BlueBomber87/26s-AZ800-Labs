@@ -301,6 +301,7 @@ Restart-Service RemoteAccess -Force -Verbose
 
 # 5. Verify NAT is now installed and interfaces are listed
 Get-NetNat
+netsh routing ip nat show interface
 
 # ========================================================
 # Step  9 -Create 1 VM per LAN - Test Confirm DCHP and Internet Connectivity.  
@@ -318,6 +319,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
+
 
 
 
