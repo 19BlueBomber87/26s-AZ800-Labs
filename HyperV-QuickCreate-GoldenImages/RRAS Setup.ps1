@@ -152,7 +152,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
 # Step  6 -Install DHCP and Remote Access Roles
 # ========================================================
 
-Install-WindowsFeature -Name DHCP, RemoteAccess -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
+Install-WindowsFeature -Name DHCP, RemoteAccess -IncludeAllSubFeature -IncludeManagementTools -Restart -Verbose *>&1
 
 # ========================================================
 # Step  7 -Configure DHCP - Set DHCP Scopes - 1 DHCP Scope Per LAN
@@ -318,6 +318,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
+
 
 
 
