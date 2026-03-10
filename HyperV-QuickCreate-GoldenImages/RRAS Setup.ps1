@@ -12,7 +12,7 @@
 # ===================================================
 # Step 1 - Create RRAS Server with 5 network adapters
 # ===================================================
-New-Lab_VM -VMNames YAHOO-RRAS01 -HyperVSwitch ER-NET -RAM_GB 4GB -AdapterCount 6 -GeneralizedImageDE
+New-Lab_VM -VMNames YAHOO-RRAS01 -HyperVSwitch ER-NET -AdapterCount 6 -GeneralizedImageDE
 # ===================================================
 # Step 2 - Create Hyper-V Switches
 # One external switch for path way to internet
@@ -306,6 +306,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
+
 
 
 
