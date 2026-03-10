@@ -27,6 +27,7 @@ New-VMSwitch -Name LINUX-NET -SwitchType Private -Verbose *>&1
 # ========================================================
 # Step 3 - Disable ipv6 and Change network adapter names
 # ========================================================
+Rename-Computer -NewName YAHOO-RRAS01 -Restart -Verbose *>&1
 $adapters = Get-NetAdapter
 $NewAdapterNames = "EXT-INT", "ANC-NET", "Nome-NET", "JUN-NET", "ER-NET", "LINUX-NET"
 $index = 0
@@ -306,6 +307,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
+
 
 
 
