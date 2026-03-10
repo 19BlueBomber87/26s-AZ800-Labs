@@ -42,68 +42,80 @@ foreach($adapter in $adapters){
 # ========================================================
 
 #on host
-Get-VMNetworkAdapter -VMName "RRAS01" | Select-Object VMName, Name, SwitchName, MacAddress, Status
+Get-VMNetworkAdapter -VMName "YAHOO-RRAS01" | Select-Object VMName, Name, SwitchName, MacAddress, Status
 #EXAMPLE OUTPUT
-# VMName     : RRAS01
+# VMName     : YAHOO-RRAS01
 # Name       : NetAdapter.1
-# SwitchName : ER-NET
-# MacAddress : 00155D0114D3
+# SwitchName : ER-Net
+# MacAddress : 00155D011405
 # Status     : {Ok}
 
-# VMName     : RRAS01
+# VMName     : YAHOO-RRAS01
 # Name       : NetAdapter.2
-# SwitchName : ER-NET
-# MacAddress : 00155D0114D4
+# SwitchName : ER-Net
+# MacAddress : 00155D011406
 # Status     : {Ok}
 
-# VMName     : RRAS01
+# VMName     : YAHOO-RRAS01
 # Name       : NetAdapter.3
-# SwitchName : ER-NET
-# MacAddress : 00155D0114D5
+# SwitchName : ER-Net
+# MacAddress : 00155D011407
 # Status     : {Ok}
 
-# VMName     : RRAS01
+# VMName     : YAHOO-RRAS01
 # Name       : NetAdapter.4
-# SwitchName : ER-NET
-# MacAddress : 00155D0114D6
+# SwitchName : ER-Net
+# MacAddress : 00155D011408
 # Status     : {Ok}
 
-# VMName     : RRAS01
+# VMName     : YAHOO-RRAS01
 # Name       : NetAdapter.5
-# SwitchName : ER-NET
-# MacAddress : 00155D0114D7
+# SwitchName : ER-Net
+# MacAddress : 00155D011409
+# Status     : {Ok}
+
+# VMName     : YAHOO-RRAS01
+# Name       : NetAdapter.6
+# SwitchName : ER-Net
+# MacAddress : 00155D01140A
 # Status     : {Ok}
 
 #on RRAS
 Get-NetAdapter | Select-Object Name, InterfaceDescription, MacAddress, Status, LinkSpeed
 # EXAMPLE OUTPUT
 # Name                 : EXT-INT
-# InterfaceDescription : Microsoft Hyper-V Network Adapter #2
-# MacAddress           : 00-15-5D-01-14-DA
+# InterfaceDescription : Microsoft Hyper-V Network Adapter #3
+# MacAddress           : 00-15-5D-01-14-0A
 # Status               : Up
 # LinkSpeed            : 10 Gbps
 
 # Name                 : ANC-NET
-# InterfaceDescription : Microsoft Hyper-V Network Adapter
-# MacAddress           : 00-15-5D-01-14-DB
+# InterfaceDescription : Microsoft Hyper-V Network Adapter #6
+# MacAddress           : 00-15-5D-01-14-06
 # Status               : Up
 # LinkSpeed            : 10 Gbps
 
 # Name                 : Nome-NET
 # InterfaceDescription : Microsoft Hyper-V Network Adapter #4
-# MacAddress           : 00-15-5D-01-14-DC
+# MacAddress           : 00-15-5D-01-14-05
 # Status               : Up
 # LinkSpeed            : 10 Gbps
 
 # Name                 : JUN-NET
-# InterfaceDescription : Microsoft Hyper-V Network Adapter #3
-# MacAddress           : 00-15-5D-01-14-D8
+# InterfaceDescription : Microsoft Hyper-V Network Adapter
+# MacAddress           : 00-15-5D-01-14-07
 # Status               : Up
 # LinkSpeed            : 10 Gbps
 
 # Name                 : ER-NET
+# InterfaceDescription : Microsoft Hyper-V Network Adapter #2
+# MacAddress           : 00-15-5D-01-14-08
+# Status               : Up
+# LinkSpeed            : 10 Gbps
+
+# Name                 : LINUX-NET
 # InterfaceDescription : Microsoft Hyper-V Network Adapter #5
-# MacAddress           : 00-15-5D-01-14-D9
+# MacAddress           : 00-15-5D-01-14-09
 # Status               : Up
 # LinkSpeed            : 10 Gbps
 
@@ -307,6 +319,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
+
 
 
 
