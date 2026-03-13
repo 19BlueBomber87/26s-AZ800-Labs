@@ -6,7 +6,10 @@
 # Purpose:  Create a one way trust between an AD DS doamin and MIT KCD Kerberos Realm
 # Location: Anchorage, Alaska lab environment
 # =============================================================================
-
+# =========================================================================================================================================================
+# Use link below to get 'New-Lab_VM' command
+# https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-QuickCreate-GoldenImages/AZ-800Celebrate-HyperV%20Creation%20and%20Disk%20Functions.ps1
+# =========================================================================================================================================================
 
 # ============================================
 # Step 1 -  Create Hyper-V Switches
@@ -17,8 +20,6 @@
 # New-VMSwitch -Name "JUN-NET"  -SwitchType Private -Verbose *>&1
 # New-VMSwitch -Name "EXT-INT"  -SwitchType Private -Verbose *>&1
 # New-MMF_VM -VMNames YAHOO-DNS01 -HyperVSwitch linux-net -GeneralizedImage
-
-
 
 # ===============================================================================
 # Step 2 -  Create YAHOO-DNS01.
@@ -34,8 +35,6 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -IcmpType 8 `
     -Action Allow
 
-
-
 New-NetIPAddress -InterfaceAlias "Ethernet" `
     -IPAddress 192.168.11.7 `
     -PrefixLength 24 `
@@ -46,7 +45,6 @@ New-NetIPAddress -InterfaceAlias "Ethernet" `
 # Set DNS server(s)
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
     -ServerAddresses 127.0.0.1, 8.8.8.8
-    
     
 Rename-Computer -NewName YAHOO-DNS01 -Restart -Verbose *>&1
 
@@ -65,7 +63,6 @@ Get-DnsServerResourceRecord -ZoneName "yahoomoose.com"
 
 # [Create DNS fowarder to megamooselabsfun.com]
 Add-DnsServerConditionalForwarderZone -Name "megamooselabsfun.com" -MasterServers 192.168.99.9 -Verbose *>&1
-
 
 # =============================================================
 # Step 4 -  Add Kerberos SRV records for MIT KDC on YAHOO-DNS01
@@ -105,9 +102,6 @@ Add-DnsServerResourceRecord -ComputerName $DnsServer -ZoneName $ZoneName -Srv `
     -Name '_kerberos-adm._tcp' `
     -DomainName $Target `
     -Priority 0 -Weight 0 -Port 749 -TimeToLive $TTL
-
-
-
 
 # ===============================================================================
 # Step 4 -  Create JUN-DC01. 
@@ -194,8 +188,6 @@ Add-DnsServerConditionalForwarderZone -Name "yahoomoose.com" -MasterServers 192.
 #     -Priority 0 -Weight 0 -Port 464 -TimeToLive $TTL
 
 
-
-
 # ===============================================================================
 # Step - Create jun-linux01 and join to AD DS domain
 # ==============================================================================
@@ -256,8 +248,6 @@ sudo nano /etc/krb5.conf
     }
 
 
-
-
 sudo realm join -U Administrator MEGAMOOSELABSFUN.COM
 
 sudo cat /etc/sssd/sssd.conf
@@ -279,7 +269,6 @@ Add-ADGroupMember -Identity "linux-sudo-admins" -Members "rush" -Verbose *>&1
 
 ssh rush@megamooselabsfun.com@jun-linux01.megamooselabsfun.com
 
-
 sudo nano /etc/sudoers.d/ad-linux-adminsd-linux-admins
 %linux-sudo-admins@megamooselabsfun.com ALL=(ALL) ALL
 #passwordless SSH
@@ -288,9 +277,6 @@ sudo cat /etc/sudoers.d/ad-linux-adminsd-linux-admins
 
 sudo sss_cache -E
 sudo systemctl restart sssd
-
-
-
 
 #Test Kerbors
 sudo apt install krb5-user # to install 
@@ -305,7 +291,6 @@ New-Lab_VM -VMNames linux01 -HyperVSwitch linux-net -RAM_GB 2GB -ISOPath C:\ISO\
 Stop-VM -VMName linux01 -Force -Verbose *>&1
 Set-VMFirmware -VMName linux01 -EnableSecureBoot off -Verbose *>&1
 Start-VM -VMName linux01 -Verbose *>&1
-
 
 # [General updates, Timezone, add user]
 sudo apt update && sudo apt upgrade -y
@@ -389,7 +374,6 @@ sudo cat /etc/krb5.conf | head -n 50
 sudo systemctl restart krb5-kdc krb5-admin-server
 sudo systemctl status krb5-kdc krb5-admin-server
 #######################################################
-#####
 # [Add prinicipals -Firewall - Checks]  
 # This does not create the Linux user — it only creates the Kerberos identity.
 sudo kadmin.local -q 'addprinc -pw "Password123!" admin01/admin@YAHOOMOOSE.COM'   # admin client principal
@@ -403,7 +387,6 @@ sudo kadmin.local -q "listprincs"                                               
 # - The Linux user protoman can now authenticate to Kerberos.
 # - They can run kinit protoman and get a TGT.
 # - They can access Kerberized services (SSH, NFS, HTTP, LDAP, etc.) if allowed and configured.
-
 
 # Update `/etc/krb5kdc/kadm5.acl`: beset practice
 # This file is the ACL (Access Control List) for the Kerberos admin server (kadmind).
@@ -447,8 +430,6 @@ kdestroy
 kinit megaman@MEGAMOOSELABSFUN.COM
 klist
 
-
-
 # The test kinit megaman@MEGAMOOSELABSFUN.COM
 # is an AD user authenticating to an AD resource — 
 # This is not proving cross-realm trust; it's just local AD Kerberos.
@@ -457,7 +438,6 @@ kdestroy
 kinit megaman@MEGAMOOSELABSFUN.COM
 smbclient //JUN-DC01.megamooselabsfun.com/SYSVOL -k -c 'ls'
 smbclient //JUN-DC01.megamooselabsfun.com/c$ -k -c 'ls'
-
 
 # WARNING!
 # A one-way trust is the only reliable and 
@@ -500,8 +480,6 @@ sudo kadmin.local -q "getprinc krbtgt/YAHOOMOOSE.COM@MEGAMOOSELABSFUN.COM"
 
 sudo systemctl restart krb5-kdc krb5-admin-server
 systemctl status krb5-kdc krb5-admin-server
-
-
 
 #SETUP WINDOWS TRUST ###################
 netdom trust megamooselabsfun.com /Domain:YAHOOMOOSE.COM /Remove /Force
