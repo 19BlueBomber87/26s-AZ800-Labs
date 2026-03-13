@@ -26,8 +26,8 @@ foreach($boss in $megaman1){
     $office = "Anchorage"
     $city = $office
     $zip = 99504
-    $pass = "Taz14Spaz!@#"
-    $secureString = ConvertTo-SecureString "Taz14Spaz!@#" -AsPlainText -Force
+    $pass = "Password123!"
+    $secureString = ConvertTo-SecureString "Password123!" -AsPlainText -Force
     $firstName = ($boss.Split(" "))[0]
     $lastName = ($boss.Split(" "))[1]
     $SAM =($FirstName + $LastName).ToLower()
@@ -79,8 +79,8 @@ foreach($boss in $megaman2){
     $office = "Nome"
     $city = $office
     $zip = 99762
-    $pass = "Taz14Spaz!@#"
-    $secureString = ConvertTo-SecureString "Taz14Spaz!@#" -AsPlainText -Force
+    $pass = "Password123!"
+    $secureString = ConvertTo-SecureString "Password123!" -AsPlainText -Force
     $firstName = ($boss.Split(" "))[0]
     $lastName = ($boss.Split(" "))[1]
     $SAM =($FirstName + $LastName).ToLower()
@@ -129,8 +129,8 @@ foreach($boss in $megaman3){
     $office = "Juneau"
     $city = $office
     $zip = 99824
-    $pass = "Taz14Spaz!@#"
-    $secureString = ConvertTo-SecureString "Taz14Spaz!@#" -AsPlainText -Force
+    $pass = "Password123!"
+    $secureString = ConvertTo-SecureString "Password123!" -AsPlainText -Force
     $firstName = ($boss.Split(" "))[0]
     $lastName = ($boss.Split(" "))[1]
     $SAM =($FirstName + $LastName).ToLower()
@@ -179,8 +179,8 @@ foreach($boss in $megaman4){
     $office = "Eagle River"
     $city = $office
     $zip = 99577
-    $pass = "Taz14Spaz!@#"
-    $secureString = ConvertTo-SecureString "Taz14Spaz!@#" -AsPlainText -Force
+    $pass = "Password123!"
+    $secureString = ConvertTo-SecureString "Password123!" -AsPlainText -Force
     $firstName = ($boss.Split(" "))[0]
     $lastName = ($boss.Split(" "))[1]
     $SAM =($FirstName + $LastName).ToLower()
@@ -214,8 +214,8 @@ foreach($boss in $megaman4){
 # $office = "Anchorage"
 # $city = $office
 # $zip = 99504
-# $pass = "Taz14Spaz!@#"
-# $secureString = ConvertTo-SecureString "Taz14Spaz!@#" -AsPlainText -Force
+# $pass = "Password123!"
+# $secureString = ConvertTo-SecureString "Password123!" -AsPlainText -Force
 # $displayName = "Proto Man3"
 # $firstName = ($Displayname.Split(" "))[0]
 # $lastName = ($Displayname.Split(" "))[1]
