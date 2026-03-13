@@ -7,6 +7,7 @@
 # Location: Anchorage, Alaska lab environment
 # =============================================================================
 
+
 # ============================================
 # Step 1 -  Create Hyper-V Switches
 # ============================================ 
@@ -391,11 +392,11 @@ sudo systemctl status krb5-kdc krb5-admin-server
 #####
 # [Add prinicipals -Firewall - Checks]  
 # This does not create the Linux user — it only creates the Kerberos identity.
-sudo kadmin.local -q 'addprinc -pw "Taz14Spaz!@#" admin01/admin@YAHOOMOOSE.COM'   # admin client principal
-sudo kadmin.local -q 'addprinc -pw "Taz14Spaz!@#" protoman@YAHOOMOOSE.COM'         # test user
-sudo kadmin.local -q 'addprinc -pw "Taz14Spaz!@#" host/linux01@YAHOOMOOSE.COM'     # short host (SSH GSSAPI)
-sudo kadmin.local -q 'addprinc -pw "Taz14Spaz!@#" host/linux01.yahoomoose.com@YAHOOMOOSE.COM'  # FQDN host
-sudo kadmin.local -q 'addprinc -pw "Taz14Spaz!@#" root/admin@YAHOOMOOSE.COM'       # for sudo kadmin
+sudo kadmin.local -q 'addprinc -pw "Password123!" admin01/admin@YAHOOMOOSE.COM'   # admin client principal
+sudo kadmin.local -q 'addprinc -pw "Password123!" protoman@YAHOOMOOSE.COM'         # test user
+sudo kadmin.local -q 'addprinc -pw "Password123!" host/linux01@YAHOOMOOSE.COM'     # short host (SSH GSSAPI)
+sudo kadmin.local -q 'addprinc -pw "Password123!" host/linux01.yahoomoose.com@YAHOOMOOSE.COM'  # FQDN host
+sudo kadmin.local -q 'addprinc -pw "Password123!" root/admin@YAHOOMOOSE.COM'       # for sudo kadmin
 sudo kadmin.local -q "listprincs"                                                   # verify
 # For example, this creates a Kerberos principal for the user protoman in the realm YAHOOMOOSE.COM.
 # This means:
