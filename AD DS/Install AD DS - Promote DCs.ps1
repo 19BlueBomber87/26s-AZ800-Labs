@@ -235,7 +235,6 @@ Install-ADDSForest `
 # Ensure the Active Directory module is loaded
 Import-Module ActiveDirectory -ErrorAction Stop
 
-
 # Jun-DC01
     Add-DnsServerConditionalForwarderZone `
     -Name "minecraftmoose.com" `
@@ -250,11 +249,7 @@ Add-DnsServerConditionalForwarderZone `
 
 # You need Enterprise Admin privileges in both forests.
 
-
 # The netdom trust command can't be used to create a forest trust between two AD DS forests. To create a cross-forest trust between two AD DS forests, use the Active Directory Domains and Trusts snap-in to create and manage forest trusts. Scripting solution such as using PowerShell is also an option for managing these types of trusts if you need to automate the process.
-
-
-
 
 # Jun-DC01
 $strRemoteForest = "minecraftmoose.com" 
@@ -280,7 +275,6 @@ Write-Verbose "CreateTrustRelationship: Succeeded for domain $($remoteForest)" -
 Write-Verbose "CreateTrustRelationship: Failed for domain$($remoteForest)`n`tError: $($($_.Exception).Message)" -Verbose *>&1
 }
 
-
 # ========================================================
 # Step 6  - Allow users from other forest to RDP to DC and member servers.  
 # This is a New Forset - megamooselabsfun.com
@@ -288,7 +282,6 @@ Write-Verbose "CreateTrustRelationship: Failed for domain$($remoteForest)`n`tErr
 #  Domain Local groups can contain users (and groups) from other forests, but only when a trust exists between the forests.
 
 # Only members of the Domain Admins, Enterprise Admins, Administrators (built-in local group on the DC), or sometimes Server Operators can RDP to a DC.
-
 
 # Get the remote user object (requires connectivity to minecraftmoose.com DCs and trust validation)
 $remoteUser = Get-ADUser -Identity "Administrator" -Server "minecraftmoose.com"  # or specific DC like "ANC-DC01.minecraftmoose.com"
