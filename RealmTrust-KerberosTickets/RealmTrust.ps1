@@ -21,8 +21,7 @@
 
 # ===============================================================================
 # Step 2 -  Create YAHOO-DNS01.
-#            YAHOO-DNS01 will be a DNS and DHCP server for YAHOOMOOSE.COM.  
-#            YAHOO-DNS01 will hand out IPs for 192.168.100.0/24
+#            YAHOO-DNS01 will be a DNS server for YAHOOMOOSE.COM.
 # ==============================================================================
 New-Lab_VM -VMNames YAHOO-DNS01 -HyperVSwitch LINUX-NET -GeneralizedImageDE
 
