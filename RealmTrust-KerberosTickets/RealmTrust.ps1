@@ -196,7 +196,7 @@ Add-DnsServerConditionalForwarderZone -Name "yahoomoose.com" -MasterServers 192.
 
 
 # ===============================================================================
-# Step - Create jun-linux01 and connect
+# Step - Create jun-linux01 and join to AD DS domain
 # ==============================================================================
 
 # [Create Linux Box on jun-net.  Linux box gets IP via DHCP]
