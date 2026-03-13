@@ -110,9 +110,8 @@ Add-DnsServerResourceRecord -ComputerName $DnsServer -ZoneName $ZoneName -Srv `
 
 # ===============================================================================
 # Step 4 -  Create JUN-DC01. 
-#            JUN-DC01 will be a AD DS, DNS and DHCP server for megamooselabsfun.com  
+#            JUN-DC01 will be a AD DS and a DNS server for megamooselabsfun.com  
 #            Configure AD DS domain megamooselabsfun.com
-#            JUN-DC01 will hand out IPs for 192.168.99.0/24
 #            Create DNS fowarder to yahoomoose.com
 # ==============================================================================
 
