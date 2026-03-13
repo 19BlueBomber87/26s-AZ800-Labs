@@ -460,8 +460,7 @@ kinit megaman@MEGAMOOSELABSFUN.COM
 smbclient //JUN-DC01.megamooselabsfun.com/SYSVOL -k -c 'ls'
 smbclient //JUN-DC01.megamooselabsfun.com/c$ -k -c 'ls'
 
-#how to SSH to jun-linux01 with AD accounts
-ssh megaman@megamooselabsfun.com@jun-linux01.megamooselabsfun.com
+
 # WARNING!
 # A one-way trust is the only reliable and 
 # fully supported configuration when connecting a MIT Kerberos KDC to an Active Directory domain.
@@ -541,6 +540,5 @@ klist -e
 kvno krbtgt/YAHOOMOOSE.COM@MEGAMOOSELABSFUN.COM
 #output
 # krbtgt/YAHOOMOOSE.COM@MEGAMOOSELABSFUN.COM: kvno = 0
-
 
 
