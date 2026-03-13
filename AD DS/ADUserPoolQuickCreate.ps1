@@ -133,7 +133,6 @@ foreach($boss in $megaman3){
     $userName = $Sam + "@" + $domain
     $OU = "OU=Entra Synced Users,DC=$distinguishedName,DC=com"
 
-
     New-ADUser -Name $boss -SamAccountName $SAM -UserPrincipalName $userName -GivenName $firstName -Surname $lastName -Path $OU -AccountPassword $secureString -Enabled $true -Verbose *>&1
     Set-ADUser $SAM `
         -DisplayName $boss `
@@ -153,7 +152,6 @@ foreach($boss in $megaman3){
         -Manager $manager -ErrorAction STOP -Verbose *>&1 #username of Manager
     }
 
-    
 # ========================================================
 # Step  4 -Create DCs - Create Test User pool 
 # ========================================================
@@ -170,7 +168,7 @@ $DC_Value2 = $DC_Value[0]
 $OUPath = "DC=$DC_Value2, DC=$DC_Value1,DC=fun"   # Replace with your domain DN
 # Create the OU
 New-ADOrganizationalUnit -Name $OUName -Path $OUPath -ProtectedFromAccidentalDeletion $true
-#start
+
 foreach($boss in $megaman4){
     $office = "Eagle River"
     $city = $office
@@ -182,7 +180,6 @@ foreach($boss in $megaman4){
     $SAM =($FirstName + $LastName).ToLower()
     $userName = $Sam + "@" + $domain
     $OU = "OU=Entra Synced Users,DC=$DC_Value2,DC=$DC_Value1,DC=fun"
-
 
     New-ADUser -Name $boss -SamAccountName $SAM -UserPrincipalName $userName -GivenName $firstName -Surname $lastName -Path $OU -AccountPassword $secureString -Enabled $true -Verbose *>&1
     Set-ADUser $SAM `
@@ -205,7 +202,7 @@ foreach($boss in $megaman4){
 
     
 
-    # #prtotype
+# #prtotype
 # $domain = "minecraftmoose.com"
 # $office = "Anchorage"
 # $city = $office
@@ -218,8 +215,6 @@ foreach($boss in $megaman4){
 # $SAM =($FirstName + $LastName).ToLower()
 # $userName = $Sam + "@" + $domain
 # $OU = "OU=AAD Synced Users,DC=minecraftmoose,DC=com"
-
-
 # New-ADUser -Name $displayName -SamAccountName $SAM -UserPrincipalName $userName -GivenName $firstName -Surname $lastName -Path $OU -AccountPassword $secureString -Enabled $true -Verbose *>&1
 # Set-ADUser $SAM `
 #     -Description $($Office + " Programmer") `
