@@ -3,7 +3,7 @@
 # Hyper-V Lab Creation 
 # =============================================================================
 # Author:   Mark Kruse
-# Purpose:  Create a one way trust between an ADDS doamin and MIT KCD Kerberos Realm
+# Purpose:  Create a one way trust between an AD DS doamin and MIT KCD Kerberos Realm
 # Location: Anchorage, Alaska lab environment
 # =============================================================================
 
