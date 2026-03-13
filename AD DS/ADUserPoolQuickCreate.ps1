@@ -3,7 +3,7 @@
 # =============================================================================
 # Author:   Mark Kruse
 # Purpose: Quickly Create Test user pool in custom OU
-# =========================================================================================================================================================
+# ============================================================================
 
 # ========================================================
 # Step  1 -Create DCs - Create Test User pool 
@@ -54,16 +54,12 @@ foreach($boss in $megaman1){
         -Manager $manager -ErrorAction STOP -Verbose *>&1 #username of Manager
     }
 
-
 # ========================================================
 # Step  2 -Create DCs - Create Test User pool 
 # ========================================================
 ###################loop2 -> moosewyre.fun ###############
 
 $megaman2 = "Bubble Man", "Air Man", "Crash Man", "Quick Man", "Heat Man", "Wood Man", "Metal Man", "Flash Man"
-
-
-#choose domain
 
 $domain = "moosewyre.fun"
 $manager = "megaman"
