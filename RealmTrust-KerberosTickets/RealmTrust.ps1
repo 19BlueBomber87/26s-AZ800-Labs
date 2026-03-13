@@ -3,8 +3,7 @@
 # Hyper-V Lab Creation 
 # =============================================================================
 # Author:   Mark Kruse
-# Purpose:  Quick Create Tools- Create VMs from ISO or golden images,
-#           add extra network adapters and data disks.  Also a tool to Initialize Raw Offline Disks quickly
+# Purpose:  Create a one way trust betweend and ADDS doamin and MIT KCD Kerberos Realm
 # Location: Anchorage, Alaska lab environment
 # =============================================================================
 
