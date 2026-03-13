@@ -259,7 +259,7 @@ Add-DnsServerConditionalForwarderZone `
 # Jun-DC01
 $strRemoteForest = "minecraftmoose.com" 
 $strRemoteAdmin = "administrator@minecraftmoose.com" 
-$strRemoteAdminPassword = "Taz14Spaz!@#" 
+$strRemoteAdminPassword = "Password123!" 
 $remoteContext = New-Object -TypeName "System.DirectoryServices.ActiveDirectory.DirectoryContext" -ArgumentList @( "Forest",$strRemoteForest, $strRemoteAdmin, $strRemoteAdminPassword) 
 try { 
 $remoteForest =[System.DirectoryServices.ActiveDirectory.Forest]::getForest($remoteContext) 
