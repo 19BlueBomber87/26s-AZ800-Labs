@@ -234,25 +234,23 @@ Set-DhcpServerv4Scope -ScopeId "192.168.100.0" -State Active  -Verbose *>&1
 Get-DhcpServerv4Scope
 
 $DhcpServer = $env:COMPUTERNAME
-$ScopeName  = "yahoomoose.com DCHP Scope"
+$ScopeName  = "yahoomoose.com-NET-Scope"
 $ScopeStart = "192.168.11.1"
 $ScopeEnd   = "192.168.11.254"
 $SubnetMask = "255.255.255.0"
 $Gateway    = "192.168.11.1"
 $DnsServer  = "192.168.11.7"   # adjust as needed
+$DnsServerSecondary = "8.8.8.8"
 $DomainName = "yahoomoose.com" # adjust as needed
-
 # Create DHCP scope
 Add-DhcpServerv4Scope -Name $ScopeName -StartRange $ScopeStart -EndRange $ScopeEnd -SubnetMask $SubnetMask -Verbose *>&1
 Add-DhcpServerv4ExclusionRange -ScopeId "192.168.11.0" -StartRange "192.168.11.1" -EndRange "192.168.11.9" -Verbose *>&1
 # Configure scope options
 Set-DhcpServerv4OptionValue -ScopeId "192.168.11.0" -Router $Gateway -Verbose *>&1
-Set-DhcpServerv4OptionValue -ScopeId "192.168.11.0" -DnsServer $DnsServer -DnsDomain $DomainName -Verbose *>&1
-
+Set-DhcpServerv4OptionValue -ScopeId "192.168.11.0" -DnsServer $DnsServer, $DnsServerSecondary  -DnsDomain $DomainName -Force -Verbose *>&1
 # Activate the scope
 Set-DhcpServerv4Scope -ScopeId "192.168.11.0" -State Active  -Verbose *>&1
 
-Write-Verbose -Message "DHCP configuration complete." -Verbose *>&1
 
 
 # ========================================================
