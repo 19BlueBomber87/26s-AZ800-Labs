@@ -31,7 +31,7 @@ Rename-Computer -NewName YAHOO-RRAS01 -Restart -Verbose *>&1
 $adapters = Get-NetAdapter
 $NewAdapterNames = "EXT-INT", "ANC-NET", "Nome-NET", "JUN-NET", "ER-NET", "LINUX-NET"
 $index = 0
-foreach($adapter in $adapters){
+foreach($adapter in $NewAdapterNames){
     Rename-NetAdapter -Name $adapter.Name -NewName $NewAdapterNames[$index]
     Disable-NetAdapterBinding -Name $NewAdapterNames[$index]-ComponentID ms_tcpip6 -Verbose *>&1
     $index++
