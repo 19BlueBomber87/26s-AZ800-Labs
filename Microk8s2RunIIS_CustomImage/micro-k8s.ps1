@@ -400,7 +400,7 @@ sudo microk8s kubectl delete pod iis-simple-6cc6f5549d-8fdw7 --grace-period=0 --
 
 
 # Enable metallb LoadBalancer 
-sudo microk8s enable metallb:192.168.88.100-192.168.88.150
+ sudo microk8s enable metallb:192.168.11.100-192.168.11.150
 #Check metallb
 sudo microk8s kubectl -n metallb-system get pods -o wide
 # Configure Deployment to use metalb LoadBalancer
