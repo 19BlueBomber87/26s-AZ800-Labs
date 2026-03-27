@@ -46,7 +46,8 @@ New-NetIPAddress -InterfaceAlias "Ethernet" `
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
     -ServerAddresses 127.0.0.1, 8.8.8.8 `
     -Verbose *>&1
-$DSRMPassword = Read-Host "Enter DSRM Password" -AsSecure
+    
+#Promote DC
 Import-Module ADDSDeployment
 Install-ADDSForest `
 -CreateDnsDelegation:$false `
@@ -58,18 +59,18 @@ Install-ADDSForest `
 -InstallDns:$true `
 -LogPath "C:\Windows\NTDS" `
 -NoRebootOnCompletion:$false `
--SafeModeAdministratorPassword  $DSRMPassword `
+-SafeModeAdministratorPassword (ConvertTo-SecureString "P@ssword1!" -AsPlainText -Force) `
 -SysvolPath "C:\Windows\SYSVOL" `
 -Force:$true
 
-New-ADReplicationSite -Name Nome -Description "Nome Office AD DS Site" -Verbose *>&1
-New-ADReplicationSite -Name Juneau -Description "Nome Office AD DS Site" -Verbose *>&1
-New-ADReplicationSite -Name EagleRiver -Description "Nome Office AD DS Site" -Verbose *>&1
-New-ADReplicationSubnet -Name "192.168.88.0/24" -Site Nome -Location "Nome Office"
-New-ADReplicationSubnet -Name "192.168.99.0/24" -Site Nome -Location "Juneau Office"
-New-ADReplicationSubnet -Name "192.168.100.0/24" -Site Nome -Location "Eagle River Office"
 
-Set-ADReplicationSiteLink -Identity "DEFAULTIPSITELINK" -SitesIncluded @{Add="Nome","Juneau","EagleRiver"}
+New-ADReplicationSite -Name Nome -Description "Nome Office AD DS Site" -Verbose *>&1
+New-ADReplicationSite -Name EagleRiver -Description "Nome Office AD DS Site" -Verbose *>&1
+New-ADReplicationSubnet -Name "192.168.88.0/24" -Site Nome -Location "Nome Office" -Verbose *>&1
+New-ADReplicationSubnet -Name "192.168.100.0/24" -Site EagleRiver -Location "Eagle River Office" -Verbose *>&1
+Set-ADReplicationSiteLink -Identity "DEFAULTIPSITELINK" -SitesIncluded @{Add="Nome","EagleRiver"} -Verbose *>&1
+
+Add-DnsServerConditionalForwarderZone -Name "moosewyre.fun" -MasterServers 192.168.88.8 -Verbose *>&1 
 # ====================================================
 # Step 3 - Install AD DS and Promote Nome-DC01 to DC.  
 # Tree Domain. moosewyre.fun This will be the second tree in the Forest.  
@@ -114,6 +115,11 @@ Install-ADDSDomain `
 -SafeModeAdministratorPassword  $DSRMPassword `
 -SysvolPath "C:\Windows\SYSVOL" -Force:$true
 
+#On ANC-DC01 make sure initial sync has completed to Nome-DC01
+repadmin /replsummary
+repadmin /syncall anc-dc01.minecraftmoose.com /AeD
+repadmin /syncall nome-dc01.moosewyre.fun /AeD
+repadmin /replsummary
 
 # ========================================================
 # Step 3  - Install AD DS and Promote ER-DC01 to DC.  
