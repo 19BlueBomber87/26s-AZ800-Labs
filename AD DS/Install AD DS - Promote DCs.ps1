@@ -112,8 +112,7 @@ Install-ADDSDomain `
 -NoRebootOnCompletion:$false `
 -SiteName "Nome" `
 -SafeModeAdministratorPassword  $DSRMPassword `
--SysvolPath "C:\Windows\SYSVOL" `
--Force:$true
+-SysvolPath "C:\Windows\SYSVOL" -Force:$true
 
 
 # ========================================================
@@ -158,8 +157,7 @@ Install-ADDSDomain `
 -NoRebootOnCompletion:$false `
 -SiteName "Nome" `
 -SysvolPath "C:\Windows\SYSVOL" `
--SafeModeAdministratorPassword  $DSRMPassword `
--Force:$true
+-SafeModeAdministratorPassword  $DSRMPassword -Force:$true
 
 
 Move-ADDirectoryServer -Identity "ER-DC01" -Site "EagleRiver" -Confirm:$false
@@ -201,8 +199,7 @@ Install-ADDSForest `
 -LogPath "C:\Windows\NTDS" `
 -NoRebootOnCompletion:$false `
 -SysvolPath "C:\Windows\SYSVOL" `
--SafeModeAdministratorPassword  $DSRMPassword ` #(ConvertTo-SecureString "YourPasswordHere" -AsPlainText)
--Force:$true
+-SafeModeAdministratorPassword  $DSRMPassword -Force
 
 # ANC-DC01, NOME-DC01 and ER-DC01 share a Schema
 # #AD Partitions
