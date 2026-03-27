@@ -161,14 +161,19 @@ Install-ADDSDomain `
 -NewDomainNetbiosName "DEV" `
 -ParentDomainName "moosewyre.fun" `
 -NoRebootOnCompletion:$false `
--SiteName "Nome" `
+-SiteName "EagleRiver" `
 -SafeModeAdministratorPassword (ConvertTo-SecureString "P@ssword1!" -AsPlainText -Force) `
 -SysvolPath "C:\Windows\SYSVOL" `
 -Force:$true
 
 
+#On ANC-DC01 make sure initial sync has completed to Nome-DC01
+repadmin /replsummary
+repadmin /syncall ER-dc01.dev.moosewyre.fun /AeD
+repadmin /replsummary
 
-Move-ADDirectoryServer -Identity "ER-DC01" -Site "EagleRiver" -Confirm:$false
+# Login into ER-DC01 with administrator@minecraftmoose.com to confrim 
+
 # ========================================================
 # Step 4  - Install AD DS and Promote JUN-DC01 to DC.  
 # This is a New Forset - megamooselabsfun.com
@@ -194,7 +199,6 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
 Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
 Rename-Computer -NewName Jun-DC01 -Restart -Verbose *>&1
 
-$DSRMPassword = Read-Host "Enter DSRM Password" -AsSecure
 Import-Module ADDSDeployment
 Install-ADDSForest `
 -CreateDnsDelegation:$false `
@@ -206,8 +210,9 @@ Install-ADDSForest `
 -InstallDns:$true `
 -LogPath "C:\Windows\NTDS" `
 -NoRebootOnCompletion:$false `
+-SafeModeAdministratorPassword (ConvertTo-SecureString "P@ssword1!" -AsPlainText -Force) `
 -SysvolPath "C:\Windows\SYSVOL" `
--SafeModeAdministratorPassword  $DSRMPassword -Force
+-Force:$true
 
 # ANC-DC01, NOME-DC01 and ER-DC01 share a Schema
 # #AD Partitions
