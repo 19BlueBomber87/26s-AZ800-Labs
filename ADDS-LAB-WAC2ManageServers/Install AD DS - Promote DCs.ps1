@@ -75,7 +75,7 @@ New-ADReplicationSite -Name EagleRiver -Description "EagleRiver Office AD DS Sit
 New-ADReplicationSubnet -Name "192.168.88.0/24" -Site Nome -Location "Nome Office"
 New-ADReplicationSubnet -Name "192.168.100.0/24" -Site EagleRiver -Location "Eagle River Office"
 
-Set-ADReplicationSiteLink -Identity "DEFAULTIPSITELINK" -SitesIncluded @{Add="Nome","Juneau","EagleRiver"}
+Set-ADReplicationSiteLink -Identity "DEFAULTIPSITELINK" -SitesIncluded @{Add="Nome","EagleRiver"}
 # ====================================================
 # Step 3 - Install AD DS and Promote Nome-DC01 to DC.  
 # Tree Domain. moosewyre.fun This will be the second tree in the Forest.  
