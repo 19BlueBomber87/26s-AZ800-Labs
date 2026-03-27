@@ -96,7 +96,6 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
 Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
 Rename-Computer -NewName Nome-DC01 -Restart -Verbose *>&1
 
-$DSRMPassword = Read-Host "Enter DSRM Password" -AsSecure
 Import-Module ADDSDeployment
 Install-ADDSDomain `
 -NoGlobalCatalog:$false `
@@ -112,8 +111,9 @@ Install-ADDSDomain `
 -ParentDomainName "minecraftmoose.com" `
 -NoRebootOnCompletion:$false `
 -SiteName "Nome" `
--SafeModeAdministratorPassword  $DSRMPassword `
--SysvolPath "C:\Windows\SYSVOL" -Force:$true
+-SafeModeAdministratorPassword (ConvertTo-SecureString "P@ssword1!" -AsPlainText -Force) `
+-SysvolPath "C:\Windows\SYSVOL" `
+-Force:$true
 
 #On ANC-DC01 make sure initial sync has completed to Nome-DC01
 repadmin /replsummary
