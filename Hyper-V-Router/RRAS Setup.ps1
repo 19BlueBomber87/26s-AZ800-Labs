@@ -18,11 +18,13 @@ New-Lab_VM -VMNames YAHOO-RRAS01 -HyperVSwitch ER-NET -AdapterCount 6 -Generaliz
 # One external switch for path way to internet
 # One private switch Per Local Area Network(LAN)
 # ===================================================
-New-VMSwitch -Name "EXT-INT"  -NetAdapterName "Wi-Fi" -AllowManagementOS $true
-New-VMSwitch -Name ANC-NET -SwitchType Private -Verbose *>&1
-New-VMSwitch -Name Nome-NET -SwitchType Private -Verbose *>&1
-New-VMSwitch -Name JUN-NET -SwitchType Private -Verbose *>&1
-New-VMSwitch -Name LINUX-NET -SwitchType Private -Verbose *>&1
+CreateLabSwitches # Function from HyperV-QuickCreate-GoldenImages to create lab switches
+
+# New-VMSwitch -Name "EXT-INT"  -NetAdapterName "Wi-Fi" -AllowManagementOS $true
+# New-VMSwitch -Name ANC-NET -SwitchType Private -Verbose *>&1
+# New-VMSwitch -Name Nome-NET -SwitchType Private -Verbose *>&1
+# New-VMSwitch -Name JUN-NET -SwitchType Private -Verbose *>&1
+# New-VMSwitch -Name LINUX-NET -SwitchType Private -Verbose *>&1
 
 # ========================================================
 # Step 3 - Disable ipv6 and Change network adapter names
