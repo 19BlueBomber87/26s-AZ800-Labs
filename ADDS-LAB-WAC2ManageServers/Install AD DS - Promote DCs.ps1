@@ -63,7 +63,13 @@ Install-ADDSForest `
 
 # Site Replication Configuration 
 # Active Directory sites and subnets are defined in the Configuration partition of AD, which is forest-wide.
+
+# You will need to be Enterprise Admin to create ADReplicationSites.
+# In the root domain, domain admins can add themselves to the enterprise admins group.  This is not the case for ‘Tree Root’ Domains or ‘Child Domains’
 # NOTE: Juneau will be its own forest
+
+Add-ADGroupMember -Identity "Enterprise Admins" -Members "MegaMan" -Verbose *>&1
+
 New-ADReplicationSite -Name Nome -Description "Nome Office AD DS Site" -Verbose *>&1
 New-ADReplicationSite -Name EagleRiver -Description "EagleRiver Office AD DS Site" -Verbose *>&1
 New-ADReplicationSubnet -Name "192.168.88.0/24" -Site Nome -Location "Nome Office"
