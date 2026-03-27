@@ -69,6 +69,9 @@ Install-ADDSForest `
 # NOTE: Juneau will be its own forest
 
 Add-ADGroupMember -Identity "Enterprise Admins" -Members "MegaMan" -Verbose *>&1
+Restart-Service ADWS -Verbose *>&1
+Restart-Service Netlogon -Verbose *>&1
+whoami /groups
 
 New-ADReplicationSite -Name Nome -Description "Nome Office AD DS Site" -Verbose *>&1
 New-ADReplicationSite -Name EagleRiver -Description "EagleRiver Office AD DS Site" -Verbose *>&1
