@@ -144,7 +144,7 @@ New-NetIPAddress -InterfaceAlias "Ethernet" `
 
 # Set DNS server(s)
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
-    -ServerAddresses 192.168.88.8, 8.8.8.8
+    -ServerAddresses 192.168.77.7, 8.8.8.8
 
 Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
 Rename-Computer -NewName ER-DC01 -Restart -Verbose *>&1
