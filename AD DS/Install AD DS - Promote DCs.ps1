@@ -31,9 +31,6 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -IcmpType 8 `
     -Action Allow
 
-Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
-Rename-Computer -NewName ANC-DC01 -Restart -Verbose *>&1
-
 # Set static IP + subnet + default gateway in one command
 New-NetIPAddress -InterfaceAlias "Ethernet" `
     -IPAddress 192.168.77.7 `
@@ -46,7 +43,10 @@ New-NetIPAddress -InterfaceAlias "Ethernet" `
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
     -ServerAddresses 127.0.0.1, 8.8.8.8 `
     -Verbose *>&1
-    
+
+Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
+Rename-Computer -NewName ANC-DC01 -Restart -Verbose *>&1
+
 #Promote DC
 Import-Module ADDSDeployment
 Install-ADDSForest `
@@ -146,7 +146,6 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
 Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
 Rename-Computer -NewName ER-DC01 -Restart -Verbose *>&1
 
-$DSRMPassword = Read-Host "Enter DSRM Password" -AsSecure
 Import-Module ADDSDeployment
 Install-ADDSDomain `
 -NoGlobalCatalog:$false `
@@ -162,8 +161,9 @@ Install-ADDSDomain `
 -ParentDomainName "moosewyre.fun" `
 -NoRebootOnCompletion:$false `
 -SiteName "Nome" `
+-SafeModeAdministratorPassword (ConvertTo-SecureString "P@ssword1!" -AsPlainText -Force) `
 -SysvolPath "C:\Windows\SYSVOL" `
--SafeModeAdministratorPassword  $DSRMPassword -Force:$true
+-Force:$true
 
 
 Move-ADDirectoryServer -Identity "ER-DC01" -Site "EagleRiver" -Confirm:$false
