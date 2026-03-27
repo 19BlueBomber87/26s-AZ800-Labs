@@ -123,7 +123,7 @@ Install-ADDSDomain `
 -SafeModeAdministratorPassword  $DSRMPassword `
 -SysvolPath "C:\Windows\SYSVOL" -Force
 
-
+Add-DnsServerConditionalForwarderZone -Name "minecraftrmoose.com" -MasterServers "192.168.77.7" -Verbose *>&1
 # ========================================================
 # Step 3  - Install AD DS and Promote ER-DC01 to DC.  
 # This is a Child Forest - dev.moosewyre.fun
@@ -144,7 +144,7 @@ New-NetIPAddress -InterfaceAlias "Ethernet" `
 
 # Set DNS server(s)
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
-    -ServerAddresses 192.168.77.7, 8.8.8.8
+    -ServerAddresses 192.168.88.8, 8.8.8.8
 
 Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
 Rename-Computer -NewName ER-DC01 -Restart -Verbose *>&1
@@ -154,7 +154,7 @@ Import-Module ADDSDeployment
 Install-ADDSDomain `
 -NoGlobalCatalog:$false `
 -CreateDnsDelegation:$true `
--Credential (Get-Credential -Credential administrator@minecraftmoose.com) `
+-Credential (Get-Credential -Credential minecraftmoose\administrator) `
 -DatabasePath "C:\Windows\NTDS" `
 -DomainMode "WinThreshold" `
 -DomainType "ChildDomain" `
@@ -164,9 +164,10 @@ Install-ADDSDomain `
 -NewDomainNetbiosName "DEV" `
 -ParentDomainName "moosewyre.fun" `
 -NoRebootOnCompletion:$false `
--SiteName "Nome" `
+-SiteName "EagleRiver" `
 -SysvolPath "C:\Windows\SYSVOL" `
--SafeModeAdministratorPassword  $DSRMPassword -Force
+-SafeModeAdministratorPassword  $DSRMPassword -Force:$true
+
 
 
 Move-ADDirectoryServer -Identity "ER-DC01" -Site "EagleRiver" -Confirm:$false
