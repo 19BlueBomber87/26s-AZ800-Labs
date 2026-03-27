@@ -66,8 +66,8 @@ New-ADReplicationSite -Name Nome -Description "Nome Office AD DS Site" -Verbose 
 New-ADReplicationSite -Name Juneau -Description "Juneau Office AD DS Site" -Verbose *>&1
 New-ADReplicationSite -Name EagleRiver -Description "EagleRiver Office AD DS Site" -Verbose *>&1
 New-ADReplicationSubnet -Name "192.168.88.0/24" -Site Nome -Location "Nome Office"
-New-ADReplicationSubnet -Name "192.168.99.0/24" -Site Nome -Location "Juneau Office"
-New-ADReplicationSubnet -Name "192.168.100.0/24" -Site Nome -Location "Eagle River Office"
+New-ADReplicationSubnet -Name "192.168.99.0/24" -Site Juneau -Location "Juneau Office"
+New-ADReplicationSubnet -Name "192.168.100.0/24" -Site EagleRiver -Location "Eagle River Office"
 
 Set-ADReplicationSiteLink -Identity "DEFAULTIPSITELINK" -SitesIncluded @{Add="Nome","Juneau","EagleRiver"}
 # ====================================================
