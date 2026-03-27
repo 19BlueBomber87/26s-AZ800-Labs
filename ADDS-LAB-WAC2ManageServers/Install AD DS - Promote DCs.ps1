@@ -59,8 +59,7 @@ Install-ADDSForest `
 -LogPath "C:\Windows\NTDS" `
 -NoRebootOnCompletion:$false `
 -SafeModeAdministratorPassword  $DSRMPassword `
--SysvolPath "C:\Windows\SYSVOL" `
--Force:$true
+-SysvolPath "C:\Windows\SYSVOL" -Force
 
 New-ADReplicationSite -Name Nome -Description "Nome Office AD DS Site" -Verbose *>&1
 New-ADReplicationSite -Name Juneau -Description "Juneau Office AD DS Site" -Verbose *>&1
@@ -112,8 +111,7 @@ Install-ADDSDomain `
 -NoRebootOnCompletion:$false `
 -SiteName "Nome" `
 -SafeModeAdministratorPassword  $DSRMPassword `
--SysvolPath "C:\Windows\SYSVOL" `
--Force:$true
+-SysvolPath "C:\Windows\SYSVOL" -Force
 
 
 # ========================================================
@@ -158,8 +156,7 @@ Install-ADDSDomain `
 -NoRebootOnCompletion:$false `
 -SiteName "Nome" `
 -SysvolPath "C:\Windows\SYSVOL" `
--SafeModeAdministratorPassword  $DSRMPassword `
--Force:$true
+-SafeModeAdministratorPassword  $DSRMPassword -Force
 
 
 Move-ADDirectoryServer -Identity "ER-DC01" -Site "EagleRiver" -Confirm:$false
@@ -201,8 +198,7 @@ Install-ADDSForest `
 -LogPath "C:\Windows\NTDS" `
 -NoRebootOnCompletion:$false `
 -SysvolPath "C:\Windows\SYSVOL" `
--SafeModeAdministratorPassword  $DSRMPassword ` #(ConvertTo-SecureString "YourPasswordHere" -AsPlainText)
--Force:$true
+-SafeModeAdministratorPassword  $DSRMPassword -Force:$true
 
 # ANC-DC01, NOME-DC01 and ER-DC01 share a Schema
 # #AD Partitions
