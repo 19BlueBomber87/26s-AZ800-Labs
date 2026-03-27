@@ -63,8 +63,8 @@ Install-ADDSForest `
 -Force:$true
 
 New-ADReplicationSite -Name Nome -Description "Nome Office AD DS Site" -Verbose *>&1
-New-ADReplicationSite -Name Juneau -Description "Nome Office AD DS Site" -Verbose *>&1
-New-ADReplicationSite -Name EagleRiver -Description "Nome Office AD DS Site" -Verbose *>&1
+New-ADReplicationSite -Name Juneau -Description "Juneau Office AD DS Site" -Verbose *>&1
+New-ADReplicationSite -Name EagleRiver -Description "EagleRiver Office AD DS Site" -Verbose *>&1
 New-ADReplicationSubnet -Name "192.168.88.0/24" -Site Nome -Location "Nome Office"
 New-ADReplicationSubnet -Name "192.168.99.0/24" -Site Nome -Location "Juneau Office"
 New-ADReplicationSubnet -Name "192.168.100.0/24" -Site Nome -Location "Eagle River Office"
