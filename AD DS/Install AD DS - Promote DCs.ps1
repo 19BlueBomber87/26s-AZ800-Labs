@@ -146,7 +146,7 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
 Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
 Rename-Computer -NewName ER-DC01 -Restart -Verbose *>&1
 
-#MAKE SURE repadmin /replsummary looks good befor promotion
+#MAKE SURE repadmin /replsummary LOOKS GOOD!!
 Import-Module ADDSDeployment
 Install-ADDSDomain `
 -NoGlobalCatalog:$false `
