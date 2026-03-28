@@ -69,13 +69,17 @@ $installerArgs = "/install /norestart /log `"$log`""
 # --- Run installer.  This will open the Wizard---
 Start-Process -FilePath $installer -ArgumentList $installerArgs -Verbose *>&1
 
-# GUI Steps
+# GUI Steps 
 # Accepts the license + privacy statement.
-# Basic silent install (self-signed cert + default port 443)
+# Custom Setup
 # Remote access.  Use machine name or FQDN to access WAC on other devices
 # HTML Form Login
-# Allow Access only to tursted computers.  This is the default.  We will update to 'Allow access to any computer' for this lab with Set-Item command
+# External Port 443
+# Generate a self-signed certificate (expires in 60 days)
+# FQDN YAHOO-WAC01.minecraftmoose.com
+# HTTP.  Default communication mechanism (WinRM over HTTP)
 # Install updates automatically 
+# Required diagnostic data
 
 # ===================================================
 # Step 4 - Create a privileged access workstation to test WAC
