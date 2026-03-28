@@ -257,33 +257,44 @@ Add-DnsServerConditionalForwarderZone `
     -MasterServers "192.168.99.9" `
     -ReplicationScope Forest                     # Replicates to all DCs in the forest
 
+repadmin /syncall anc-dc01.minecraftmoose.com /AeD
+repadmin /syncall nome-dc01.moosewyre.fun /AeD
+
+# You will see the Conditional Forwarder Zone on Nome-DC01 and ER-DC01
+
 # You need Enterprise Admin privileges in both forests.
 
 # The netdom trust command can't be used to create a forest trust between two AD DS forests. To create a cross-forest trust between two AD DS forests, use the Active Directory Domains and Trusts snap-in to create and manage forest trusts. Scripting solution such as using PowerShell is also an option for managing these types of trusts if you need to automate the process.
 
-# Jun-DC01
-$strRemoteForest = "minecraftmoose.com" 
-$strRemoteAdmin = "administrator@minecraftmoose.com" 
-$strRemoteAdminPassword = "Password123!" 
-$remoteContext = New-Object -TypeName "System.DirectoryServices.ActiveDirectory.DirectoryContext" -ArgumentList @( "Forest",$strRemoteForest, $strRemoteAdmin, $strRemoteAdminPassword) 
-try { 
-$remoteForest =[System.DirectoryServices.ActiveDirectory.Forest]::getForest($remoteContext) 
-#Write-Host "GetRemoteForest: Succeeded for domain $($remoteForest)" 
-}catch { 
-Write-Verbose "GetRemoteForest: Failed:`n`tError: $($($_.Exception).Message)" -Verbose *>&1
-} 
+# Jun-DC01 (run in local forest)
+$strRemoteForest = "minecraftmoose.com"
+$strRemoteAdmin  = "administrator@minecraftmoose.com"
+$strRemoteAdminPassword = "Taz14Spaz!@#"
 
-Write-Verbose "Connected to Remote forest: $($remoteForest.Name)" -Verbose *>&1
-$localforest=[System.DirectoryServices.ActiveDirectory.Forest]::getCurrentForest() 
-Write-Verbose "Connected to Local forest: $($localforest.Name)" -Verbose *>&1
+$remoteContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext(
+    "Forest",
+    $strRemoteForest,
+    $strRemoteAdmin,
+    $strRemoteAdminPassword
+)
 
-try { 
-$localForest.CreateTrustRelationship($remoteForest,"Inbound") 
-Write-Verbose "CreateTrustRelationship: Succeeded for domain $($remoteForest)" -Verbose *>&1 
+# Get remote forest
+$remoteForest = [System.DirectoryServices.ActiveDirectory.Forest]::GetForest($remoteContext)
+Write-Verbose "Connected to Remote forest: $($remoteForest.Name)" -Verbose
 
-}catch { 
-Write-Verbose "CreateTrustRelationship: Failed for domain$($remoteForest)`n`tError: $($($_.Exception).Message)" -Verbose *>&1
+# Get local forest
+$localForest = [System.DirectoryServices.ActiveDirectory.Forest]::GetCurrentForest()
+Write-Verbose "Connected to Local forest: $($localForest.Name)" -Verbose
+
+# Create TWO-WAY trust
+try {
+    $localForest.CreateTrustRelationship($remoteForest, "Bidirectional")
+    Write-Verbose "Two-way forest trust created successfully." -Verbose
 }
+catch {
+    Write-Verbose "CreateTrustRelationship failed:`n$($_.Exception.Message)" -Verbose
+}
+
 
 # ========================================================
 # Step 6  - Allow users from other forest to RDP to DC and member servers.  
