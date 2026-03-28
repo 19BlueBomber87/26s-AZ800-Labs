@@ -88,6 +88,10 @@ Start-Process -FilePath $installer -ArgumentList $installerArgs -Verbose *>&1
 # Check Services are running
 Get-Service *AdminCenter* -ErrorAction SilentlyContinue | Select Name, Status, StartType
 
+Start-Service WindowsAdminCenter -Verbose *>&1
+
+Set-Service WindowsAdminCenter -StartupType Automatic -Verbose *>&1
+
 # Test From PAW Workstation
 New-Lab_VM -VMNames ER-PAW01 -HyperVSwitch ER-NET -GeneralizedImageDE
 
@@ -106,4 +110,4 @@ Add-Computer -DomainName dev.moosewyre.fun -Credential moosewyre\administrator -
 # ===================================================
 # Access WAC from ER-PAW01.  Use minecraftmoose\administrator to login
 
-http://YAHOO-WAC01.minecraftmoose.com
+https://YAHOO-WAC01.minecraftmoose.com
