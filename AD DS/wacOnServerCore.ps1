@@ -27,9 +27,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -IcmpType 8 `
     -Action Allow
     
-Rename-Computer -NewName YAHOO-WAC01 -Restart -Verbose *>&1
-
-Add-Computer -DomainName minecraftmoose.com -Credential minecraftmoose\administrator -Restart -Verbose *>&1
+Add-Computer -DomainName minecraftmoose.com -Credential minecraftmoose\administrator -NewName YAHOO-WAC01 -Restart -Verbose *>&1
 
 # ===================================================
 # Step 2 - Download WAC
