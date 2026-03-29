@@ -94,7 +94,7 @@ function New-Lab_VM
     .PARAMETER HyperVSwitch
         Name of the virtual switch for the primary network adapter
 
-    .PARAMETER RAM_GB
+    .PARAMETER RAM
         Startup RAM in GB (default: 1)
 
     .PARAMETER AdapterCount
@@ -103,7 +103,7 @@ function New-Lab_VM
     .PARAMETER nonOSdiskcount
         Number of additional data disks to attach (default: 0)
 
-    .PARAMETER nonOSdisksize
+    .PARAMETER nonOSdiskSizeGB
         Size in GB for each additional data disk (default: 128)
 
     .PARAMETER DynamicMemory
@@ -124,11 +124,11 @@ function New-Lab_VM
 
     .EXAMPLE
         # Create two DCs from Server Core golden image
-        New-Lab_VM -VMNames "DC01","DC02" -HyperVSwitch "ANC-Net" -RAM_GB 4 -GeneralizedImageCore
+        New-Lab_VM -VMNames "DC01","DC02" -HyperVSwitch "ANC-Net" -RAM 4 -GeneralizedImageCore
 
     .EXAMPLE
         # File server with 6 data disks and dynamic memory
-        New- Lab_VM -VMNames "FS01" -HyperVSwitch "JUN-Net" -RAM_GB 6 -nonOSdiskcount 6 -nonOSdisksize 200 -DynamicMemory -GeneralizedImageDE
+        New- Lab_VM -VMNames "FS01" -HyperVSwitch "JUN-Net" -RAM 6GB -nonOSdiskcount 6 -nonOSdiskSizeGB 200 -GeneralizedImageDE
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'ISOPath')]
@@ -149,7 +149,7 @@ function New-Lab_VM
         [Parameter(ParameterSetName = 'ISOPath')]
         [Parameter(ParameterSetName = 'GeneralizedImageDE')]
         [Parameter(ParameterSetName = 'GeneralizedImageCore')]
-        [Int64] $RAM_GB = 1GB,
+        [Int64] $RAM = 1GB,
 
         [Parameter(ParameterSetName = 'ISOPath')]
         [Parameter(ParameterSetName = 'GeneralizedImageDE')]
@@ -164,7 +164,7 @@ function New-Lab_VM
         [Parameter(ParameterSetName = 'ISOPath')] 
         [Parameter(ParameterSetName = 'GeneralizedImageDE')]
         [Parameter(ParameterSetName = 'GeneralizedImageCore')]
-        [int] $nonOSdisksize = 128,
+        [int] $nonOSdiskSizeGB = 128,
 
         # Set-specific switches
         [Parameter(Mandatory = $false, ParameterSetName = 'ISOPath')]
@@ -198,7 +198,7 @@ function New-Lab_VM
         $GeneralizedImagePathDE = "C:\GoldenImages\GoldenImage-DesktopExperience.vhdx"
         $GeneralizedImagePathCore = "C:\GoldenImages\GoldenImage-ServerCore.vhdx"
         $VHDSize = 128GB 
-        $MemoryStartup = $RAM_GB                      # Size of the new VHDX             # Memory
+        $MemoryStartup = $RAM                      # Size of the new VHDX             # Memory
         $ProcessorCount = ((Get-WmiObject -Class Win32_Processor).NumberOfLogicalProcessors / 2)      # Number of vCPUs
         # Create the VM with a new dynamic VHDX
         if($GeneralizedImageDE){
@@ -286,7 +286,7 @@ function New-Lab_VM
         ###################################_FILE SERVERS_#########################################
         if($nonOSdiskcount){
             foreach($x in 1..$nonOSdiskcount){
-                New-VHD -Path "C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\$VMName.Disk$X.vhdx" -SizeBytes ($nonOSdisksize * 1GB) -Verbose *>&1
+                New-VHD -Path "C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\$VMName.Disk$X.vhdx" -SizeBytes ($nonOSdiskSizeGB * 1GB) -Verbose *>&1
             }
             foreach($x in 1..$nonOSdiskcount){
                [array]$disks +=  Get-VHD -Path "C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\$VMName.Disk$x.vhdx"
