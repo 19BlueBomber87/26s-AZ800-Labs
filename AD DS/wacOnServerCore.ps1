@@ -17,8 +17,10 @@
 # For a quicker demo, you can also do this lab with one Windows Server and the WAC server  
  
 # ===================================================
-# Step 1 - Create Server Core VM to be WAC Server.  It will not be domain joined
+# Step 1 - Create Server Core VM to be WAC Server. 
+#          Create Server to be privileged access workstation(PAW) management server
 # ===================================================
+#WAC Server
 New-Lab_VM -VMNames YAHOO-WAC01 -HyperVSwitch ANC-NET -GeneralizedImageCore
 
 New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
@@ -26,8 +28,31 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
-    
-Add-Computer -DomainName minecraftmoose.com -Credential minecraftmoose\administrator -NewName YAHOO-WAC01 -Restart -Verbose *>&1
+Rename-Computer -NewName "YAHOO-WAC01"  -Restart -Verbose *>&1
+
+#Make sure domain name resovles to minecraftmoose.com before joining
+# ping minecraftmoose.com should return ANC-DC01 ip address -> 192.168.77.7
+# If not run 'ipconfig /flushdns' and try ping again
+ping minecraftmoose.com
+
+Add-Computer -DomainName minecraftmoose.com -Credential minecraftmoose\administrator -Restart -Verbose *>&1
+
+#PAW Server - Destkop Experience
+New-Lab_VM -VMNames YAHOO-PAW01 -HyperVSwitch ANC-NET -GeneralizedImageDE
+
+New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
+    -Direction Inbound `
+    -Protocol ICMPv4 `
+    -IcmpType 8 `
+    -Action Allow
+Rename-Computer -NewName "YAHOO-PAW01"  -Restart -Verbose *>&1
+
+#Make sure domain name resovles to minecraftmoose.com before joining
+# ping minecraftmoose.com should return ANC-DC01 ip address -> 192.168.77.7
+# If not run 'ipconfig /flushdns' and try ping again
+ping minecraftmoose.com
+
+Add-Computer -DomainName minecraftmoose.com -Credential minecraftmoose\administrator -Restart -Verbose *>&1
 
 # ===================================================
 # Step 2 - Download WAC
@@ -89,7 +114,6 @@ Get-Service *AdminCenter* -ErrorAction SilentlyContinue | Select Name, Status, S
 Start-Service WindowsAdminCenter -Verbose *>&1
 
 Set-Service WindowsAdminCenter -StartupType Automatic -Verbose *>&1
-
 # Test From PAW Workstation
 New-Lab_VM -VMNames ER-PAW01 -HyperVSwitch ER-NET -GeneralizedImageDE
 
