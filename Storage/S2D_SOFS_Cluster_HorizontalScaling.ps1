@@ -217,8 +217,8 @@ Invoke-Command -ComputerName Anc-DC01 -ScriptBlock {
 } -Verbose *>&1
 
 
-# Check out the SCOF SMB PATH! <@:D
-# in File Explorer navitage to \\S2D-SOFS01
+# Check out the SOFS SMB PATH! <@:D
+# In File Explorer navitage to \\S2D-SOFS01
 Test-Path \\S2D-SOFS01\VM01
 
 
@@ -285,10 +285,6 @@ Invoke-Command -ComputerName ANC-Clus04 -ScriptBlock {
 Invoke-Command -ComputerName ANC-Clus04 -ScriptBlock {
     Get-StoragePool -FriendlyName "s2d-StoragePool01"
 } -Verbose *>&1
-
-
-
-
 
 
 
