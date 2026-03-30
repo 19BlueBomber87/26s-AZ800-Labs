@@ -177,10 +177,6 @@ Invoke-Command -ComputerName ANC-Clus01  -ScriptBlock {
 # } -Verbose *>&1
 
 
-
-
-
-
 # Create Shares
 Invoke-Command -ComputerName Anc-Clus01 -ScriptBlock {
     # Create folders
