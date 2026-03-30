@@ -3,8 +3,8 @@
 # =====================
 # Author:   Mark Kruse
 # Purpose:  Create a 3-node Storage Spaces Direct (S2D) failover cluster
+#           Configure failover cluster to be a 'Scale Out File Server(SOFS)'
 #           Add a 4th node to the cluster
-#           Configure Cluster to be a 'Scale Out File Server(SOFS)'
 #           Example of Horizontal scaling
 # Location: Anchorage, Alaska lab environment
 # ==========================================================================================================================================================
