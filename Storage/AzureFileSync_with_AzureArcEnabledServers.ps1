@@ -280,11 +280,6 @@ az storagesync sync-group server-endpoint create --resource-group $resourceGroup
 
 
 # Add filess to each E:\Share01 and watch the syncing between servers and Azure File Share!
-
-\\yahoo-syncfile1\E Share01
-\\yahoo-syncfile2\E Share01
-\\yahoo-syncfile3\E Share01
-
 \\yahoo-filesync1\E Share01
 \\yahoo-filesync2\E Share01
 \\yahoo-filesync3\E Share01
