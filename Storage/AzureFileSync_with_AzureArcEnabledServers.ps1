@@ -279,7 +279,7 @@ az storagesync sync-group server-endpoint create --resource-group $resourceGroup
                                                  --tier-files-older-than-days 15 
 
 
-# Add filess to each E:\Share01 and watch the syncing between servers and Azure File Share!
+# Add files to each E:\Share01 on any server and watch the syncing between servers and Azure File Share!
 \\yahoo-filesync1\E Share01
 \\yahoo-filesync2\E Share01
 \\yahoo-filesync3\E Share01
