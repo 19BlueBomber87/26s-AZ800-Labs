@@ -120,7 +120,7 @@ function New-Lab_VM
 
     .EXAMPLE
         # Create single VM from ISO
-        New-Lab_VM -VMNames "ANC-RRAS01" -HyperVSwitch "EXT-INT" -AdapterCount 4 -ISOPath $vmiso_path
+        New-Lab_VM -VMNames "ANC-RRAS01" -HyperVSwitch "EXT-INT" -AdapterCount 6 -ISOPath $vmiso_path
 
     .EXAMPLE
         # Create two DCs from Server Core golden image
