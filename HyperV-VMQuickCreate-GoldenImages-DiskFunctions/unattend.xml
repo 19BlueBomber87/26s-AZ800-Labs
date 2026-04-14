@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+
+    <!-- GENERALIZE PASS – empty or add other generalize settings if needed -->
+    <settings pass="generalize">
+        <component name="Microsoft-Windows-Shell-Setup"
+                   processorArchitecture="amd64"
+                   publicKeyToken="31bf3856ad364e35"
+                   language="neutral"
+                   versionScope="nonSxS">
+            <!-- Optional: Add generalize settings like OEMInformation if desired -->
+        </component>
+    </settings>
+
+    <!-- SPECIALIZE PASS – CopyProfile goes here -->
+    <settings pass="specialize">
+        <component name="Microsoft-Windows-Shell-Setup"
+                   processorArchitecture="amd64"
+                   publicKeyToken="31bf3856ad364e35"
+                   language="neutral"
+                   versionScope="nonSxS">
+            <CopyProfile>true</CopyProfile>
+            <!-- Optional: Add other specialize settings (e.g. ComputerName, TimeZone if not in oobeSystem, etc.) -->
+        </component>
+    </settings>
+
+    <!-- OOBE SYSTEM PASS – your original -->
+    <settings pass="oobeSystem">
+        <component name="Microsoft-Windows-Shell-Setup"
+                   processorArchitecture="amd64"
+                   publicKeyToken="31bf3856ad364e35"
+                   language="neutral"
+                   versionScope="nonSxS"
+                   xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+            <TimeZone>Alaskan Standard Time</TimeZone>
+
+            <UserAccounts>
+                <LocalAccounts>
+                    <LocalAccount wcm:action="add">
+                        <Password>
+                            <Value>Taz14Spaz!@#</Value>
+                            <PlainText>true</PlainText>
+                        </Password>
+                        <Name>MegaMan</Name>
+                        <Group>Administrators</Group>
+                        <DisplayName>Mega Man</DisplayName>
+                    </LocalAccount>
+
+                    <LocalAccount wcm:action="add">
+                        <Password>
+                            <Value>Taz14Spaz!@#</Value>
+                            <PlainText>true</PlainText>
+                        </Password>
+                        <Name>Rush</Name>
+                        <Group>Users</Group>
+                        <DisplayName>Rush</DisplayName>
+                    </LocalAccount>
+                </LocalAccounts>
+            </UserAccounts>
+
+            <OOBE>
+                <HideEULAPage>true</HideEULAPage>
+                <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
+                <ProtectYourPC>3</ProtectYourPC>
+            </OOBE>
+
+        </component>
+    </settings>
+
+</unattend>
