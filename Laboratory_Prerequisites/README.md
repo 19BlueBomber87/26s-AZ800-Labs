@@ -1,6 +1,6 @@
 # Laboratory Prerequisites
 
-This folder contains the core PowerShell scripts needed to build the foundational infrastructure for the **AZ-800 Hyper-V Lab Environment** (Anchorage, Alaska themed lab).
+This folder contains the core PowerShell scripts needed to build the foundational infrastructure for the **AZ-800 Hyper-V Lab Environments** (Anchorage, Alaska themed lab).
 
 These scripts are designed to be run **in order** and prepare the networking, Active Directory, routing/NAT, and management tools required for the rest of the lab series.
 
