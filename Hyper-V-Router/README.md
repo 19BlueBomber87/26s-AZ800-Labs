@@ -86,4 +86,4 @@ Anchorage, Alaska
 
 ---
 
-✅ **Next:** Proceed to deploy domain controllers and other servers in each network.
+**Next:** Proceed to deploy domain controllers and other servers in each network.
