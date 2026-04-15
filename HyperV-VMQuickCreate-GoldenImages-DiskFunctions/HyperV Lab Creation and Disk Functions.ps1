@@ -120,11 +120,12 @@ function New-Lab_VM
 
     .EXAMPLE
         # Create single VM from ISO
+        $vmiso_path = C:\ISO\yourISO.iso
         New-Lab_VM -VMNames "ANC-RRAS01" -HyperVSwitch "EXT-INT" -AdapterCount 6 -ISOPath $vmiso_path
 
     .EXAMPLE
         # Create two DCs from Server Core golden image
-        New-Lab_VM -VMNames "DC01","DC02" -HyperVSwitch "ANC-Net" -RAM 4 -GeneralizedImageCore
+        New-Lab_VM -VMNames "DC01","DC02" -HyperVSwitch "ANC-Net" -RAM 4GB -GeneralizedImageCore
 
     .EXAMPLE
         # File server with 6 data disks and dynamic memory
