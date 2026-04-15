@@ -53,7 +53,6 @@ Created and maintained by **Mark Kruse** in Anchorage, Alaska.
 5. Open PowerShell **as Administrator**
 6. Dot-source the script:
 
-```powershell
 . ".\HyperV Lab Creation and Disk Functions.ps1"
 
 Usage Examples
