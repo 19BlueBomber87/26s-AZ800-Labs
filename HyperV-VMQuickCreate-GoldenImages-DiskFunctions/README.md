@@ -14,7 +14,7 @@ Created and maintained by **Mark Kruse** in Anchorage, Alaska.
   - Support for multiple VMs at once
   - Configurable RAM, vCPU count, dynamic memory
   - Add multiple network adapters during creation
-  - Automatically add extra data disks
+  - Function to add extra data disks
 
 - **Add Extra Disks** (`Add-Disks2VM`)
   - Easily attach multiple identically sized data disks to an existing VM
