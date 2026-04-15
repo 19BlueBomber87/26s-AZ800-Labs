@@ -41,7 +41,8 @@ Created and maintained by **Mark Kruse** in Anchorage, Alaska.
 - At least one Wi-Fi or Ethernet adapter for the external switch
 ## 🔗 Dependencies
 
-- [GoldenImage.ps1](https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/GoldenImage.ps1)  
+- [GoldenImage.ps1](https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/GoldenImage.ps1)
+- [Unattend.xml](https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/unattend.xml)  
 ---
 
 ## Setup Instructions
@@ -174,8 +175,9 @@ The script will automatically:
 Install Python 3.12.6 (silent install)
 Create Unicode test files (yahoo.py section)
 Download and place MegaMan.jpg custom wallpaper (Desktop Experience only)
-Download unattend.xml
+Download unattend.xml to "C:\windows\System32\Sysprep"
 Run Sysprep with /generalize /oobe /shutdown /unattend
+C:\windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown /unattend:C:\Windows\System32\Sysprep\unattend.xml
 
 The VM will shut down automatically when sysprep completes.
 4. Finalize Golden Image
