@@ -63,8 +63,9 @@ PowerShell# Two Domain Controllers from Server Core golden image
 New-Lab_VM -VMNames "DC01","DC02" -HyperVSwitch "ANC-Net" -RAM 4GB -GeneralizedImageCore
 
 # File server with extra disks from Desktop Experience image
-New-Lab_VM -VMNames "FS01" -HyperVSwitch "JUN-Net" -RAM 6GB `
-           -nonOSdiskcount 6 -nonOSdiskSizeGB 200 -GeneralizedImageDE
+
+New-Lab_VM -VMNames "FS01" -HyperVSwitch "JUN-Net" -RAM 6GB -nonOSdiskcount 6 -nonOSdiskSizeGB 200 -GeneralizedImageDE
+
 3. Create VM from ISO
 PowerShell$iso = "C:\ISO\SERVER_EVAL_x64FRE_en-us.iso"
 New-Lab_VM -VMNames "ANC-RRAS01" -HyperVSwitch "EXT-INT" -AdapterCount 6 -ISOPath $iso
