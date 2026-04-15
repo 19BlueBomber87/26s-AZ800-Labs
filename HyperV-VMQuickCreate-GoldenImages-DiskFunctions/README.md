@@ -116,3 +116,113 @@ License
 This project is open-source and free to use for personal and educational purposes.
 
 Happy Lab Building! 🚀
+
+# Hyper-V Golden Image Preparation
+
+PowerShell script and supporting files to create **generalized golden images** for fast VM deployment in Hyper-V labs.
+
+Author: **Mark Kruse**  
+Location: Anchorage, Alaska
+
+---
+
+## Purpose
+
+This script helps you build reusable, sysprepped golden images for:
+
+- **GoldenImage-DesktopExperience.vhdx** (Full GUI)
+- **GoldenImage-ServerCore.vhdx** (Server Core)
+
+These images are then used by the main `New-Lab_VM` function for extremely fast VM creation.
+
+---
+
+## Files Included
+
+- `GoldenImage.ps1` – Main preparation script
+- `unattend.xml` – Unattend file used during sysprep (creates local accounts, sets timezone, etc.)
+- Main wallpaper image (MegaMan.jpg) – Optional custom background
+
+---
+
+## Prerequisites
+
+- Hyper-V enabled on Windows 10/11 Pro or Windows Server
+- Windows Server 2025 Evaluation ISO (or newer)
+- PowerShell running **as Administrator**
+- Internet access (for downloading Python and wallpaper)
+
+---
+
+## Step-by-Step Guide
+
+### 1. Create Base VMs (First Run)
+
+Run the following commands from `GoldenImage.ps1`:
+
+```powershell
+# Creates two temporary VMs for golden image preparation
+New-Lab_VM -VMNames GoldenImage-ServerCore -HyperVSwitch EXT-INT -ISOPath "C:\ISO\2025_26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso"
+
+New-Lab_VM -VMNames GoldenImage-DesktopExperience -HyperVSwitch EXT-INT -ISOPath "C:\ISO\2025_26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso"
+Tip: Update the ISO path to match your actual ISO filename and location.
+2. Prepare the Golden Image (Inside the VM)
+Start the VM and perform these steps manually:
+
+At the first OOBE screen, press CTRL + SHIFT + F3 to enter Audit Mode.
+Install latest Windows Updates.
+(Optional) Install any tools or applications you want in the golden image.
+(Desktop Experience only) Set custom wallpaper if desired.
+
+3. Run Golden Image Preparation Script (Inside the VM)
+Inside the VM (still in Audit Mode), run:
+PowerShell# Download and run the preparation script
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/GoldenImage.ps1" -OutFile "C:\GoldenImage.ps1"
+.\GoldenImage.ps1
+The script will automatically:
+
+Install Python 3.12.6 (silent install)
+Create Unicode test files (yahoo.py section)
+Download and place MegaMan.jpg custom wallpaper (Desktop Experience only)
+Download unattend.xml
+Run Sysprep with /generalize /oobe /shutdown /unattend
+
+The VM will shut down automatically when sysprep completes.
+4. Finalize Golden Image
+After the VM shuts down:
+
+In Hyper-V Manager, right-click the VM → Delete (do not delete the VHDX).
+Locate the VHDX file:
+C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\GoldenImage-DesktopExperience.vhdx
+C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\GoldenImage-ServerCore.vhdx
+
+Copy and rename it to:
+
+cmdC:\GoldenImages\GoldenImage-DesktopExperience.vhdx
+C:\GoldenImages\GoldenImage-ServerCore.vhdx
+Make sure the folder C:\GoldenImages\ exists.
+5. Test the Golden Images
+PowerShell# Test Desktop Experience golden image
+New-Lab_VM -VMNames "Test-DE" -HyperVSwitch "ANC-Net" -RAM 4GB -GeneralizedImageDE
+
+# Test Server Core golden image
+New-Lab_VM -VMNames "Test-Core" -HyperVSwitch "ANC-Net" -RAM 4GB -GeneralizedImageCore
+
+What the unattend.xml Does
+
+Sets timezone to Alaskan Standard Time
+Creates local Administrator account: MegaMan (password: Taz14Spaz!@#)
+Creates standard user account: Rush
+Skips EULA and online account screens
+Enables CopyProfile during specialize pass
+
+
+Important Notes
+
+Always run sysprep from Audit Mode (CTRL+SHIFT+F3 at OOBE).
+The golden images must be generalized — never boot them directly after sysprep.
+You can rerun the entire process anytime you want to update the golden images.
+The Python section is optional and mainly used for Unicode/character testing in labs.
+
+
+Happy Lab Building!
