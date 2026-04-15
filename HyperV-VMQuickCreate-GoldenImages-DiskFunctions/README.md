@@ -1,6 +1,6 @@
 # Hyper-V Lab Creation - Quick Create Tools
 
-A powerful set of PowerShell tools designed to quickly build, manage, and reset Hyper-V lab environments — ideal for learning, testing, and certification labs (AZ-800, AZ-801, etc.).
+A powerful set of PowerShell tools designed to quickly build, manage, and reset Hyper-V lab environments — ideal for learning, testing, and certification labs (AZ-800, AZ-801, AZ-802, etc.).
 
 Created and maintained by **Mark Kruse** in Anchorage, Alaska.
 
