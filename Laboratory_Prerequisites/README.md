@@ -48,7 +48,7 @@ These scripts are designed to be run **in order** and prepare the networking, Ac
 
 ## 🔗 Dependencies
 
-- [New-Lab_VM function](https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-QuickCreate-GoldenImages/AZ-800Celebrate-HyperV%20Creation%20and%20Disk%20Functions.ps1)  
+- [New-Lab_VM function](https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/HyperV%20Lab%20Creation%20and%20Disk%20Functions.ps1)  
   (Required — must be loaded before running any of these scripts)
 
 - Generalized Windows Server images (Desktop Experience + Server Core)
