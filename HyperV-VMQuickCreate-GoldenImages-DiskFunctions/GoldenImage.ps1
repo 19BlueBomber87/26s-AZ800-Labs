@@ -7,7 +7,7 @@
 # =============================================================================
 # =========================================================================================================================================================
 # Use link below to get 'New-Lab_VM' command
-# https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-QuickCreate-GoldenImages/AZ-800Celebrate-HyperV%20Creation%20and%20Disk%20Functions.ps1
+# https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/HyperV%20Lab%20Creation%20and%20Disk%20Functions.ps1
 # =========================================================================================================================================================
 New-Lab_VM -VMNames GoldenImage-ServerCore -HyperVSwitch EXT-INT -ISOPath C:\ISO\2025_26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
 New-Lab_VM -VMNames GoldenImage-DesktopExperience -HyperVSwitch EXT-INT -ISOPath 2025_26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
