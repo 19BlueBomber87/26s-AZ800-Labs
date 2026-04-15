@@ -6,7 +6,7 @@
 # Location: Anchorage, Alaska lab environment
 # ==========================================================================================================================================================
 # Use link below to get 'New-Lab_VM' command
-# https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-QuickCreate-GoldenImages/AZ-800Celebrate-HyperV%20Creation%20and%20Disk%20Functions.ps1
+# https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/HyperV%20Lab%20Creation%20and%20Disk%20Functions.ps1
 # ==========================================================================================================================================================
 
 # ===================================================
