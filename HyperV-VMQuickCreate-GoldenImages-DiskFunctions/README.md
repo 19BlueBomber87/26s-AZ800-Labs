@@ -42,14 +42,6 @@ Created and maintained by **Mark Kruse** in Anchorage, Alaska.
 
 ---
 
-## Repository Structure
-HyperV-QuickCreate/
-├── HyperV Lab Creation and Disk Functions.ps1   ← Main script
-├── GoldenImage.ps1                              ← (Optional) Golden image creation helper
-├── README.md
-└── C:\GoldenImages\                             ← Place your sysprepped .vhdx files here
-text---
-
 ## Setup Instructions
 
 1. **Enable Hyper-V** (if not already enabled)
