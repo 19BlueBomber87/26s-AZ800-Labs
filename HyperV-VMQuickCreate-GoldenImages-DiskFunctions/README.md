@@ -82,19 +82,4 @@ The _ResetLabNow function is destructive — use with caution.
 Customize switch names, paths, and adapter names as needed (e.g., Wi-Fi adapter name).
 Tested in Anchorage, Alaska lab environment.
 
-Future Enhancements (Ideas)
-
-Winget/Chocolatey app installation in golden image
-Auto domain join / DSC configuration
-Export/Import lab configurations
-GUI wrapper (optional)
-
-License
-Free to use, modify, and share.
 No warranty — test thoroughly in a non-production environment.
-
-Made for speed and repeatability in Hyper-V labs.
-Questions, issues, or improvements? Open an Issue or Pull Request!
-textThis README is well-structured for GitHub (with clear sections, code blocks, and examples), informative without being overwhelming, and directly references the files you provided.
-
-Would you like a shorter "one-screen" version, or any sections added/removed (e.g., screenshot
