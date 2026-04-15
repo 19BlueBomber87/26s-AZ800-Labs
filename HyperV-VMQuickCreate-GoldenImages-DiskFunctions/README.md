@@ -39,7 +39,9 @@ Created and maintained by **Mark Kruse** in Anchorage, Alaska.
 - Windows 10 / 11 Pro or Enterprise (or Windows Server) with **Hyper-V** enabled
 - Run **PowerShell as Administrator**
 - At least one Wi-Fi or Ethernet adapter for the external switch
+## 🔗 Dependencies
 
+- [GoldenImage.ps1](https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/GoldenImage.ps1)  
 ---
 
 ## Setup Instructions
@@ -78,7 +80,7 @@ Golden Image Preparation
 See the included comments in the script or the companion script:
 
 GoldenImage.ps1 (in the repo)
-
+- [GoldenImage.ps1](https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/GoldenImage.ps1)  
 Key steps:
 
 Build a reference VM
