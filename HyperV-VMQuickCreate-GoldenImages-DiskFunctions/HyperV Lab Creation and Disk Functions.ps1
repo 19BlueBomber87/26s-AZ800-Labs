@@ -129,7 +129,7 @@ function New-Lab_VM
 
     .EXAMPLE
         # File server with 6 data disks and dynamic memory
-        New- Lab_VM -VMNames "FS01" -HyperVSwitch "JUN-Net" -RAM 6GB -nonOSdiskcount 6 -nonOSdiskSizeGB 200 -GeneralizedImageDE
+        New-Lab_VM -VMNames "FS01" -HyperVSwitch "JUN-Net" -RAM 6GB -nonOSdiskcount 6 -nonOSdiskSizeGB 200  -DynamicMemory -GeneralizedImageDE
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'ISOPath')]
