@@ -35,7 +35,7 @@ shutdown /r /f /t 0
 python --version
 
 # Use notepad to create yahoo.py
-notepad yahoo.py
+notepad C:\Users\Administrator\Desktop\yahoo.py
 #Paste the text below into yahoo.py and save to desktop
 import textwrap
 with open("unicodeAlphabet-Py.txt", "w",encoding="UTF-8") as unicodeAlphabet:
