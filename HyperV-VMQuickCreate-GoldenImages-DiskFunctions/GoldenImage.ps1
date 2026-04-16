@@ -93,7 +93,7 @@ New-Lab_VM -VMNames yahoo -HyperVSwitch ext-int -GeneralizedImageDE -RAM 2GB
 # Repeat steps 1-4 using a Server Core Image 
 # ============================================
 # Now New-Lab VM can use GeneralizedImageCore
-New-Lab_VM -VMNames yahoo -HyperVSwitch ext-int -GeneralizedImageCore -RAM 2GB
+New-Lab_VM -VMNames yahooCore -HyperVSwitch ext-int -GeneralizedImageCore -RAM 2GB
 
 # ============================================
 # GUI                                    
