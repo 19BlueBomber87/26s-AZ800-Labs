@@ -40,7 +40,7 @@
                 <LocalAccounts>
                     <LocalAccount wcm:action="add">
                         <Password>
-                            <Value>Taz14Spaz!@#</Value>
+                            <Value>P@ssword2026!</Value>
                             <PlainText>true</PlainText>
                         </Password>
                         <Name>MegaMan</Name>
@@ -50,7 +50,7 @@
 
                     <LocalAccount wcm:action="add">
                         <Password>
-                            <Value>Taz14Spaz!@#</Value>
+                            <Value>P@ssword2026!</Value>
                             <PlainText>true</PlainText>
                         </Password>
                         <Name>Rush</Name>
