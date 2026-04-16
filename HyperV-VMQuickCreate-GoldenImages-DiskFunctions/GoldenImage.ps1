@@ -73,7 +73,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/19BlueBomber87/26s-AZ8
 # =============================================
 # Step 3 - Pull unattend.xml file for Sysprep 
 # =============================================
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/19BlueBomber87/Hyper-V-GoldenImages/refs/heads/main/Apps/unattend.xml" -OutFile C:\Windows\System32\Sysprep\unattend.xml
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/unattend.xml" -OutFile C:\Windows\System32\Sysprep\unattend.xml
 
 # ===================
 # Step 4 - Sysprerp 
@@ -84,7 +84,8 @@ C:\windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown /unattend:C:
 # Step 4 - Post Sysprerp 
 # ======================
 # Move the .vhdx file to C:\GoldenImages
-# Now New-Lab VM can use GeneralizedImageDE.
+Move-Item 'C:\Programdata\Microsoft\Windows\Virtual Hard Disks\GoldenImage-ServerCore.vhdx' C:\GoldenImages\ -Verbose *>&1
+# Test creating a VM with Golden Image
 New-Lab_VM -VMNames yahoo -HyperVSwitch ext-int -GeneralizedImageDE -RAM_GB 2GB
 
 # ============================================
