@@ -68,7 +68,7 @@ with open("unicodeAlphabet-Py.txt", "r",encoding="UTF-8") as unicodeAlphabet:
 mkdir C:\Windows\Web\Wallpaper\Custom
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/Main.JPG" -OutFile "C:\Windows\Web\Wallpaper\Custom\MegaMan.jpg"
 
-#USE GUI TO SET BACKGROUND!
+#USE GUI TO SET BACKGROUND
 
 # =============================================
 # Step 3 - Pull unattend.xml file for Sysprep 
