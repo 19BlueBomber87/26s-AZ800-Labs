@@ -88,6 +88,7 @@ Move-Item 'C:\Programdata\Microsoft\Windows\Virtual Hard Disks\GoldenImage-Serve
 # Test creating a VM with Golden Image
 New-Lab_VM -VMNames yahoo -HyperVSwitch ext-int -GeneralizedImageDE -RAM 2GB
 
+Get-Timzone # Verify
 # ============================================
 # Step 5                                     
 # Repeat steps 1-4 using a Server Core Image 
@@ -95,8 +96,4 @@ New-Lab_VM -VMNames yahoo -HyperVSwitch ext-int -GeneralizedImageDE -RAM 2GB
 # Now New-Lab VM can use GeneralizedImageCore
 New-Lab_VM -VMNames yahooCore -HyperVSwitch ext-int -GeneralizedImageCore -RAM 2GB
 
-# ============================================
-# GUI                                    
-# You can copy and rename the golden image with the GUI.  
-# ============================================
-
+Get-Timzone # Verify
