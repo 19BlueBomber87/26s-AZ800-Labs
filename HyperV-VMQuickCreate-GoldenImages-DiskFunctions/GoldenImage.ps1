@@ -9,8 +9,9 @@
 # Use link below to get 'New-Lab_VM' command
 # https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/HyperV%20Lab%20Creation%20and%20Disk%20Functions.ps1
 # =========================================================================================================================================================
-New-Lab_VM -VMNames GoldenImage-ServerCore -HyperVSwitch EXT-INT -ISOPath C:\ISO\2025_26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
-New-Lab_VM -VMNames GoldenImage-DesktopExperience -HyperVSwitch EXT-INT -ISOPath 2025_26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
+# Use 2GB or higher if possible
+New-Lab_VM -VMNames GoldenImage-ServerCore -HyperVSwitch EXT-INT -Ram 2GB -ISOPath C:\ISO\2025_26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
+New-Lab_VM -VMNames GoldenImage-DesktopExperience -HyperVSwitch EXT-INT -RAM 2GB -ISOPath 2025_26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
 
 #enter Audit Mode - At the very first OOBE screen CTRL + SHIFT + F3
 #intsall Updates
@@ -35,7 +36,7 @@ python --version
 
 # Use notepad to create yahoo.py
 notepad yahoo.py
-#Paste into yahoo.py and save to desktop
+#Paste the text below into yahoo.py and save to desktop
 import textwrap
 with open("unicodeAlphabet-Py.txt", "w",encoding="UTF-8") as unicodeAlphabet:
     for i in range(55295):
@@ -58,6 +59,7 @@ with open("unicodeAlphabet-Py.txt", "r",encoding="UTF-8") as unicodeAlphabet:
         print("\n".join(textwrap.wrap(x,100)),file=unicodeWrap)
     unicodeWrap.close()
     unicodeAlphabet.close()
+#end of python file
 # ============================================
 # Step 2- Custom Background Image            
 # Skip this step if making Server Core Image 
