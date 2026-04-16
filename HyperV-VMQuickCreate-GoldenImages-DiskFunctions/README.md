@@ -131,8 +131,8 @@ These images are then used by the main `New-Lab_VM` function for extremely fast 
 ## Files Included
 
 - `GoldenImage.ps1` – Main preparation script
-- `unattend.xml` – Unattend file used during sysprep (creates local accounts, sets timezone, etc.)
-- Main wallpaper image (MegaMan.jpg) – Optional custom background
+- `unattend.xml` – Unattend file used during sysprep (creates local accounts, sets timezone, etc.) AKA: Unattend Answer File
+- Main wallpaper image (Main.jpg) – Optional custom background
 
 ---
 
