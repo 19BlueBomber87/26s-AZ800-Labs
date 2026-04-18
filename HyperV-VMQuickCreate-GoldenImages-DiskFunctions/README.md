@@ -11,7 +11,7 @@ Created and maintained by **Mark Kruse** in Anchorage, Alaska.
 - **Quick VM Creation** (`New-Lab_VM`)
   - Create VMs from Windows Server ISO (clean install)
   - Create VMs from generalized **Desktop Experience** or **Server Core** golden images
-  - Support for multiple VMs at once
+  - Support for creating multiple VMs at once
   - Configurable RAM, vCPU count, dynamic memory
   - Add multiple network adapters during creation
   - Function to add extra data disks
