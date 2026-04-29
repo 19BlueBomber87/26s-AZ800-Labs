@@ -38,8 +38,9 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
     -ServerAddresses 127.0.0.1, 8.8.8.8 `
     -Verbose *>&1
 
-Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
 Rename-Computer -NewName ANC-DC01 -Restart -Verbose *>&1
+Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
+
 
 #Promote DC
 Import-Module ADDSDeployment
