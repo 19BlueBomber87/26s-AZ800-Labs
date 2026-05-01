@@ -8,13 +8,8 @@
 # Use link below to get 'New-Lab_VM' command
 # https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/HyperV%20Lab%20Creation%20and%20Disk%20Functions.ps1
 # ==========================================================================================================================================================
-
 # ===================================================
-# Step 1 - Create RRAS Server with 5 network adapters
-# ===================================================
-New-Lab_VM -VMNames YAHOO-RRAS01 -HyperVSwitch ER-NET -AdapterCount 6 -GeneralizedImageDE
-# ===================================================
-# Step 2 - Create Hyper-V Switches
+# Step 1 - Create Hyper-V Switches
 # One external switch for path way to internet
 # One private switch Per Local Area Network(LAN)
 # ===================================================
@@ -26,6 +21,11 @@ CreateLabSwitches # Function from HyperV-QuickCreate-GoldenImages to create lab 
 # New-VMSwitch -Name JUN-NET -SwitchType Private -Verbose *>&1
 # New-VMSwitch -Name LINUX-NET -SwitchType Private -Verbose *>&1
 # New-VMSwitch -Name ER-NET -SwitchType Private -Verbose *>&1
+
+# ===================================================
+# Step 2 - Create RRAS Server with 5 network adapters
+# ===================================================
+New-Lab_VM -VMNames YAHOO-RRAS01 -HyperVSwitch ER-NET -AdapterCount 6 -GeneralizedImageDE
 
 # ========================================================
 # Step 3 - Disable ipv6 and Change network adapter names
