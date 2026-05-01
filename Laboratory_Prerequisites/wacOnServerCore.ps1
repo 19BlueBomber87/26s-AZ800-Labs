@@ -108,17 +108,12 @@ Start-Process -FilePath $installer -ArgumentList $installerArgs -Verbose *>&1
 # Install updates automatically 
 # Required diagnostic data
 
-# ===================================================
-# Step 4 - Create a privileged access workstation to test WAC
-# ===================================================
-
-# Check Services are running
+# Check Services are running or reboot
 Get-Service *AdminCenter* -ErrorAction SilentlyContinue | Select Name, Status, StartType
 
 Start-Service WindowsAdminCenter -Verbose *>&1
 
 Set-Service WindowsAdminCenter -StartupType Automatic -Verbose *>&1
-
 
 # ===================================================
 # Step 4 - Test WAC
