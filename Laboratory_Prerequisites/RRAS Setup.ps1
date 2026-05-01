@@ -25,6 +25,7 @@ CreateLabSwitches # Function from HyperV-QuickCreate-GoldenImages to create lab 
 # New-VMSwitch -Name Nome-NET -SwitchType Private -Verbose *>&1
 # New-VMSwitch -Name JUN-NET -SwitchType Private -Verbose *>&1
 # New-VMSwitch -Name LINUX-NET -SwitchType Private -Verbose *>&1
+# New-VMSwitch -Name ER-NET -SwitchType Private -Verbose *>&1
 
 # ========================================================
 # Step 3 - Disable ipv6 and Change network adapter names
