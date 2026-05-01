@@ -18,31 +18,11 @@
  
 # ===================================================
 # Step 1 - Create Server Core VM to be WAC Server. 
-#          Create Server to be privileged access workstation(PAW) management server
 # ===================================================
 #WAC Server
 New-Lab_VM -VMNames YAHOO-WAC01 -HyperVSwitch ANC-NET -GeneralizedImageCore
 
 Rename-Computer -NewName "YAHOO-WAC01"  -Restart -Verbose *>&1
-
-New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
-    -Direction Inbound `
-    -Protocol ICMPv4 `
-    -IcmpType 8 `
-    -Action Allow
-
-
-#Make sure domain name resovles to minecraftmoose.com before joining
-# ping minecraftmoose.com should return ANC-DC01 ip address -> 192.168.77.7
-# If not run 'ipconfig /flushdns' and try ping again
-ping minecraftmoose.com
-
-Add-Computer -DomainName minecraftmoose.com -Credential minecraftmoose\administrator -Restart -Verbose *>&1
-
-#PAW Server - Destkop Experience
-New-Lab_VM -VMNames YAHOO-PAW01 -HyperVSwitch ANC-NET -GeneralizedImageDE
-
-Rename-Computer -NewName "YAHOO-PAW01"  -Restart -Verbose *>&1
 
 New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Direction Inbound `
@@ -129,7 +109,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     
 Rename-Computer -NewName ER-PAW01 -Restart -Verbose *>&1
 
-Add-Computer -DomainName dev.moosewyre.fun -Credential moosewyre\administrator -Restart -Verbose *>&1
+Add-Computer -DomainName minecraftmoose.com -Credential minecraftmoose\administrator -Restart -Verbose *>&1
 
 # ===================================================
 # Step 4 - Test WAC
