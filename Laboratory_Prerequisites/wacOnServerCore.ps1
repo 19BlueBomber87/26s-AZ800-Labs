@@ -23,12 +23,14 @@
 #WAC Server
 New-Lab_VM -VMNames YAHOO-WAC01 -HyperVSwitch ANC-NET -GeneralizedImageCore
 
+Rename-Computer -NewName "YAHOO-WAC01"  -Restart -Verbose *>&1
+
 New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Direction Inbound `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
-Rename-Computer -NewName "YAHOO-WAC01"  -Restart -Verbose *>&1
+
 
 #Make sure domain name resovles to minecraftmoose.com before joining
 # ping minecraftmoose.com should return ANC-DC01 ip address -> 192.168.77.7
@@ -40,12 +42,14 @@ Add-Computer -DomainName minecraftmoose.com -Credential minecraftmoose\administr
 #PAW Server - Destkop Experience
 New-Lab_VM -VMNames YAHOO-PAW01 -HyperVSwitch ANC-NET -GeneralizedImageDE
 
+Rename-Computer -NewName "YAHOO-PAW01"  -Restart -Verbose *>&1
+
 New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Direction Inbound `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
-Rename-Computer -NewName "YAHOO-PAW01"  -Restart -Verbose *>&1
+
 
 #Make sure domain name resovles to minecraftmoose.com before joining
 # ping minecraftmoose.com should return ANC-DC01 ip address -> 192.168.77.7
