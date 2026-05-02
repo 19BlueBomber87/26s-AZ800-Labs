@@ -1,4 +1,4 @@
-# Hyper-V Lab: Active Directory Domain Services Lab Environment 
+# Hyper-V: Active Directory Domain Services Lab Environment 
 
 A complete PowerShell automation suite for building a complex Active Directory lab environment in Hyper-V. Includes multiple domains, forests, forest trusts, and automated test user creation.
 
