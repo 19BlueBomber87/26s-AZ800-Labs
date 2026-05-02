@@ -1,6 +1,6 @@
 # Hyper-V Lab: Multi-Domain Active Directory Forest Automation
 
-A complete PowerShell automation suite for building a complex Active Directory lab environment in Hyper-V. Includes multiple domains, forests, site topology, forest trust, and automated test user creation.
+A complete PowerShell automation suite for building a complex Active Directory lab environment in Hyper-V. Includes multiple domains, forests, forest trusts, and automated test user creation.
 
 Perfect for AZ-800 study, hybrid identity testing, Entra ID sync labs, and advanced AD administration practice.
 
@@ -41,18 +41,7 @@ https://github.com/19BlueBomber87/26s-AZ800-Labs/tree/main/AD%20DS
 - Windows 10/11 or Windows Server with Hyper-V enabled
 - New-Lab_VM function (from the HyperV helper script in the repo)
 - Generalized Windows Server images (Desktop Experience)
-- At least 32GB RAM recommended for smooth performance
-
----
-
-## How to Use
-
-1. Go to the folder: `/AD DS`
-2. Load the Hyper-V helper functions first
-3. Run `Install-ADDS-and-Promote-DCs.ps1` step by step
-4. Then run `Create-TestUser-Pool.ps1` to create test users
-
-Follow the detailed comments inside each script.
+- At least 16GB RAM recommended for smooth performance
 
 ---
 
@@ -64,13 +53,6 @@ Follow the detailed comments inside each script.
 | Nome-DC01   | moosewyre.fun (Tree)            | 192.168.88.8    | Tree Domain Controller   |
 | ER-DC01     | dev.moosewyre.fun (Child)       | 192.168.100.9   | Child Domain Controller  |
 | JUN-DC01    | megamooselabsfun.com            | 192.168.99.9    | Forest Root DC           |
-
----
-
-## Default Credentials
-
-- Safe Mode / DSRM Password: `P@ssword1!`
-- Test User Password: `Password123!`
 
 ---
 
