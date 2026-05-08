@@ -14,7 +14,7 @@
 # A domain registrar is a company accredited by ICANN (or relevant authorities) that lets you buy, register, and manage domain names like .com, .net, .org, etc.
 # Examples: Network Solutions, Squarespace, GoDaddy, etc
 
-# You also must connect your domains to your Azure\365 tenant
+# For these Labs I have added minecraftmoose.com, moosewyre.fun and megamooselabsfun.com to my Azure\365 tenant.  (You would replace with your domain name)
 # ========================================================
 
 # ========================================================
