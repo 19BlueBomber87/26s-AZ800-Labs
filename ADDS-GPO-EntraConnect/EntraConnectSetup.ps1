@@ -19,14 +19,9 @@
 4. Set Source Anchor to "mS-DS-ConsistencyGuid"
 # Unlike objectGUID, which changes during cross-forest migrations, mS-DS-ConsistencyGuid remains constant, preventing synchronization errors
 
-
-
-
-
-
-
+# ========================
 # EntraConnect design.  
-
+# ========================
 # The Password Hashes are synced to Entra ID from AD DS
 # If AD DS is down things still work.
 # Micrsoft monitors password hashes
