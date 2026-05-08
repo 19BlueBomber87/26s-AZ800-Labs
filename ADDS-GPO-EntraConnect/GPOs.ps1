@@ -57,8 +57,10 @@ Write-Verbose "`n=== DONE! ==="  -Verbose *>&1
 Write-Verbose "Run 'gpupdate /force' on test machines."  -Verbose *>&1
 Write-Verbose "Check Group Policy Management Console to verify the link."  -Verbose *>&1
 
+# on member servers use "gpupdate /force" to update group policy
+gpupdate /force
 # ========================================================
-# Step  1 -Create Computer GPO to sAdd MCM-RDS-Users to Remote Desktop Users.  
+# Step  2 -Create Computer GPO to sAdd MCM-RDS-Users to Remote Desktop Users.  
 # Create and Confgiure GUI
 # ========================================================
 
