@@ -46,7 +46,7 @@ Rename-Computer -NewName ER-DC01 -Restart -Verbose *>&1
 Save-VM -VMName ER-DC01  -Verbose *>&1 
 
 # 7 - dev.moosewyre.fun member server
-New-Lab_VM ER-SVR01 -HyperVSwitch ER-Net -GeneralizedImageCore
+New-Lab_VM ER-SVR01 -HyperVSwitch ER-Net -GeneralizedImageDE
 Rename-Computer -NewName ER-SVR01 -Restart -Verbose *>&1
 Save-VM -VMName ER-SVR01  -Verbose *>&1 
 
@@ -56,7 +56,7 @@ Rename-Computer -NewName JUN-DC01 -Restart -Verbose *>&1
 Save-VM -VMName JUN-DC01  -Verbose *>&1 
 
 # 9 - megamooselabsfun.com member server
-New-Lab_VM JUN-SVR01 -HyperVSwitch Jun-Net -GeneralizedImageCore
+New-Lab_VM JUN-SVR01 -HyperVSwitch Jun-Net -GeneralizedImageDE
 Rename-Computer -NewName JUN-SVR01 -Restart -Verbose *>&1
 Save-VM -VMName JUN-SVR01  -Verbose *>&1 
 
@@ -64,6 +64,7 @@ Save-VM -VMName JUN-SVR01  -Verbose *>&1
 New-Lab_VM MCMENTRACONNECT -HyperVSwitch Linux-Net -GeneralizedImageDE
 Rename-Computer -NewName MCMENTRACONNECT -Restart -Verbose *>&1
 Save-VM -VMName MCMENTRACONNECT -Verbose *>&1 
+
 
 
 
