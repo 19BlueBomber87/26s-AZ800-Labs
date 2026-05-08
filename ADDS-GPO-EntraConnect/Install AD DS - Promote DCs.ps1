@@ -31,7 +31,7 @@ Rename-Computer -NewName ANC-PAW01 -Restart -Verbose *>&1
 Save-VM -VMName ANC-PAW01 -Verbose *>&1 
 
 # moosewyre.fun domain controller
-New-Lab_VM Nome-DC01 -HyperVSwitch -RAM 2GB Nome-Net -GeneralizedImageCore
+New-Lab_VM Nome-DC01 -HyperVSwitch Nome-Net -RAM 2GB -GeneralizedImageCore
 Rename-Computer -NewName Nome-DC01 -Restart -Verbose *>&1
 Save-VM -VMName Nome-DC01  -Verbose *>&1 
 
