@@ -143,9 +143,10 @@ Disable-ADAccount Administrator -Verbose *>&1
 # CN=Administrators,CN=Builtin,DC=minecraftmoose,DC=com
 
 ##############################################
-# Important -> Build default users with GUI or Powershell.  (Link to a .ps1 file that builds users quickly -> [Link])
+# Important -> Build default users with GUI or Powershell.  (Link to a .ps1 file that builds users quickly -> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/ADDS-GPO-EntraConnect/ADUserPoolQuickCreate.ps1
 ##############################################
-# Important -> Design Group Policies -> Create and Test GPOs.  (Link to instructions for creating GPOs-> [Link])
+# Important -> Design Group Policies -> Create and Test GPOs.  (Link to instructions for creating GPOs-> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/ADDS-GPO-EntraConnect/GPOs.ps1)
+##############################################
 ##############################################
 # Test GPO Config
 # Test RDP with GUI
