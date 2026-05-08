@@ -1,6 +1,6 @@
 # Hyper-V Lab: Active Directory Domain Services & Entra Connect Lab
 
-This lab provides a Hyper-V lab environment for building a complex, multi-domain Active Directory infrastructure. It features multiple domains and forests, advanced site topology, forest trusts and Entra Connect synchronization
+This Hyper-V lab environment allows you to build a complex, multi-domain Active Directory infrastructure. It consists of two forests.  One forest containing a root domain, a tree domain, and a child domain. Once the AD DS environment is built, we will configure Entra Connect to synchronize all users to Entra ID.
 
 ---
 
