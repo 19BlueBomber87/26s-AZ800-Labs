@@ -147,7 +147,6 @@ Disable-ADAccount Administrator -Verbose *>&1
 ##############################################
 # Important -> Design Group Policies -> Create and Test GPOs.  (Link to instructions for creating GPOs-> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/ADDS-GPO-EntraConnect/GPOs.ps1)
 ##############################################
-##############################################
 # Test GPO Config
 # Test RDP with GUI
 # Test new Wallpaper GUI
