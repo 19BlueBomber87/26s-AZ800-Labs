@@ -235,7 +235,7 @@ Disable-ADAccount administrator -Verbose *>&1
 # CN=Administrators,CN=Builtin,DC=minecraftmoose,DC=com
 
 ##############################################
-# Important -> Build default users with GUI or Powershell.  (Link to a .ps1 file that builds users quickly -> [Link])
+# Important -> Build default users with GUI or Powershell.  (Link to a .ps1 file that builds users quickly -> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/ADDS-GPO-EntraConnect/ADUserPoolQuickCreate.ps1
 ##############################################
 
 #On ANC-DC01 make sure initial sync has completed to Nome-DC01
@@ -315,7 +315,7 @@ Disable-ADAccount Administrator -Verbose *>&1
 # CN=Administrators,CN=Builtin,DC=minecraftmoose,DC=com
 
 ##############################################
-# Important -> Build default users with GUI or Powershell.  (Link to a .ps1 file that builds users quickly -> [Link])
+# Important -> Build default users with GUI or Powershell.  (Link to a .ps1 file that builds users quickly -> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/ADDS-GPO-EntraConnect/ADUserPoolQuickCreate.ps1
 ##############################################
 
 #On ANC-DC01 make sure initial sync has completed to ER-DC01
@@ -394,7 +394,7 @@ Disable-ADAccount Administrator -Verbose *>&1
 # CN=Administrators,CN=Builtin,DC=minecraftmoose,DC=com
 
 ##############################################
-# Important -> Build default users with GUI or Powershell.  (Link to a .ps1 file that builds users quickly -> [Link])
+# Important -> Build default users with GUI or Powershell.  (Link to a .ps1 file that builds users quickly -> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/ADDS-GPO-EntraConnect/ADUserPoolQuickCreate.ps1
 ##############################################
 
 # ANC-DC01, NOME-DC01 and ER-DC01 share a Schema
