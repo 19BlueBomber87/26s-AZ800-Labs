@@ -1,8 +1,8 @@
 # Hyper-V Lab: Active Directory Domain Services & Entra Connect Lab
 
-A complete PowerShell automation suite for building a complex Active Directory lab environment in Hyper-V. Includes multiple domains, forests, site topology, forest trust, and automated test user creation.
+This lab is for building a complex Active Directory lab environment in Hyper-V. Includes multiple domains, forests, complex site topology, forest trust, and automated test user creation.
 
-Perfect for AZ-800 study, hybrid identity testing, Entra ID sync labs, and advanced AD administration practice.
+Perfect to study, hybrid identity testing, Entra ID sync labs, and advanced AD administration practice.
 
 ---
 
