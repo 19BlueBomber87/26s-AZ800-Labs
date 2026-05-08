@@ -31,7 +31,7 @@ Rename-Computer -NewName ANC-PAW01 -Restart -Verbose *>&1
 Save-VM -VMName ANC-PAW01 -Verbose *>&1 
 
 # 4 - Windows Admin Center
-New-Lab_VM ANC-WAC01 -HyperVSwitch ER-Net -GeneralizedImageCore
+New-Lab_VM ANC-WAC01 -HyperVSwitch ANC-Net -GeneralizedImageCore
 Rename-Computer -NewName ANC-WAC01 -Restart -Verbose *>&1
 Save-VM -VMName ANC-WAC01  -Verbose *>&1 
 
