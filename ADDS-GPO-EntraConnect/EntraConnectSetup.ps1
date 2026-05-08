@@ -8,7 +8,7 @@
 # =====================
 
 # ========================================================
-# Prerequisite -You must own your AD DS domain names and have them connected to Azure\365 tenant before starting lab. 
+# Prerequisite -You must own your AD DS domain names and have them connected to Azure\365 tenant before starting the lab. 
 # https://learn.microsoft.com/en-us/microsoft-365/admin/setup/add-domain?view=o365-worldwide&tabs=domain-connect
 
 # A domain registrar is a company accredited by ICANN (or relevant authorities) that lets you buy, register, and manage domain names like .com, .net, .org, etc.
