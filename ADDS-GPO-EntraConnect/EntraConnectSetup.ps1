@@ -53,12 +53,12 @@ Get-FileHash .\yahoo.txt -Algorithm SHA256
 
 
 # Format-Hex .\yahoo.txt
-# Output
-#            Path: C:\Users\admin.mkruse\yahoo.txt
+
+#            Path: C:\Users\A19mk\yahoo.txt
 
 #            00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
 
-# 00000000   FF FE 79 00 61 00 68 00 6F 00 6F 00              .þy.a.h.o.o.
+# 00000000   FF FE 59 00 61 00 68 00 6F 00 6F 00 0D 00 0A 00  .þY.a.h.o.o.....
 
 # Moose in Hex
 # 4D 00 6F 00 6F 00 73 00 65 00
