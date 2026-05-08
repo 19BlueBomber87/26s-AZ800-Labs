@@ -1,4 +1,4 @@
-# Hyper-V Lab: Multi-Domain Active Directory Forest Automation
+# Hyper-V Lab: Active Directory Domain Services & Entra Connect Lab
 
 A complete PowerShell automation suite for building a complex Active Directory lab environment in Hyper-V. Includes multiple domains, forests, site topology, forest trust, and automated test user creation.
 
