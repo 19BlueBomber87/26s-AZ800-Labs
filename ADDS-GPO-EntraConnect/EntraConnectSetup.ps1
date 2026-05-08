@@ -8,6 +8,16 @@
 # =====================
 
 # ========================================================
+# Prerequisite -You must own your AD DS domain names and have them connected to Azure\365 tenant before starting lab. 
+# https://learn.microsoft.com/en-us/microsoft-365/admin/setup/add-domain?view=o365-worldwide&tabs=domain-connect
+
+# A domain registrar is a company accredited by ICANN (or relevant authorities) that lets you buy, register, and manage domain names like .com, .net, .org, etc.
+# Examples: Network Solutions, Squarespace, GoDaddy, etc
+
+# You also must connect your domains to your Azure\365 tenant
+# ========================================================
+
+# ========================================================
 # Step  1 -Log into entra.microsoft.com and download the install file for EntraConnect.(As of May 2026 the file name is -> "AzureADConnect.msi")
 # ========================================================
 
@@ -19,9 +29,10 @@
 4. Set Source Anchor to "mS-DS-ConsistencyGuid"
 # Unlike objectGUID, which changes during cross-forest migrations, mS-DS-ConsistencyGuid remains constant, preventing synchronization errors
 
-# ========================
+
+
 # EntraConnect design.  
-# ========================
+
 # The Password Hashes are synced to Entra ID from AD DS
 # If AD DS is down things still work.
 # Micrsoft monitors password hashes
