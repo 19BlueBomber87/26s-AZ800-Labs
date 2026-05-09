@@ -31,6 +31,7 @@ New-Lab_VM ANC-Paw01 -HyperVSwitch Linux-Net -GeneralizedImageDE
 Rename-Computer -NewName ANC-PAW01 -Restart -Verbose *>&1
 Install-WindowsFeature -Name RSAT-AD-PowerShell -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
+Install-WindowsFeature -Name DNS -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
 Save-VM -VMName ANC-PAW01 -Verbose *>&1 
 
 # 4 - Windows Admin Center
