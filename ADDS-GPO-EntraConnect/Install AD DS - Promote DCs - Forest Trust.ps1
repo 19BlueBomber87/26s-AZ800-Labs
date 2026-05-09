@@ -232,6 +232,8 @@ Install-ADDSDomain `
 -SysvolPath "C:\Windows\SYSVOL" `
 -Force:$true
 
+Add-DnsServerConditionalForwarderZone -Name "minecraftmoose.com" -MasterServers 192.168.77.7 -Verbose *>&1 
+
 # Set permissions for administrators, in this case the user megaman@moosewyre.fun and rush@moosewyre.fun
 # Disable default administrator account for the domain
 $newAdmins = "megaman","Rush"
