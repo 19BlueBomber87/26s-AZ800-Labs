@@ -19,6 +19,7 @@
 New-Lab_VM ANC-DC01 -HyperVSwitch ANC-Net -RAM 2GB -GeneralizedImageCore
 Rename-Computer -NewName ANC-DC01 -Restart -Verbose *>&1
 Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
+Restart-Computer -Verbose *>&1
 Save-VM -VMName ANC-DC01 -Verbose *>&1 
 
 # 2 - minecraftmoose.com member server
