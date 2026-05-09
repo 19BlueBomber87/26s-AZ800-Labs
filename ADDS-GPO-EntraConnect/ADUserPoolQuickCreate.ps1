@@ -68,6 +68,7 @@ foreach ($user in $rdsUsers) {
         Write-Verbose "Failed to add $($user.SamAccountName) - Check if username is correct" -Verbose *>&1
     }
 }
+(Get-ADGroup "MCM-RDS-Users"  -Properties member).member
 # ========================================================
 # Step  2 -Create DCs - Create Test User pool 
 # ========================================================
@@ -128,6 +129,7 @@ foreach ($user in $rdsUsers) {
         Write-Verbose "Failed to add $($user.SamAccountName) - Check if username is correct" -Verbose *>&1
     }
 }
+(Get-ADGroup "MCM-RDS-Users"  -Properties member).member
 # ========================================================
 # Step  3 -Create DCs - Create Test User pool 
 # ========================================================
@@ -188,6 +190,7 @@ foreach ($user in $rdsUsers) {
         Write-Verbose "Failed to add $($user.SamAccountName) - Check if username is correct" -Verbose *>&1
     }
 }
+(Get-ADGroup "MCM-RDS-Users"  -Properties member).member
 # ========================================================
 # Step  4 -Create DCs - Create Test User pool 
 # ========================================================
@@ -247,6 +250,7 @@ foreach ($user in $rdsUsers) {
         Write-Verbose "Failed to add $($user.SamAccountName) - Check if username is correct" -Verbose *>&1
     }
 }
+(Get-ADGroup "MCM-RDS-Users"  -Properties member).member
 ####################################  
 
 # #prtotype
