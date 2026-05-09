@@ -343,7 +343,7 @@ repadmin /replsummary
 repadmin /syncall ER-dc01.dev.moosewyre.fun /AeD
 repadmin /replsummary
 
-# ANC-DC01, NOME-DC01 and ER-DC01 share a Schema
+# ANC-DC01(minecraftmoose.com), NOME-DC01(moosewyre.fun) and ER-DC01(dev.moosewyre.fun) share a Schema
 # #AD Partitions
 # ntdsutil.exe
 # activate instance ntds
