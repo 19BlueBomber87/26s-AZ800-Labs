@@ -31,7 +31,8 @@ New-Lab_VM ANC-Paw01 -HyperVSwitch Linux-Net -GeneralizedImageDE
 Rename-Computer -NewName ANC-PAW01 -Restart -Verbose *>&1
 Install-WindowsFeature -Name RSAT-AD-PowerShell -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
-Install-WindowsFeature -Name DNS -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
+Install-WindowsFeature -Name RSAT-DNS-Server -Confirm:$false -Verbose *>&1
+Restart-Computer -Verbose *>&1
 Save-VM -VMName ANC-PAW01 -Verbose *>&1 
 
 # 4 - Windows Admin Center
@@ -43,12 +44,14 @@ Save-VM -VMName ANC-WAC01  -Verbose *>&1
 New-Lab_VM Nome-DC01 -HyperVSwitch Nome-Net -RAM 2GB -GeneralizedImageCore
 Rename-Computer -NewName Nome-DC01 -Restart -Verbose *>&1
 Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
+Restart-Computer -Verbose *>&1
 Save-VM -VMName Nome-DC01  -Verbose *>&1 
 
 # 6 - dev.moosewyre.fun domain controller
 New-Lab_VM ER-DC01 -HyperVSwitch ER-Net -RAM 2GB -GeneralizedImageCore
 Rename-Computer -NewName ER-DC01 -Restart -Verbose *>&1
 Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
+Restart-Computer -Verbose *>&1
 Save-VM -VMName ER-DC01  -Verbose *>&1 
 
 # 7 - dev.moosewyre.fun member server
@@ -60,6 +63,7 @@ Save-VM -VMName ER-SVR01  -Verbose *>&1
 New-Lab_VM JUN-DC01 -HyperVSwitch Jun-Net -RAM 2GB -GeneralizedImageCore
 Rename-Computer -NewName JUN-DC01 -Restart -Verbose *>&1
 Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
+Restart-Computer -Verbose *>&1
 Save-VM -VMName JUN-DC01  -Verbose *>&1 
 
 # 9 - megamooselabsfun.com member server
@@ -71,8 +75,6 @@ Save-VM -VMName JUN-SVR01  -Verbose *>&1
 New-Lab_VM MCMENTRACONNECT -HyperVSwitch Linux-Net -GeneralizedImageDE
 Rename-Computer -NewName MCMENTRACONNECT -Restart -Verbose *>&1
 Save-VM -VMName MCMENTRACONNECT -Verbose *>&1 
-
-
 
 # Power Shell Direct Example.  Use the -VMName parameter. (Run command from the hyper-V host to any VM)
 Enter-PSSession -VMName ANC-DC01 -Credential ANC-DC01\administrator
