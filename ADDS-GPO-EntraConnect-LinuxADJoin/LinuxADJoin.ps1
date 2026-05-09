@@ -38,8 +38,8 @@ Start-VM -VMName jun-linux01 -Verbose *>&1
 # Find the ip of your linux server
 $Linux_ipv4 = "192.168.99.28"
 Add-DnsServerResourceRecordA -Name "jun-linux01" -ZoneName "megamooselabsfun.com" -IPv4Address $Linux_ipv4
-Get-DnsServerResourceRecord -ZoneName "megamooselabsfun.com" 
 Get-DnsServerResourceRecord -ZoneName "megamooselabsfun.com" | ? -Property hostname -Like *linux*
+Get-DnsServerResourceRecord -ZoneName "megamooselabsfun.com" 
 
 # Create Test File Share
 mkdir "C:\Share01\Yahoo"
