@@ -186,6 +186,7 @@ Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\meg
 
 Get-WindowsFeature -Name RSAT-AD-PowerShell
 Get-WindowsFeature -Name RSAT-AD-Tools
+Get-WindowsFeature -Name RSAT-DNS-Server
 Set-DNSClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.77.7 
 Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\megaman -Restart -Verbose *>&1
 
