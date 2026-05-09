@@ -215,7 +215,7 @@ Import-Module ADDSDeployment
 Install-ADDSDomain `
 -NoGlobalCatalog:$false `
 -CreateDnsDelegation:$false `
--Credential (Get-Credential -Credential administrator@minecraftmoose.com) `
+-Credential (Get-Credential -Credential megaman@minecraftmoose.com) `
 -DatabasePath "C:\Windows\NTDS" `
 -DomainMode "WinThreshold" `
 -DomainType "TreeDomain" `
@@ -297,7 +297,7 @@ Import-Module ADDSDeployment
 Install-ADDSDomain `
 -NoGlobalCatalog:$false `
 -CreateDnsDelegation:$true `
--Credential (Get-Credential -Credential administrator@minecraftmoose.com) `
+-Credential (Get-Credential -Credential megaman@minecraftmoose.com) `
 -DatabasePath "C:\Windows\NTDS" `
 -DomainMode "WinThreshold" `
 -DomainType "ChildDomain" `
