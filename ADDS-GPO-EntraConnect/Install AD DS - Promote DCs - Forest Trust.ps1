@@ -166,7 +166,7 @@ Disable-ADAccount Administrator -Verbose *>&1
 # Test RDP with GUI
 # Test new Wallpaper GUI
 
-# ANC-DC01, NOME-DC01 and ER-DC01 share a Schema
+# ANC-DC01(minecraftmoose.com), NOME-DC01(moosewyre.fun) and ER-DC01(dev.moosewyre.fun) share a Schema
 # #AD Partitions
 # ntdsutil.exe
 # activate instance ntds
@@ -263,7 +263,7 @@ repadmin /syncall anc-dc01.minecraftmoose.com /AeD
 repadmin /syncall nome-dc01.moosewyre.fun /AeD
 repadmin /replsummary
 
-# ANC-DC01, NOME-DC01 and ER-DC01 share a Schema
+# ANC-DC01(minecraftmoose.com), NOME-DC01(moosewyre.fun) and ER-DC01(dev.moosewyre.fun) share a Schema
 # #AD Partitions
 # ntdsutil.exe
 # activate instance ntds
@@ -418,7 +418,7 @@ Disable-ADAccount Administrator -Verbose *>&1
 # Important -> Build default users with GUI or Powershell.  (Link to a .ps1 file that builds users quickly -> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/ADDS-GPO-EntraConnect/ADUserPoolQuickCreate.ps1
 ##############################################
 
-# ANC-DC01, NOME-DC01 and ER-DC01 share a Schema
+# ANC-DC01(minecraftmoose.com), NOME-DC01(moosewyre.fun) and ER-DC01(dev.moosewyre.fun) share a Schema
 # #AD Partitions
 # ntdsutil.exe
 # activate instance ntds
