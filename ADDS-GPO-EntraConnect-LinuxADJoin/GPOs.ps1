@@ -66,7 +66,7 @@ gpupdate /force
 
 # 1. Open Group Policy Management (gpmc.msc)
 
-# 2. Right-click the OU that contains your computers or servers → 
+# 2. Right-click the OU that contains your computers or servers (CrossDomain01) → "OU=CrossDomain01,DC=minecraftmoose,DC=com" 
 #    Select "Create a GPO in this domain, and Link it here"
 
 # 3. Name the GPO: RDS - Allow MCM-RDS-Users
