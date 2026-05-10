@@ -7,7 +7,8 @@
 # Use link below to get 'New-Lab_VM' command
 # https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-QuickCreate-GoldenImages/AZ-800Celebrate-HyperV%20Creation%20and%20Disk%20Functions.ps1
 # =========================================================================================================================================================
-
+# How to create Hyper-V Windows Server Router
+# https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/ADDS-GPO-EntraConnect-LinuxADJoin/RRAS%20Setup.ps1
 # ========================================================
 # Step  1 -Create Lab Servers - One DC per Domain - Install AD DS on DCs and 
 # ========================================================
