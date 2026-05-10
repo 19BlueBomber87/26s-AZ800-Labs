@@ -34,6 +34,7 @@ Rename-Computer -NewName ANC-PAW01 -Restart -Verbose *>&1
 Install-WindowsFeature -Name RSAT-AD-PowerShell -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name RSAT-DNS-Server -Confirm:$false -Verbose *>&1
+Install-WindowsFeature GPMC -Confirm:$false -Verbose *>&1
 Restart-Computer -Verbose *>&1
 Save-VM -VMName ANC-PAW01 -Verbose *>&1 
 
