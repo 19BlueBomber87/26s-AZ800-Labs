@@ -5,7 +5,8 @@
 # Purpose:  Help understand Password Hash Synchronization.  
 # Location: Anchorage, Alaska lab environment
 # =====================
-
+# Hash text website
+# https://www.onlinewebtoolkit.com/hash-generator
 # The Password Hashes are synced to Entra ID from AD DS
 # If AD DS is down things still work.
 # Micrsoft monitors password hashes
