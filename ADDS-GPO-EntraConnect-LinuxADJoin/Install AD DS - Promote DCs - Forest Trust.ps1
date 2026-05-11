@@ -42,6 +42,7 @@ Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature -Confirm:$false
 Install-WindowsFeature -Name RSAT-DNS-Server -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name GPMC -Confirm:$false -Verbose *>&1
 Set-Item WSMan:\localhost\Client\TrustedHosts -Value * # Paw in a different LAN
+Restart-Service WinRM -Verbose *>&1
 Restart-Computer -Verbose *>&1
 Save-VM -VMName ANC-PAW01 -Verbose *>&1 
 
