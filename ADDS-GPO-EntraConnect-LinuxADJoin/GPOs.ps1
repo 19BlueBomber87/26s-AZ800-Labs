@@ -23,7 +23,7 @@ $OUName   = "Entra Synced Users"
 $OUPath   = "OU=$OUName,$DomainDN"
 $GPOName  = "Set-Wallpaper"
 $Comment  = "Corporate Wallpaper"
-$WallpaperPath = "\\ANC-DC01\WallPapers\RDP-WallPaper.jpg"     # UNC path to image
+$WallpaperPath = "\\ANC-DC01.minecraftmoose.com\WallPapers\RDP-WallPaper.jpg"     # UNC path to image
 $WallpaperStyle = "2"                               # 0=Centered, 2=Stretch, 3=Fit, 4=Fill, 5=Span
 $PreventChange = $true                              # $false = allow users to change
 
