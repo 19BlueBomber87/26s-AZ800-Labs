@@ -10,7 +10,7 @@
 # ========================================================
 
 mkdir C:\Share01\WallPapers
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/WallPaper-GPO.png"  -OutFile "C:\Share01\Wallpapers\RDP-WallPaper.png" -Verbose *>&1
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/WallPaper-GPO.jpg"  -OutFile "C:\Share01\Wallpapers\RDP-WallPaper.jpg" -Verbose *>&1
 
 # Share Wall Paper Location
 $Path = "C:\Share01\WallPapers"
