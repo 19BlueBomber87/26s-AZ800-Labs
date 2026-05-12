@@ -234,7 +234,7 @@ New-NetIPAddress -InterfaceAlias "Ethernet" `
 
 # Set DNS server(s)
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
-    -ServerAddresses 192.168.77.7, 8.8.8.8 `  # When setting up a Tree Domain, use the DNS server of the root domain.  
+    -ServerAddresses 192.168.77.7, 8.8.8.8 `  # Use the DNS server of the root domain.  
 
 # Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
 Get-WindowsFeature AD-Domain-Services
@@ -286,7 +286,8 @@ Disable-ADAccount administrator -Verbose *>&1
 # Important -> Build default users with GUI or Powershell.  (Link to a .ps1 file that builds users quickly -> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/ADDS-GPO-EntraConnect/ADUserPoolQuickCreate.ps1
 ##############################################
 
-#On ANC-DC01 make sure initial sync has completed to Nome-DC01
+#On ANC-DC01 make sure initial sync has completed to Nome-DC01.  This must be true in order to create child domain "dev.moosewyre.fun"
+repadmin /showrepl
 repadmin /replsummary
 repadmin /syncall anc-dc01.minecraftmoose.com /AeD
 repadmin /syncall nome-dc01.moosewyre.fun /AeD
@@ -297,7 +298,9 @@ repadmin /syncall nome-dc01.moosewyre.fun /AeD
 # Nome -> Servers -> Nome-DC01 -> Right click NTDS settings -> replicate configuration FROM the selected dc 
 # Nome -> Servers -> Nome-DC01 -> Right click NTDS settings -> replicate configuration TO the selected dc 
 
+repadmin /showrepl
 repadmin /replsummary
+
 
 # ANC-DC01(minecraftmoose.com), NOME-DC01(moosewyre.fun) and ER-DC01(dev.moosewyre.fun) share a Schema
 # #AD Partitions
@@ -329,7 +332,7 @@ New-NetIPAddress -InterfaceAlias "Ethernet" `
 
 # Set DNS server(s)
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
-    -ServerAddresses 192.168.88.8, 8.8.8.8
+    -ServerAddresses 192.168.77.7, 8.8.8.8     # Use the DNS server of the root domain.  
 
 # Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
 Get-WindowsFeature AD-Domain-Services
@@ -377,8 +380,11 @@ Disable-ADAccount Administrator -Verbose *>&1
 ##############################################
 
 #On ANC-DC01 make sure initial sync has completed to ER-DC01
+repadmin /showrepl
 repadmin /replsummary
 repadmin /syncall ER-dc01.dev.moosewyre.fun /AeD
+repadmin /syncall nome-dc01.moosewyre.fun /AeD
+repadmin /syncall anc-dc01.minecraftmoose.com /AeD
 
 #From ANC-PAW01
 # Sites-> "Site Name" -> Servers -> DC -> Right click NTDS settings -> replicate configuration FROM the selected dc 
@@ -388,7 +394,7 @@ repadmin /syncall ER-dc01.dev.moosewyre.fun /AeD
 # EagleRiver -> Servers -> ER-DC01 -> Right click NTDS settings -> replicate configuration FROM the selected dc 
 # EagleRiver -> Servers -> ER-DC01 -> Right click NTDS settings -> replicate configuration TO the selected dc 
 
-
+repadmin /showrepl
 repadmin /replsummary
 
 # ANC-DC01(minecraftmoose.com), NOME-DC01(moosewyre.fun) and ER-DC01(dev.moosewyre.fun) share a Schema
