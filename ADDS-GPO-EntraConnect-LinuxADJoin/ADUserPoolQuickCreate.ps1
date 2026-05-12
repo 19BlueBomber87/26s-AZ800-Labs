@@ -57,7 +57,10 @@ foreach($boss in $megaman1){
 
 
 # === Create Domain Security Group for RDP
-New-ADGroup -Name "MCM-RDS-Users" -GroupScope Global -GroupCategory Security -Description "Group for Remote Desktop access" -Path "OU=Entra Synced Users,DC=$distinguishedName,DC=com"
+# Domain Local -> Members: from anywhere in forest -> Permissions: only in its own domain
+# Global -> Members: only from its own domain -> Permissions: can be assigned anywhere in the forest
+
+New-ADGroup -Name "MCM-RDS-Users" -GroupScope DomainLocal -GroupCategory Security -Description "Group for Remote Desktop access" -Path "OU=Entra Synced Users,DC=$distinguishedName,DC=com"
 $rdsUsers = Get-ADUser -SearchBase "OU=Entra Synced Users,DC=$distinguishedName,DC=com" -Filter *
 foreach ($user in $rdsUsers) {
     try {
@@ -118,7 +121,10 @@ foreach($boss in $megaman2){
         -Manager $manager -ErrorAction STOP -Verbose *>&1 #username of Manager
     }
 # === Create Domain Security Group for RDP
-New-ADGroup -Name "MooseWyre-RDS-Users" -GroupScope Global -GroupCategory Security -Description "Group for Remote Desktop access" -Path "OU=Entra Synced Users,DC=$distinguishedName,DC=fun"
+# Domain Local -> Members: from anywhere in forest -> Permissions: only in its own domain
+# Global -> Members: only from its own domain -> Permissions: can be assigned anywhere in the forest
+
+New-ADGroup -Name "MooseWyre-RDS-Users" -GroupScope DomainLocal -GroupCategory Security -Description "Group for Remote Desktop access" -Path "OU=Entra Synced Users,DC=$distinguishedName,DC=fun"
 $rdsUsers = Get-ADUser -SearchBase "OU=Entra Synced Users,DC=$distinguishedName,DC=fun" -Filter *
 foreach ($user in $rdsUsers) {
     try {
@@ -179,7 +185,10 @@ foreach($boss in $megaman3){
         -Manager $manager -ErrorAction STOP -Verbose *>&1 #username of Manager
     }
 # === Create Domain Security Group for RDP
-New-ADGroup -Name "MML-RDS-Users" -GroupScope Global -GroupCategory Security -Description "Group for Remote Desktop access" -Path "OU=Entra Synced Users,DC=$distinguishedName,DC=com"
+# Domain Local -> Members: from anywhere in forest -> Permissions: only in its own domain
+# Global -> Members: only from its own domain -> Permissions: can be assigned anywhere in the forest
+
+New-ADGroup -Name "MML-RDS-Users" -GroupScope DomainLocal -GroupCategory Security -Description "Group for Remote Desktop access" -Path "OU=Entra Synced Users,DC=$distinguishedName,DC=com"
 $rdsUsers = Get-ADUser -SearchBase "OU=Entra Synced Users,DC=$distinguishedName,DC=com" -Filter *
 foreach ($user in $rdsUsers) {
     try {
@@ -239,6 +248,9 @@ foreach($boss in $megaman4){
         -Manager $manager -ErrorAction STOP -Verbose *>&1 #username of Manager
     }
 # === Create Domain Security Group for RDP
+# Domain Local -> Members: from anywhere in forest -> Permissions: only in its own domain
+# Global -> Members: only from its own domain -> Permissions: can be assigned anywhere in the forest
+
 New-ADGroup -Name "Dev-RDS-Users" -GroupScope Global -GroupCategory Security -Description "Group for Remote Desktop access" -Path "OU=Entra Synced Users,DC=$DC_Value2,DC=$DC_Value1,DC=fun"
 $rdsUsers = Get-ADUser -SearchBase "OU=Entra Synced Users,DC=$DC_Value2,DC=$DC_Value1,DC=fun" -Filter *
 foreach ($user in $rdsUsers) {
