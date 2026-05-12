@@ -39,7 +39,7 @@ This project automates the deployment of:
 - Windows 10/11 or Windows Server with Hyper-V enabled
 - New-Lab_VM function (from the HyperV helper script in the repo)
 - Generalized Windows Server images (Desktop Experience)
-- At least 32GB RAM recommended for smooth performance
+- At least 16GB RAM, 32GB recommended for smooth performance
 
 ---
 
