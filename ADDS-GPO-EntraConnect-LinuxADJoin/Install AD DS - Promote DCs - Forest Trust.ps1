@@ -163,8 +163,7 @@ Disable-ADAccount Administrator -Verbose *>&1
 (Get-ADUser megaman -Properties memberof).memberof
 (Get-ADUser rush -Properties memberof).memberof
 
-# This is an OU for a GPO later in the lab
-New-ADOrganizationalUnit -Name CrossDomain01 -Path "DC=minecraftmoose,DC=com"-ProtectedFromAccidentalDeletion $true
+
 # Permission List
 # CN=Group Policy Creator Owners,CN=Users,DC=minecraftmoose,DC=com
 # CN=Domain Admins,CN=Users,DC=minecraftmoose,DC=com
@@ -204,8 +203,12 @@ Get-WindowsFeature -Name RSAT-DNS-Server
 Set-DNSClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.77.7 
 Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\megaman -Restart -Verbose *>&1
 
+# This is an OU for the Computer GPO 
+New-ADOrganizationalUnit -Name CrossDomain01 -Path "DC=minecraftmoose,DC=com"-ProtectedFromAccidentalDeletion $true
 
-Get-ADComputer "ANC-WAC01","ANC-SVR01", "ANC-PAW01" | Move-ADObject -TargetPath "OU=CrossDomain01,DC=minecraftmoose,DC=com" -Verbose *>&1
+Get-ADComputer "ANC-WAC01" | Move-ADObject -TargetPath "OU=CrossDomain01,DC=minecraftmoose,DC=com" -Verbose *>&1
+Get-ADComputer "ANC-SVR01" | Move-ADObject -TargetPath "OU=CrossDomain01,DC=minecraftmoose,DC=com" -Verbose *>&1
+Get-ADComputer "ANC-PAW01" | Move-ADObject -TargetPath "OU=CrossDomain01,DC=minecraftmoose,DC=com" -Verbose *>&1
 
 ##############################################
 # Important -> Design Group Policies -> Create and Test GPOs.  (Link to instructions for creating GPOs-> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/ADDS-GPO-EntraConnect/GPOs.ps1)
