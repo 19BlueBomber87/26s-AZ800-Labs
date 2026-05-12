@@ -118,18 +118,18 @@ foreach($boss in $megaman2){
         -Manager $manager -ErrorAction STOP -Verbose *>&1 #username of Manager
     }
 # === Create Domain Security Group for RDP
-New-ADGroup -Name "MCM-RDS-Users" -GroupScope Global -GroupCategory Security -Description "Group for Remote Desktop access" -Path "OU=Entra Synced Users,DC=$distinguishedName,DC=fun"
+New-ADGroup -Name "MooseWyre-RDS-Users" -GroupScope Global -GroupCategory Security -Description "Group for Remote Desktop access" -Path "OU=Entra Synced Users,DC=$distinguishedName,DC=fun"
 $rdsUsers = Get-ADUser -SearchBase "OU=Entra Synced Users,DC=$distinguishedName,DC=fun" -Filter *
 foreach ($user in $rdsUsers) {
     try {
-        Add-ADGroupMember -Identity "MCM-RDS-Users" -Members $user.SamAccountName
+        Add-ADGroupMember -Identity "MooseWyre-RDS-Users" -Members $user.SamAccountName
         Write-Verbose "Added $($user.SamAccountName) to domain group $GroupName" -Verbose *>&1
     }
     catch {
         Write-Verbose "Failed to add $($user.SamAccountName) - Check if username is correct" -Verbose *>&1
     }
 }
-(Get-ADGroup "MCM-RDS-Users"  -Properties member).member
+(Get-ADGroup "MooseWyre-RDS-Users"  -Properties member).member
 # ========================================================
 # Step  3 -Create DCs - Create Test User pool 
 # ========================================================
@@ -179,18 +179,18 @@ foreach($boss in $megaman3){
         -Manager $manager -ErrorAction STOP -Verbose *>&1 #username of Manager
     }
 # === Create Domain Security Group for RDP
-New-ADGroup -Name "MCM-RDS-Users" -GroupScope Global -GroupCategory Security -Description "Group for Remote Desktop access" -Path "OU=Entra Synced Users,DC=$distinguishedName,DC=com"
+New-ADGroup -Name "Dev-RDS-Users" -GroupScope Global -GroupCategory Security -Description "Group for Remote Desktop access" -Path "OU=Entra Synced Users,DC=$distinguishedName,DC=com"
 $rdsUsers = Get-ADUser -SearchBase "OU=Entra Synced Users,DC=$distinguishedName,DC=com" -Filter *
 foreach ($user in $rdsUsers) {
     try {
-        Add-ADGroupMember -Identity "MCM-RDS-Users" -Members $user.SamAccountName
+        Add-ADGroupMember -Identity "Dev-RDS-Users" -Members $user.SamAccountName
         Write-Verbose "Added $($user.SamAccountName) to domain group $GroupName" -Verbose *>&1
     }
     catch {
         Write-Verbose "Failed to add $($user.SamAccountName) - Check if username is correct" -Verbose *>&1
     }
 }
-(Get-ADGroup "MCM-RDS-Users"  -Properties member).member
+(Get-ADGroup "Dev-RDS-Users"  -Properties member).member
 # ========================================================
 # Step  4 -Create DCs - Create Test User pool 
 # ========================================================
