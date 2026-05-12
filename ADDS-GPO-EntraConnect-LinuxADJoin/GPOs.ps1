@@ -59,6 +59,8 @@ Write-Verbose "Check Group Policy Management Console to verify the link."  -Verb
 
 # on member servers use "gpupdate /force" to update group policy
 gpupdate /force
+
+# Attach the GP to the "EagleRiver" site to test GPOs on Sites.  
 # ========================================================
 # Step  2 -Create Computer GPO to sAdd MCM-RDS-Users to Remote Desktop Users.  
 # Create and Confgiure GUI
