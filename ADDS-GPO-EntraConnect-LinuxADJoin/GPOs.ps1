@@ -99,7 +99,7 @@ gpupdate /force
 # 13. On a test computer run in Command Prompt (as admin):
 #     gpupdate /force
 
-# After this, members of MCM-RDS-Users should be able to RDP.
+# After this, members of your groups should be able to RDP.
 
 # ========================================================
 # -Create User GPO to set Wall Paper.  Create and Confgiure GPO with GUI
