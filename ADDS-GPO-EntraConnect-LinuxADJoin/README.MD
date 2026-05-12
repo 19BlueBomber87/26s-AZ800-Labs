@@ -16,7 +16,8 @@ This project automates the deployment of:
 - AD Sites & Subnets
 - Bulk creation of realistic test users in custom OUs
 
-![Full Mesh Topology - IP Ranges](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/VisualizationDiagrams/EntraConnect02.jpg)
+![Domain Trust Plan](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/VisualizationDiagrams/01-AD%20DS%20Domain%20Trust%20Plan.png)
+
 
 ---
 
@@ -29,7 +30,7 @@ This project automates the deployment of:
 - Automated test user creation with custom "Entra Synced Users" OU
 - Mega Man themed users for fun lab testing
 
-![Domain Trust Plan](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/VisualizationDiagrams/01-AD%20DS%20Domain%20Trust%20Plan.png)
+![Full Mesh Topology - IP Ranges](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/VisualizationDiagrams/EntraConnect02.jpg)
 
 ---
 
