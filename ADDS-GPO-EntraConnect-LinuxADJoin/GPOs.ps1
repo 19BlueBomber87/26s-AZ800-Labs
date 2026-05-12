@@ -71,7 +71,7 @@ gpupdate /force
 # 2. Right-click the OU that contains your computers or servers (CrossDomain01) → "OU=CrossDomain01,DC=minecraftmoose,DC=com" 
 #    Select "Create a GPO in this domain, and Link it here"
 
-# 3. Name the GPO: RDS - Allow MCM-RDS-Users
+# 3. Name the GPO: RDS - Allow MCM-MooseWyre-Dev-RDS-Users
 
 # 4. Right-click the new GPO → Select "Edit"
 
@@ -82,15 +82,15 @@ gpupdate /force
 #    → Security Settings 
 #    → Restricted Groups
 
-# 6. Right-click on "Restricted Groups" (left side) → Add Group
+# 6. Right-click on "Restricted Groups" (left side) → Add Groups
 
-# 7. Type exactly: Remote Desktop Users → Click OK
+# 7. Find Your Group → Click OK
 
-# 8. Double-click the "Remote Desktop Users" entry that appears
+# 8. Under "Members of this group" click add and add the group again
 
-# 9. In the bottom section "This group is a member of" → Click Add
+# 9. Under "This group is a member of" click add "Remote Desktop Users"
 
-# 10. Type: MCM-RDS-Users → Click "Check Names" → OK
+# 10. Type: Repeat for all groups you want to have RDP access
 
 # 11. Click OK to close the properties window
 
