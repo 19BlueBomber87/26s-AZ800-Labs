@@ -30,8 +30,6 @@ This project automates the deployment of:
 - Automated test user creation with custom "Entra Synced Users" OU
 - Mega Man themed users for fun lab testing
 
-![Full Mesh Topology - IP Ranges](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/VisualizationDiagrams/EntraConnect02.jpg)
-
 ---
 
 ## Prerequisites
@@ -72,6 +70,7 @@ Follow the detailed comments inside each script.
 ## Hybrid Identity with Entra ID
 
 This lab is designed for testing hybrid identity scenarios including Password Hash Sync and multi-forest synchronization to a single Entra ID tenant.
+![Full Mesh Topology - IP Ranges](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/VisualizationDiagrams/EntraConnect02.jpg)
 
 ![Azure AD Hybrid Identity with Password Hash Sync](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/VisualizationDiagrams/Password%20Hash%20Sync-EntraID.jpg)
 
