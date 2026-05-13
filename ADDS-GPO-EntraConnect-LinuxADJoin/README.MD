@@ -69,9 +69,9 @@ Follow the detailed comments inside each script.
 This lab is designed for testing hybrid identity scenarios including Password Hash Sync and multi-forest synchronization to a single Entra ID tenant.
 ![Full Mesh Topology - IP Ranges](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/VisualizationDiagrams/EntraConnect02.jpg)
 
-![Azure AD Hybrid Identity with Password Hash Sync](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/VisualizationDiagrams/Password%20Hash%20Sync-EntraID.jpg)
-
 ![Multiple Forests, Single Entra Tenant](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/VisualizationDiagrams/EntraConnect01.png)
+
+![Azure AD Hybrid Identity with Password Hash Sync](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/main/ADDS-GPO-EntraConnect-LinuxADJoin/VisualizationDiagrams/Password%20Hash%20Sync-EntraID.jpg)
 
 ---
 
