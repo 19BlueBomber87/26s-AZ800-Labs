@@ -23,12 +23,13 @@ This project automates the deployment of:
 
 ## Features
 
-- Fully automated DC creation and promotion
+- DC creation and promotion
 - Complex AD structure (Root, Tree, Child, Separate Forest)
 - Conditional DNS forwarders
 - Two-way Forest Trust
 - Automated test user creation with custom "Entra Synced Users" OU
 - Mega Man themed users for fun lab testing
+- Use Windows Admin Center to manage environment
 
 ---
 
