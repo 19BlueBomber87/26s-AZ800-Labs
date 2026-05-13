@@ -45,11 +45,6 @@ This project automates the deployment of:
 
 ## How to Use
 
-1. Go to the folder: `/ADDS-GPO-EntraConnect-LinuxADJoin`
-2. Load the Hyper-V helper functions first
-3. Run `Install AD DS - Promote DCs - Forest Trust.ps1` step by step
-4. Then run `ADUserPoolQuickCreate.ps1` to create test users
-
 Follow the detailed comments inside each script.
 
 ---
