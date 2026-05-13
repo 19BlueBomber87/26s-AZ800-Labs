@@ -23,7 +23,7 @@ This project automates the deployment of:
 
 ## Features
 
-- Domain Controller creation and promotion
+- How to create and promote Domain Controllers
 - Complex AD structure (Root, Tree, Child, Separate Forest)
 - Conditional DNS forwarders
 - Two-way Forest Trust
@@ -40,6 +40,7 @@ This project automates the deployment of:
 - Generalized Windows Server images (Desktop Experience)
 - At least 16GB RAM, 32GB recommended for smooth performance
 - Hyper-V Windows Server acting as a router
+- Azure Tenant(Entra ID - Ownership of domain names used in AD DS domains)
 
 ---
 
