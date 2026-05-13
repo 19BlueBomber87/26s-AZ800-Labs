@@ -23,7 +23,7 @@ This project automates the deployment of:
 
 ## Features
 
-- DC creation and promotion
+- Domain Controller creation and promotion
 - Complex AD structure (Root, Tree, Child, Separate Forest)
 - Conditional DNS forwarders
 - Two-way Forest Trust
