@@ -175,10 +175,6 @@ Disable-ADAccount Administrator -Verbose *>&1
 # Important -> Build default users with GUI or Powershell.  (Link to a .ps1 file that builds users quickly -> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/ADDS-GPO-EntraConnect/ADUserPoolQuickCreate.ps1
 ##############################################
 
-# Test GPO Config
-# Test RDP with GUI
-# Test new Wallpaper GUI
-
 # ANC-DC01(minecraftmoose.com), NOME-DC01(moosewyre.fun) and ER-DC01(dev.moosewyre.fun) share a Schema
 # #AD Partitions
 # ntdsutil.exe
