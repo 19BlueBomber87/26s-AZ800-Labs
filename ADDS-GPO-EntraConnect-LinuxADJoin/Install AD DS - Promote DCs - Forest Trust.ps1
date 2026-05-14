@@ -143,7 +143,8 @@ New-ADReplicationSite -Name Nome -Description "Nome Office AD DS Site" -Verbose 
 New-ADReplicationSite -Name EagleRiver -Description "Nome Office AD DS Site" -Verbose *>&1
 New-ADReplicationSubnet -Name "192.168.88.0/24" -Site Nome -Location "Nome Office" -Verbose *>&1
 New-ADReplicationSubnet -Name "192.168.100.0/24" -Site EagleRiver -Location "Eagle River Office" -Verbose *>&1
-Set-ADReplicationSiteLink -Identity "DEFAULTIPSITELINK" -SitesIncluded @{Add="Nome","EagleRiver"} -Verbose *>&1
+$sites = "Nome","EagleRiver"
+Set-ADReplicationSiteLink -Identity "DEFAULTIPSITELINK" -SitesIncluded @{Add=$sites} -Verbose *>&1
 
 Add-DnsServerConditionalForwarderZone -Name "moosewyre.fun" -MasterServers 192.168.88.8 -Verbose *>&1 
 # Note: A tree domain (new domain with a non-contiguous namespace, e.g., moosewyre.fun in a forest whose root is something like corp.local) creates a separate DNS namespace inside the same forest.
