@@ -578,10 +578,12 @@ New-ADGroup -Name "megamooselabs-DL-RDP-CrossForest" `
             -Path "OU=Entra Synced Users,DC=minecraftmoose,DC=com" `
             -Description "Allows users from minecraftmoose.com to RDP" `
             -Verbose *>&1
-
-$RemoteUser01 = Get-ADUser -Identity "megaman" -Server "megamooselabsfun.com"
-$RemoteUser02 = Get-ADUser -Identity "rush" -Server "megamooselabsfun.com"
-$RemoteUser03 = Get-ADUser -Identity "topman" -Server "megamooselabsfun.com"
+            
+# megamooselabsfun.com NET BIOS name is MEGAMOOSELABSFU
+$cred = Get-Credential -Credential megamooselabsfu\megaman # megamooselabsfun.com NET BIOS name is MEGAMOOSELABSFU
+$RemoteUser01 = Get-ADUser -Identity "megaman" -Server "megamooselabsfun.com" -Credential $cred
+$RemoteUser02 = Get-ADUser -Identity "rush" -Server "megamooselabsfun.com" -Credential $cred
+$RemoteUser03 = Get-ADUser -Identity "topman" -Server "megamooselabsfun.com" -Credential $cred
 
 Add-ADGroupMember -Identity "megamooselabs-DL-RDP-CrossForest" -Members $RemoteUser01,$RemoteUser02,$RemoteUser03 -Verbose *>&1
 
