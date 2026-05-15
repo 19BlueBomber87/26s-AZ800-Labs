@@ -534,7 +534,7 @@ repadmin /syncall nome-dc01.moosewyre.fun /AeD
 
 # Jun-DC01 (run in local forest)
 $strRemoteForest = "minecraftmoose.com"
-$strRemoteAdmin  = "administrator@minecraftmoose.com"
+$strRemoteAdmin  = "megaman"
 $strRemoteAdminPassword = "P@ssword2026!"
 
 $remoteContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext(
