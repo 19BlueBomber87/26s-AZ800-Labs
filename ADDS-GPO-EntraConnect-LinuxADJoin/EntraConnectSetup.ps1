@@ -37,6 +37,9 @@ Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\meg
 
 
 
+# Can only update user properties on DCs.  Then Sync to cloud
+Start-ADSyncSyncCycle -PolicyType Delta
+
 # EntraConnect design.  
 
 # The Password Hashes are synced to Entra ID from AD DS
