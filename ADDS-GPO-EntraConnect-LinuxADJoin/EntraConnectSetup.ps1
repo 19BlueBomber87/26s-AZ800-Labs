@@ -17,6 +17,12 @@
 # For these Labs I have added minecraftmoose.com, moosewyre.fun and megamooselabsfun.com to my Azure\365 tenant.  (You would replace with your domain name)
 # ========================================================
 
+New-Lab_VM MCMENTRACONNECT -HyperVSwitch Linux-Net -GeneralizedImageDE
+Rename-Computer -NewName MCMENTRACONNECT -Restart -Verbose *>&1
+Save-VM -VMName MCMENTRACONNECT -Verbose *>&1 
+
+Set-DNSClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.77.7 
+Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\megaman -Restart -Verbose *>&1
 # ========================================================
 # Step  1 -Log into entra.microsoft.com and download the install file for EntraConnect.(As of May 2026 the file name is -> "AzureADConnect.msi")
 # ========================================================
