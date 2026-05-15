@@ -582,7 +582,9 @@ $cred = Get-Credential -Credential megamooselabsfu\megaman # megamooselabsfun.co
 $RemoteUser01 = Get-ADUser -Identity "megaman" -Server "megamooselabsfun.com" -Credential $cred
 $RemoteUser02 = Get-ADUser -Identity "rush" -Server "megamooselabsfun.com" -Credential $cred
 $RemoteUser03 = Get-ADUser -Identity "topman" -Server "megamooselabsfun.com" -Credential $cred
+$RemoteUser04 = Get-ADUser -Identity "geminiman" -Server "megamooselabsfun.com" -Credential $cred
+$RemoteUser05 = Get-ADUser -Identity "shadownman" -Server "megamooselabsfun.com" -Credential $cred
 
-Add-ADGroupMember -Identity "megamooselabs-DL-RDP-CrossForest" -Members $RemoteUser01,$RemoteUser02,$RemoteUser03 -Verbose *>&1
+Add-ADGroupMember -Identity "megamooselabs-DL-RDP-CrossForest" -Members $RemoteUser01,$RemoteUser02,$RemoteUser03, $RemoteUser04, $RemoteUser05 -Verbose *>&1
 
 # Add megamooselabs-DL-RDP-CrossForest to remote desktop users group on member servers
