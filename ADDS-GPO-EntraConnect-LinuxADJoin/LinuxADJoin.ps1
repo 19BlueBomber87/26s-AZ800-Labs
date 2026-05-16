@@ -22,7 +22,7 @@
 
 # [Create Linux Box on jun-net.  Linux box gets IP via DHCP]
 $iso = "C:\ISO\ubuntu-26.04-live-server-amd64.iso"
-New-Lab_VM -VMNames jun-linux01 -HyperVSwitch jun-net -RAM_GB 2GB -ISOPath $iso
+New-Lab_VM -VMNames jun-linux01 -HyperVSwitch jun-net -RAM 2GB -ISOPath $iso
 # [Disable Secure boot to start OS installation]
 Stop-VM -VMName jun-linux01 -Force -Verbose *>&1
 Set-VMFirmware -VMName jun-linux01 -EnableSecureBoot off -Verbose *>&1
