@@ -583,7 +583,7 @@ $RemoteUser01 = Get-ADUser -Identity "megaman" -Server "megamooselabsfun.com" -C
 $RemoteUser02 = Get-ADUser -Identity "rush" -Server "megamooselabsfun.com" -Credential $cred
 $RemoteUser03 = Get-ADUser -Identity "topman" -Server "megamooselabsfun.com" -Credential $cred
 $RemoteUser04 = Get-ADUser -Identity "geminiman" -Server "megamooselabsfun.com" -Credential $cred
-$RemoteUser05 = Get-ADUser -Identity "shadownman" -Server "megamooselabsfun.com" -Credential $cred
+$RemoteUser05 = Get-ADUser -Identity "shadowman" -Server "megamooselabsfun.com" -Credential $cred
 
 Add-ADGroupMember -Identity "megamooselabs-DL-RDP-CrossForest" -Members $RemoteUser01,$RemoteUser02,$RemoteUser03, $RemoteUser04, $RemoteUser05 -Verbose *>&1
 
