@@ -154,8 +154,6 @@ Add-ADGroupMember -Identity "linux-sudo-admins" -Members "beat" -Verbose *>&1
 $cred = Get-Credential -Credential minecraftmoose\megaman 
 $RemoteUser01 = Get-ADUser -Identity "megaman" -Server "minecraftmoose.com" -Credential $cred
 $RemoteUser02 = Get-ADUser -Identity "rush" -Server "minecraftmoose.com" -Credential $cred
-
-
 Add-ADGroupMember -Identity "linux-sudo-admins" -Members $RemoteUser01,$RemoteUser02 -Verbose *>&1
 
 ssh admin01@jun-linux01.megamooselabsfun.com
