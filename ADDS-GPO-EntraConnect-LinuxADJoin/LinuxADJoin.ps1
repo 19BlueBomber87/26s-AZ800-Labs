@@ -151,8 +151,12 @@ Add-ADGroupMember -Identity "linux-sudo-admins" -Members "beat" -Verbose *>&1
 (Get-ADUser beat -Properties memberof).memberof
 
 # Domain local groups can have users from other other forests <@:D
-Add-ADGroupMember -Identity "linux-sudo-admins" -Members "minecraftmoose\megaman" -Verbose *>&1
-Add-ADGroupMember -Identity "linux-sudo-admins" -Members "minecraftmoose\iceman" -Verbose *>&1
+$cred = Get-Credential -Credential minecraftmoose\megaman 
+$RemoteUser01 = Get-ADUser -Identity "megaman" -Server "minecraftmoose.com" -Credential $cred
+$RemoteUser02 = Get-ADUser -Identity "rush" -Server "minecraftmoose.com" -Credential $cred
+
+
+Add-ADGroupMember -Identity "linux-sudo-admins" -Members $RemoteUser01,$RemoteUser02 -Verbose *>&1
 
 ssh admin01@jun-linux01.megamooselabsfun.com
 # Add AD DS group that will have SuperUser (superuser do)(linux version of the "administrator" account in Windows)
