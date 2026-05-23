@@ -7,7 +7,7 @@
 # Use link below to get 'New-Lab_VM' command
 # https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/HyperV%20Lab%20Creation%20and%20Disk%20Functions.ps1
 # =========================================================================================================================================================
-# How to create Hyper-V Windows Server Router
+# How to create Hyper-V Windows Server Router\DHCP Server
 # https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/ADDS-GPO-EntraConnect-LinuxADJoin/RRAS%20Setup.ps1
 # ========================================================
 # Golden Images were used to create VMs
