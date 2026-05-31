@@ -10,8 +10,9 @@
 # https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-VMQuickCreate-GoldenImages-DiskFunctions/HyperV%20Lab%20Creation%20and%20Disk%20Functions.ps1
 # =========================================================================================================================================================
 # Use 2GB or higher if possible
-New-Lab_VM -VMNames GoldenImage-ServerCore -HyperVSwitch EXT-INT -Ram 2GB -ISOPath C:\ISO\2025_26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
-New-Lab_VM -VMNames GoldenImage-DesktopExperience -HyperVSwitch EXT-INT -RAM 2GB -ISOPath 2025_26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
+$iso = "C:\ISO\2025_26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso"
+New-Lab_VM -VMNames GoldenImage-ServerCore -HyperVSwitch EXT-INT -Ram 2GB -ISOPath $iso
+New-Lab_VM -VMNames GoldenImage-DesktopExperience -HyperVSwitch EXT-INT -RAM 2GB -ISOPath $iso
 
 #enter Audit Mode - At the very first OOBE screen CTRL + SHIFT + F3
 #intsall Updates
