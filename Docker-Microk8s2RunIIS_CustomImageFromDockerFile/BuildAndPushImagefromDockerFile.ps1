@@ -96,8 +96,16 @@ Get-Service;Get-Process;
 $ENV:USERNAME
 
 # run as "ContainerAdministrator"
-docker run -it --isolation=process --user ContainerAdministrator --name yahoo01 hello-world:nanoserver cmd
-docker run -it --isolation=hyperv --user ContainerAdministrator --name yahoo02 hello-world:nanoserver cmd
+docker run -it --user ContainerAdministrator --name yahoo0100 hello-world:nanoserver cmd
+# Install PowerShell Version 7
+mkdir C:\Temp
+# Link as of 5-27-2026 
+curl -L -o C:\Temp\pwsh.zip https://github.com/PowerShell/PowerShell/releases/latest/download/PowerShell-7.6.2-win-x64.zip
+tar -xf C:\Temp\pwsh.zip -C C:\Temp
+C:\Temp\pwsh.exe
+$PSVersionTable
+Get-Service;Get-Process;
+$ENV:USERNAME
 
 # Remove all Containers
 docker rm -f $(docker ps -aq)
@@ -105,6 +113,9 @@ docker rm -f $(docker ps -aq)
 docker ps -a
 
 # Test 2 Create Hyper-V Isolated Container
+docker run -it --isolation=process --user ContainerAdministrator --name yahoo01 hello-world:nanoserver cmd
+docker run -it --isolation=hyperv --user ContainerAdministrator --name yahoo02 hello-world:nanoserver cmd
+
 docker pull mcr.microsoft.com/windows/servercore/iis:windowsservercore-ltsc2025
 # Takes longer to download
 docker pull mcr.microsoft.com/windows/servercore:ltsc2025
