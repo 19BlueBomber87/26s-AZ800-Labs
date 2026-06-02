@@ -34,8 +34,7 @@
 
 
 # ===============================================================================
-# Step 1 -Create Control Plane Node and Windows Worker Nodes virtual machines
-#         Expose Virtualization Extensions on Windows Worker Nodes      
+# Step 1 -Create Control Plane Node and Windows Worker Nodes virtual machines   
 # ===============================================================================
 # Control Plane Node
 $iso = "C:\ISO\ubuntu-26.04-live-server-amd64.iso"
@@ -47,8 +46,7 @@ Start-VM -VMName micro-k8s -Verbose *>&1
 
 # Create Windows Worker Nodes
 # Rename Computer Names on Windows Worker Nodes
-# Expose Virtualization Extensions 
-# Install Required Windows Features -> Hyper-V and Containers
+# Install Required Windows Features -> Containers
 
 # micro-k8s-node01
 $WindowsNode = "micro-k8s-node1"
