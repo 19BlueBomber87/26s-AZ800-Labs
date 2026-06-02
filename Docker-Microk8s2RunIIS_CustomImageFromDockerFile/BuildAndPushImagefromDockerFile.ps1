@@ -17,6 +17,7 @@
 # ===============================================================================
 # Step 1 - Build Windows server to create a custome image from Docker file
 #          Install Docker
+#          Enable Nested Virtualization for Hyper-V isolated containers
 # ===============================================================================
 $dockerBuild = "micro-k8s-node-DockerBuild"
 New-Lab_VM -VMNames  $dockerBuild -HyperVSwitch Linux-Net -Ram 2GB -GeneralizedImageDE
@@ -37,8 +38,6 @@ Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/micro
 .\install-docker-ce.ps1
 docker version
 docker info
-
-
 
 
 # ===========================
