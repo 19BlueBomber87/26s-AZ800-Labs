@@ -15,26 +15,16 @@
 # ==================================================================================================================
 # Note: For this Lab You can an External Hyper-V Switch connected to all VMs, instead of Hyper-V router
 # ==================================================================================================================
-#  Why Containers Are More Efficient
 
-# No duplicate kernels → less overhead.  Smaller size → less disk usage
-# Faster spin-up → milliseconds vs minutes
-# Better resource usage → higher density (more apps per server)
-# VMs = separate houses (each with its own plumbing, electricity)
-# Containers = apartments in the same building (shared infrastructure)
-
-# Containers share the kernel, so:  They are less isolated than VMs.  Security boundaries are weaker (but still strong with proper config)
-# Containers → process-level isolation
-# VMs → hardware/OS-level isolation
-
-# The move from virtual machines to container technology has been a transformative shift in server infrastructure.  
-# For Example:
-# A server with 128 GB of RAM and 32 CPU cores could comfortably run 10-15 virtual machines . 
-# On that same hardware, you could run 100-200 containers, maybe a little more. This is fascinating! <@:D
 # ===============================================================================
 # # Prerequisites   Custom Built Image from Docker file to build custom website
 #                   [Link] -> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/BuildAndPushImagefromDockerFile.ps1
 # ===============================================================================
+# Another technology that has been a transformative shift in server infrastructure over the past decade, has been the move from virtual machines to containers.
+# For Example:
+# A server with 128 GB of RAM and 32 CPU cores could comfortably run 10-15 virtual machines . 
+# On that same hardware, you could run 100-200 containers, maybe a little more. This is fascinating! <@:D
+
 Term                  | Definition / Short Explanation
 ----------------------|---------------------------------------------------------------
 Pod                   | The basic operational unit for Kubernetes. Groups one or more containers that share networking and storage. Smallest deployable unit.
@@ -47,6 +37,19 @@ kube-proxy            | Network proxy that runs on each node. Handles service ne
 Container Runtime     | Software that actually runs containers on the node (containerd, CRI-O, etc.).
 kube-api-server       | Main control plane component. Exposes the Kubernetes API for all operations.
 kube-scheduler        | Assigns pods to suitable nodes based on resource requirements and constraints.
+
+
+#  Why Containers Are More Efficient
+
+# No duplicate kernels → less overhead.  Smaller size → less disk usage
+# Faster spin-up → milliseconds vs minutes
+# Better resource usage → higher density (more apps per server)
+# VMs = separate houses (each with its own plumbing, electricity)
+# Containers = apartments in the same building (shared infrastructure)
+
+# Containers share the kernel, so:  They are less isolated than VMs.  Security boundaries are weaker (but still strong with proper config)
+# Containers → process-level isolation
+# VMs → hardware/OS-level isolation
 
 # ===============================================================================
 # Step 1 -Create Control Plane Node and Windows Worker Nodes virtual machines   
