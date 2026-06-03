@@ -31,7 +31,18 @@
 # # Prerequisites   Custom Built Image from Docker file to build custom website
 #                   [Link] -> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/BuildAndPushImagefromDockerFile.ps1
 # ===============================================================================
-
+Term                  | Definition / Short Explanation
+----------------------|---------------------------------------------------------------
+Pod                   | The basic operational unit for Kubernetes. Groups one or more containers that share networking and storage. Smallest deployable unit.
+Service               | Logical abstraction over a set of pods. Provides stable IP/DNS and load balancing to access pods.
+Controller            | Keeps Kubernetes resources in the desired state (e.g. Deployment, ReplicaSet, StatefulSet, Job, CronJob).
+kubectl               | Official command-line tool (CLI) to interact with Kubernetes clusters.
+kubeadm               | Tool used to easily bootstrap a minimum viable Kubernetes cluster.
+kubelet               | Agent that runs on every node. Starts/stops containers and reports node status.
+kube-proxy            | Network proxy that runs on each node. Handles service networking and load balancing.
+Container Runtime     | Software that actually runs containers on the node (containerd, CRI-O, etc.).
+kube-api-server       | Main control plane component. Exposes the Kubernetes API for all operations.
+kube-scheduler        | Assigns pods to suitable nodes based on resource requirements and constraints.
 
 # ===============================================================================
 # Step 1 -Create Control Plane Node and Windows Worker Nodes virtual machines   
