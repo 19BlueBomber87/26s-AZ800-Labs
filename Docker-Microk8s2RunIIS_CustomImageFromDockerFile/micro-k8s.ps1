@@ -27,6 +27,10 @@
 # Containers → process-level isolation
 # VMs → hardware/OS-level isolation
 
+# The move from virtual machines to container technology has been a transformative shift in server infrastructure.  
+# For Example:
+# A server with 128 GB of RAM and 32 CPU cores could comfortably run 10-15 virtual machines . 
+# On that same hardware, you could run 100-200 containers, maybe a little more. This is fascinating! <@:D
 # ===============================================================================
 # # Prerequisites   Custom Built Image from Docker file to build custom website
 #                   [Link] -> https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/BuildAndPushImagefromDockerFile.ps1
