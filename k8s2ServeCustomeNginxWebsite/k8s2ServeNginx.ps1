@@ -20,18 +20,30 @@
 # A server with 128 GB of RAM and 32 CPU cores could comfortably run 10-15 virtual machines . 
 # On that same hardware, you could run 100-200 containers, maybe a little more. This is fascinating! <@:D
 
-Term                  | Definition / Short Explanation
-----------------------|---------------------------------------------------------------
-Pod                   | The basic operational unit for Kubernetes. Groups one or more containers that share networking and storage. Smallest deployable unit.
-Service               | Logical abstraction over a set of pods. Provides stable IP/DNS and load balancing to access pods.
-Controller            | Keeps Kubernetes resources in the desired state (e.g. Deployment, ReplicaSet, StatefulSet, Job, CronJob).
-kubectl               | Official command-line tool (CLI) to interact with Kubernetes clusters.
-kubeadm               | Tool used to easily bootstrap a minimum viable Kubernetes cluster.
-kubelet               | Agent that runs on every node. Starts/stops containers and reports node status.
-kube-proxy            | Network proxy that runs on each node. Handles service networking and load balancing.
-Container Runtime     | Software that actually runs containers on the node (containerd, CRI-O, etc.).
-kube-api-server       | Main control plane component. Exposes the Kubernetes API for all operations.
-kube-scheduler        | Assigns pods to suitable nodes based on resource requirements and constraints.
+# Term                  | Definition / Short Explanation
+# ----------------------|---------------------------------------------------------------
+# Pod                   | The basic operational unit for Kubernetes. Groups one or more containers that share networking and storage. Smallest deployable unit.
+# Service               | Logical abstraction over a set of pods. Provides stable IP/DNS and load balancing to access pods.
+# Controller            | Keeps Kubernetes resources in the desired state (e.g. Deployment, ReplicaSet, StatefulSet, Job, CronJob).
+# kubectl               | Official command-line tool (CLI) to interact with Kubernetes clusters.
+# kubeadm               | Tool used to easily bootstrap a minimum viable Kubernetes cluster.
+# kubelet               | Agent that runs on every node. Starts/stops containers and reports node status.
+# kube-proxy            | Network proxy that runs on each node. Handles service networking and load balancing.
+# Container Runtime     | Software that actually runs containers on the node (containerd, CRI-O, etc.).
+# kube-api-server       | Main control plane component. Exposes the Kubernetes API for all operations.
+# kube-scheduler        | Assigns pods to suitable nodes based on resource requirements and constraints.
+
+#  Why Containers Are More Efficient
+
+# No duplicate kernels → less overhead.  Smaller size → less disk usage
+# Faster spin-up → milliseconds vs minutes
+# Better resource usage → higher density (more apps per server)
+# VMs = separate houses (each with its own plumbing, electricity)
+# Containers = apartments in the same building (shared infrastructure)
+
+# Containers share the kernel, so:  They are less isolated than VMs.  Security boundaries are weaker (but still strong with proper config)
+# Containers → process-level isolation
+# VMs → hardware/OS-level isolation
 
 # You can use YAHOO-RRAS01 for ssh and web browser. Or create a managment server for ssh and web browser
 New-Lab_VM -VMNames Yahoo-ManageServer -HyperVSwitch Linux-Net -GeneralizedImageDE   
