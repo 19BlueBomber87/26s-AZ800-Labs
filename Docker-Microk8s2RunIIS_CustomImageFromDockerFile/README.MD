@@ -30,16 +30,66 @@ This project shows a full end-to-end workflow for running **Windows containers**
 
 ---
 
-## Repository Contents
+## Visualization Diagrams
 
-| File                              | Description |
-|-----------------------------------|-----------|
-| `BuildAndPushImagefromDockerFile.ps1` | Builds custom IIS image and pushes to Docker Hub |
-| `dockerfile.dockerfile`           | Dockerfile for the custom IIS website |
-| `Startup.ps1`                     | PowerShell script that customizes the IIS homepage |
-| `micro-k8s.ps1`                   | Full setup script for MicroK8s cluster + Windows nodes |
-| `iis-simple.yaml`                 | Basic NodePort deployment |
-| `iis-metallb.yaml`                | LoadBalancer deployment with MetalLB |
+This lab includes the following conceptual diagrams to help you understand the underlying technologies:
+
+### 01. CPU - User Mode vs Kernel Mode
+![01-CPU-User-Kernel](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/01-CPU-User-Kernel.jpg)
+
+Shows the fundamental separation between **User Mode** (where applications run) and **Kernel Mode** (where core OS components and device drivers operate). This is the foundation for understanding container isolation.
+
+### 02. Hypervisor and Host Kernel Architecture
+![02-Hypervisor-HostKernel](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/02-Hypervisor-HostKernel.jpg)
+
+Illustrates the **Hyper-V** architecture layers: Hardware → Hypervisor (Level 0) → Host Windows Kernel → Guest OS. Critical for understanding how Windows containers run on top of the host.
+
+### 03. Virtual Machines vs Containers
+![03-VMS vs Containers](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/03-VMS%20vs%20Containers.jpg)
+
+Classic side-by-side comparison showing why containers are much lighter than VMs — containers share the host OS kernel while VMs each have their own guest OS.
+
+### 04. Windows Container Architecture
+![04-Container-Kernel](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/04Container-Kernel.jpg)
+
+Details the Windows container stack including **Dockerd**, **HCSv1/HCSv2**, **HNS** (Host Network Service), and how Kubernetes (kubelet) interacts with the Windows container runtime.
+
+### 05. Process Isolation vs Hyper-V Isolation
+![05-Process vs Hyper-V Isolation](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/05-Process%20vs%20Hyper-V%20Isolation.jpg)
+
+Explains the two Windows container isolation modes:
+- **Process Isolation** (shared kernel — faster)
+- **Hyper-V Isolation** (each container gets its own lightweight VM with isolated kernel — more secure)
+
+### 06. Kubernetes Cluster Architecture (Master + Nodes)
+![06-ClusterMaster](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/06-ClusterMaster.jpg)
+
+Shows the relationship between the **Kubernetes Control Plane** (Linux) and **Worker Nodes** (supporting both Linux and Windows).
+
+### 07. Kubernetes Overview - Pods, Containers, Nodes
+![07-k8s-Overview](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/07-k8s-Overview.jpg)
+
+Comprehensive overview of Kubernetes concepts: **Control Plane**, **Nodes**, **Pods**, and **Containers**.
+
+### 08. Nested Virtualization
+![08-Nesting](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/08-Nesting.jpg)
+
+Explains **nested virtualization** — running Hyper-V inside another Hyper-V environment (important when running Windows containers inside VMs).
+
+### 09. Docker Build Process (High Level)
+![09-BuildDockerImage-Basic](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/09-BuildDockerImage-Basic.jpg)
+
+High-level view of the Docker workflow: **Dockerfile → Docker Image → Docker Container**.
+
+### 10. Docker Build Steps (Detailed)
+![10-BuildDockerImage](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/10-BuildDockerImage.jpg)
+
+Step-by-step breakdown of creating and running Docker images.
+
+### 11. Docker Workflow Diagram
+![11-Docker build flow](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/11%20-%20Docker%20build%20flow.png)
+
+Technical flowchart showing the full Docker lifecycle from Dockerfile to pushing to Docker Hub and deploying to servers.
 
 ---
 
