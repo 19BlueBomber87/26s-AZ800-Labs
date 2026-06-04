@@ -83,7 +83,7 @@ Explains **nested virtualization** — running Hyper-V inside another Hyper-V en
 High-level view of the Docker workflow: **Dockerfile → Docker Image → Docker Container**.
 
 ### 10. Docker Build Steps (Detailed)
-![10-BuildDockerImage](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/10-BuildDockerImage.jpg)
+![10-BuildDockerImage](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/10-BuildDockerImageFromDockerFile.jpg)
 
 Step-by-step breakdown of creating and running Docker images.
 
