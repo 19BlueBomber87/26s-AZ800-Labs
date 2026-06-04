@@ -1,0 +1,62 @@
+How to Create a Dockerfile (Step-by-Step)
+
+Create the file
+In your project folder, create a new file called exactly: Dockerfile (no .txt, no .docker — just Dockerfile)
+
+Write instructions (using capital commands)
+
+Here’s a basic example for a simple Node.js app:
+
+
+
+# Step 1: Choose a base image
+FROM node:20-alpine
+
+# Step 2: Set working directory inside the container
+WORKDIR /app
+
+# Step 3: Copy files from your computer into the image
+COPY package*.json ./
+
+# Step 4: Install dependencies
+RUN npm install
+
+# Step 5: Copy the rest of your application code
+COPY . .
+
+# Step 6: Expose the port your app runs on
+EXPOSE 3000
+
+# Step 7: Define the command to run when container starts
+CMD ["npm", "start"]
+
+
+
+Instruction | Purpose                                      | Example
+------------|----------------------------------------------|------------------------------------
+FROM        | Base image to start from                     | FROM ubuntu:22.04
+WORKDIR     | Set working directory                        | WORKDIR /app
+COPY        | Copy files from host to image                | COPY . .
+RUN         | Run commands during build                    | RUN apt-get update
+EXPOSE      | Document which port the app listens on       | EXPOSE 8080
+CMD         | Default command when container starts        | CMD ["npm", "start"]
+ENV         | Set environment variables                    | ENV PORT=3000
+ARG         | Build-time variables                         | ARG VERSION
+
+
+
+docker build -t myapp:latest ./
+
+
+___________________________________________
+Docker does not care about the file extension at all. A file like:
+
+dockerfile.dockerfile
+app.dockerfile
+something.custom
+even myfile.txt
+
+will work as long as:
+
+It contains valid Dockerfile syntax, and
+You specify it with -f
