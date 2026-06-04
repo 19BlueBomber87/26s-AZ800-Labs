@@ -78,5 +78,13 @@ You can scale the deployment live:
 kubectl scale deployment custom-static-site --replicas=20
 
 ---
-Author: Mark Kruse Location: Anchorage, Alaska Lab Environment
-Happy Orchestrating! 🚀
+
+## Author
+
+**Mark Kruse**  
+GitHub: https://github.com/19BlueBomber87  
+X: [@19BlueBomber87](https://x.com/19BlueBomber87)
+
+---
+
+⭐ Star the repo if this lab helped you!
