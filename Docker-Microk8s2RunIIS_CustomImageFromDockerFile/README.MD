@@ -56,7 +56,7 @@ Classic side-by-side comparison showing why containers are much lighter than VMs
 Details the Windows container stack including **Dockerd**, **HCSv1/HCSv2**, **HNS** (Host Network Service), and how Kubernetes (kubelet) interacts with the Windows container runtime.
 
 ### 05. Process Isolation vs Hyper-V Isolation
-![05-Process vs Hyper-V Isolation](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/05-Process%20vs%20Hyper-V%20Isolation.jpg)
+![05-Process vs Hyper-V Isolation](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/05-Process%20vs.%20Hyper-V%20Isolation.jpg)
 
 Explains the two Windows container isolation modes:
 - **Process Isolation** (shared kernel — faster)
