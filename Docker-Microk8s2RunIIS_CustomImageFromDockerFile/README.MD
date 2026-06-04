@@ -1,5 +1,5 @@
 # MicroK8s with Windows Worker Nodes to Run IIS Lab  
-**Custom IIS Website using Docker + Windows Worker Nodes**
+**Custom IIS Website. Uses a custom image built from Docker + Windows Worker Nodes**
 
 A complete hands-on lab that demonstrates building a custom Windows IIS Docker image, pushing it to Docker Hub, and deploying it as Pods in a **MicroK8s** Kubernetes cluster with Windows Server worker nodes.
 
