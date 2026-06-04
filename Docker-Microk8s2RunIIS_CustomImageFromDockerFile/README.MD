@@ -88,7 +88,7 @@ High-level view of the Docker workflow: **Dockerfile → Docker Image → Docker
 Step-by-step breakdown of creating and running Docker images.
 
 ### 11. Docker Workflow Diagram
-![11-Docker build flow](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/b5802a0f296e7672c6a46dcc1c2dbf44ceee840c/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/11%20-%20Docker%20build%20flow.png)
+![11-Docker build flow](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Docker-Microk8s2RunIIS_CustomImageFromDockerFile/Visualization%20Diagrams/11-Docker%20Workflow-DockerHub.jpg)
 
 Technical flowchart showing the full Docker lifecycle from Dockerfile to pushing to Docker Hub and deploying to servers.
 
