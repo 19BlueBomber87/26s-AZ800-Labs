@@ -16,6 +16,7 @@ This project shows a full end-to-end workflow for running **Windows containers**
 - Calico CNI
 - MetalLB Load Balancer
 - Hyper-V Isolated Containers
+- Nested Virtualization
 
 ---
 
