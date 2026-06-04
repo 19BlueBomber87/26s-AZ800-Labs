@@ -97,18 +97,10 @@ Technical flowchart showing the full Docker lifecycle from Dockerfile to pushing
 ## Prerequisites
 
 - Windows 11 / Windows Server host with Hyper-V enabled
-- At least 32GB RAM recommended
+- At least 16GB RAM recommended
 - Windows Server 2025 evaluation ISO
 - Ubuntu 26.04 Server ISO
 - Docker Hub account
 - Internet access
 
 ---
-
-## Quick Start
-
-### 1. Build and Push Custom Docker Image
-
-```powershell
-# Run on a Windows machine
-.\BuildAndPushImagefromDockerFile.ps1
