@@ -7,7 +7,7 @@ A complete hands-on lab that demonstrates building a custom Windows IIS Docker i
 
 ## Overview
 
-This project shows a full end-to-end workflow for running **Windows containers** (IIS) inside Kubernetes using a mixed Linux + Windows cluster.
+This project shows a full end-to-end workflow for running **Windows containers** (IIS) inside Kubernetes using Windows worker nodes.
 
 **Key Technologies:**
 - Windows Server 2025 LTSC
