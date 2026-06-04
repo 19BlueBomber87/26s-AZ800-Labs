@@ -19,25 +19,21 @@ The goal is to demonstrate **container orchestration** in action — deploying, 
 ### 1. Processor Modes (CPU Rings)
 ![Processor Modes](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/k8s2ServeCustomeNginxWebsite/Visualization%20Diagrams/01-CPU-User-Kernel.jpg)
 
-**Short Explanation**:  
 Shows the different privilege levels (rings) of a CPU. The kernel runs in Ring 0 (highest privilege), while user applications run in Ring 3. This is foundational for understanding how containers and VMs achieve isolation.
 
 ### 2. Virtual Machines vs Containers
 ![VMs vs Containers](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/k8s2ServeCustomeNginxWebsite/Visualization%20Diagrams/02-VMS%20vs%20Containers.jpg)
 
-**Short Explanation**:  
 Compares traditional VMs (each with its own guest OS and kernel) to Containers (which share the host kernel). Containers are much lighter and more efficient — the core reason Kubernetes can run hundreds of workloads on modest hardware.
 
 ### 3. Kubernetes Control Plane (Master Node)
 ![Cluster Master](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/k8s2ServeCustomeNginxWebsite/Visualization%20Diagrams/03-ClusterMaster.jpg)
 
-**Short Explanation**:  
 Illustrates the Kubernetes architecture. The **Control Plane** (API Server) receives commands from the administrator and schedules work. **Kubelet** on each Node works with the container runtime to run Pods.
 
 ### 4. Nodes, Pods and Containers
 ![Nodes, Pods and Containers](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/k8s2ServeCustomeNginxWebsite/Visualization%20Diagrams/04-k8s-Overview.jpg)
 
-**Short Explanation**:  
 Shows the hierarchy: A **Node** runs the Kubelet + container runtime. The Kubelet manages **Pods**, which are the smallest deployable units containing one or more containers.
 
 ---
