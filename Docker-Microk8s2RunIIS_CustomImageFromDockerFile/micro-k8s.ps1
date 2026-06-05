@@ -97,7 +97,7 @@ Rename-Computer -NewName $WindowsNode -Verbose *>&1
 Install-WindowsFeature -Name Containers -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
 
 # micro-k8s-node04
-$WindowsNode = "micro-k8s-node4"
+$WindowsNode = "micro-k8s-node04"
 New-Lab_VM -VMNames "micro-k8s-node4" -HyperVSwitch Linux-Net -GeneralizedImageCore
 # Inside Guest OS
 $WindowsNode = "micro-k8s-node4"
