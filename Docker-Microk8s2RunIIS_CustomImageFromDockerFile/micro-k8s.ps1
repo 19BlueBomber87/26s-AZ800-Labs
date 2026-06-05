@@ -66,38 +66,38 @@ Start-VM -VMName micro-k8s -Verbose *>&1
 # Rename Computer Names on Windows Worker Nodes
 # Install Required Windows Features -> Containers
 
-# micro-k8s-node01
+# micro-k8s-node1
 $WindowsNode = "micro-k8s-node1"
 New-Lab_VM -VMNames $WindowsNode -HyperVSwitch Linux-Net -GeneralizedImageCore
 # Inside Guest OS
-$WindowsNode = "micro-k8s-node01"
+$WindowsNode = "micro-k8s-node1"
 #Rename Worker Node
 Rename-Computer -NewName $WindowsNode -Verbose *>&1
 # Install Required Windows Features
 Install-WindowsFeature -Name Containers -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
 
-# micro-k8s-node02
-$WindowsNode = "micro-k8s-node02"
+# micro-k8s-node2
+$WindowsNode = "micro-k8s-node2"
 New-Lab_VM -VMNames $WindowsNode -HyperVSwitch Linux-Net -GeneralizedImageCore
 # Inside Guest OS
-$WindowsNode = "micro-k8s-node02"
+$WindowsNode = "micro-k8s-node2"
 #Rename Worker Node
 Rename-Computer -NewName $WindowsNode -Verbose *>&1
 # Install Required Windows Features
 Install-WindowsFeature -Name Containers -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
 
-# micro-k8s-node03
-$WindowsNode = "micro-k8s-node03"
+# micro-k8s-node3
+$WindowsNode = "micro-k8s-node3"
 New-Lab_VM -VMNames $WindowsNode -HyperVSwitch Linux-Net -GeneralizedImageCore
 # Inside Guest OS
-$WindowsNode = "micro-k8s-node03"
+$WindowsNode = "micro-k8s-node3"
 #Rename Worker Node
 Rename-Computer -NewName $WindowsNode -Verbose *>&1
 # Install Required Windows Features
 Install-WindowsFeature -Name Containers -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
 
-# micro-k8s-node04
-$WindowsNode = "micro-k8s-node04"
+# micro-k8s-node4
+$WindowsNode = "micro-k8s-node4"
 New-Lab_VM -VMNames $WindowsNode -HyperVSwitch Linux-Net -GeneralizedImageCore
 # Inside Guest OS
 $WindowsNode = "micro-k8s-node4"
