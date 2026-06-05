@@ -281,8 +281,8 @@ mkdir "c:\certs"
 $linuxIP = "192.168.11.25" # UPDATE IP!!
 $uri = "http://" + $linuxIP + ":8081/ca.crt"
 
-Invoke-WebRequest -Uri $uri -OutFile C:\certs\ca.cert
-Get-Content C:\certs\ca.cert
+Invoke-WebRequest -Uri $uri -OutFile C:\certs\ca.crt
+Get-Content C:\certs\ca.crt
 Import-Certificate -FilePath "C:\certs\ca.crt" -CertStoreLocation Cert:\LocalMachine\Root -Verbose *>&1
 
 # Confirm
