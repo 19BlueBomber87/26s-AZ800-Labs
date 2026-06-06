@@ -54,8 +54,10 @@ $computerName = "MCM-Nested-Host01"
 New-Lab_VM -VMNames  $computerName  -HyperVSwitch Linux-Net -Ram 4GB -GeneralizedImageDE
 Install-WindowsFeature -Name Containers, Hyper-V -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
 
+# Create Hyper-V Switch
+New-VMSwitch -Name "Nested-EXT-INT"  -NetAdapterName "Ethernet" -AllowManagementOS $true
 # Move Golden Images and ISOs to Nested Host
 
 # Create Nested VM
-New-Lab_VM -VMNames  MCM-Nested-VM01 -HyperVSwitch Linux-Net -GeneralizedImageDE
+New-Lab_VM -VMNames  MCM-Nested-VM01 -HyperVSwitch "Nested-EXT-INT" -GeneralizedImageDE
 
