@@ -46,17 +46,17 @@ Install-WindowsFeature -Name Containers, Hyper-V -IncludeAllSubFeature -IncludeM
 # ===================================================
 # Step 2 - Create the Hyper-V host and configure to support nested virtualization  
 # ===================================================
-
-# On the host enalabe mac address spoofing
-Set-VMNetworkAdapter -VMName "MCM-Host01" -MacAddressSpoofing On
-
 $computerName = "MCM-Nested-Host01"
 New-Lab_VM -VMNames  $computerName  -HyperVSwitch Linux-Net -Ram 4GB -GeneralizedImageDE
 Install-WindowsFeature -Name Containers, Hyper-V -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
 
 # Create Hyper-V Switch
 New-VMSwitch -Name "Nested-EXT-INT"  -NetAdapterName "Ethernet" -AllowManagementOS $true
+
 # Move Golden Images and ISOs to Nested Host
+
+# On the host enalabe mac address spoofing
+Set-VMNetworkAdapter -VMName "MCM-Host01" -MacAddressSpoofing On
 
 # Create Nested VM
 New-Lab_VM -VMNames  MCM-Nested-VM01 -HyperVSwitch "Nested-EXT-INT" -GeneralizedImageDE
