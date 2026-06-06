@@ -27,27 +27,15 @@
 # Level 2 | Nested Hyper-V Hypervisor + Guest OS   | Inside the Level 1 VM, you run another Hyper-V hypervisor, which then runs additional Guest VMs (with their own kernels).
 
 # ===================================================
-# Step 1 - Create the Hyper-V host and configure to support nested virtualization  
+# Create the Hyper-V host and configure to support nested virtualization  
 # ===================================================
-$computerName = "MCM-Host01"
+$computerName = "MCM-Nested-Host01"
 New-Lab_VM -VMNames  $computerName  -HyperVSwitch Linux-Net -Ram 4GB -GeneralizedImageDE
 Stop-VM -VMName $computerName -Force -Verbose *>&1 
 Set-VMProcessor -VMName $computerName  -ExposeVirtualizationExtensions $true -Verbose *>&1
 Start-VM -VMName $computerName  -Verbose *>&1
 Get-VMProcessor -VMName $computerName  | Select-Object VMName, ExposeVirtualizationExtensions
 #Rename Worker Node
-$computerName  =  "MCM-Host01"
-Rename-Computer -NewName $computerName  -Verbose *>&1
-# Install Required Windows Features
-Install-WindowsFeature -Name Containers, Hyper-V -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
-
-
-
-# ===================================================
-# Step 2 - Create the Hyper-V host and configure to support nested virtualization  
-# ===================================================
-$computerName = "MCM-Nested-Host01"
-New-Lab_VM -VMNames  $computerName  -HyperVSwitch Linux-Net -Ram 4GB -GeneralizedImageDE
 Install-WindowsFeature -Name Containers, Hyper-V -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
 
 # Create Hyper-V Switch
@@ -55,9 +43,12 @@ New-VMSwitch -Name "Nested-EXT-INT"  -NetAdapterName "Ethernet" -AllowManagement
 
 # Move Golden Images and ISOs to Nested Host
 
-# On the host enalabe mac address spoofing
-Set-VMNetworkAdapter -VMName "MCM-Host01" -MacAddressSpoofing On
+# Enable Mac Address spoofing for 
+Set-VMNetworkAdapter -VMName "MCM-Nested-Host01" -MacAddressSpoofing On
 
 # Create Nested VM
 New-Lab_VM -VMNames  MCM-Nested-VM01 -HyperVSwitch "Nested-EXT-INT" -GeneralizedImageDE
+New-Lab_VM -VMNames  MCM-Nested-VM02 -HyperVSwitch "Nested-EXT-INT" -GeneralizedImageCore
+
+
 
