@@ -74,7 +74,7 @@ $WindowsNode = "micro-k8s-node1"
 #Rename Worker Node
 Rename-Computer -NewName $WindowsNode -Verbose *>&1
 # Install Required Windows Features
-Install-WindowsFeature -Name Containers -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
+Install-WindowsFeature -Name Containers -IncludeAllSubFeature -IncludeManagementTools -Restart -Verbose *>&1 -Restart
 
 # micro-k8s-node2
 $WindowsNode = "micro-k8s-node2"
@@ -84,7 +84,7 @@ $WindowsNode = "micro-k8s-node2"
 #Rename Worker Node
 Rename-Computer -NewName $WindowsNode -Verbose *>&1
 # Install Required Windows Features
-Install-WindowsFeature -Name Containers -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
+Install-WindowsFeature -Name Containers -IncludeAllSubFeature -IncludeManagementTools -Restart -Verbose *>&1 -Restart
 
 # micro-k8s-node3
 $WindowsNode = "micro-k8s-node3"
@@ -94,7 +94,7 @@ $WindowsNode = "micro-k8s-node3"
 #Rename Worker Node
 Rename-Computer -NewName $WindowsNode -Verbose *>&1
 # Install Required Windows Features
-Install-WindowsFeature -Name Containers -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
+Install-WindowsFeature -Name Containers -IncludeAllSubFeature -IncludeManagementTools -Restart -Verbose *>&1 -Restart
 
 # micro-k8s-node4
 $WindowsNode = "micro-k8s-node4"
@@ -104,7 +104,7 @@ $WindowsNode = "micro-k8s-node4"
 #Rename Worker Node
 Rename-Computer -NewName $WindowsNode -Verbose *>&1
 # Install Required Windows Features
-Install-WindowsFeature -Name Containers -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
+Install-WindowsFeature -Name Containers -IncludeAllSubFeature -IncludeManagementTools -Restart -Verbose *>&1 -Restart
 
 #Check Virtualization Extensions are exposed
 $VMs = Get-VM | Where-Object -Property VMName -Like *micro-k8s-node0*
