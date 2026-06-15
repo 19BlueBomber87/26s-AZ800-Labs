@@ -16,39 +16,147 @@
 # ===================================================
 # One RRAS server for routing
 # One domain controller 
-# One Windows Admin Center instance
+# One Windows Admin Center instYAHOO-e
 # One server to be privileged access workstation(PAW) management server
- 
+
+
+# ===================================================
+# Step 1 - Create YAHOO-DC01
+#                 Promote DC for minecraftmoose.com domain
+# ===================================================
+New-Lab_VM YAHOO-DC01 -HyperVSwitch ANC-NET -GeneralizedImageCore
+# 
+Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
+Rename-Computer -NewName YAHOO-DC01 -Restart -Verbose *>&1
+
+#
+Get-WindowsFeature -Name AD-Domain-Services
+New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
+    -Direction Inbound `
+    -Protocol ICMPv4 `
+    -IcmpType 8 `
+    -Action Allow
+
+# Set static IP + subnet + default gateway in one command
+New-NetIPAddress -InterfaceAlias "Ethernet" `
+    -IPAddress 192.168.77.7 `
+    -PrefixLength 24 `
+    -DefaultGateway 192.168.77.1 `
+    -AddressFamily IPv4 `
+    -Verbose *>&1
+
+# Set DNS server(s)
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
+    -ServerAddresses 127.0.0.1, 8.8.8.8 `
+    -Verbose *>&1
+
+
+#Promote DC
+Import-Module ADDSDeployment
+Install-ADDSForest `
+-CreateDnsDelegation:$false `
+-DatabasePath "C:\Windows\NTDS" `
+-DomainMode "WinThreshold" `
+-DomainName "minecraftmoose.com" `
+-DomainNetbiosName "minecraftmoose" `
+-ForestMode "WinThreshold" `
+-InstallDns:$true `
+-LogPath "C:\Windows\NTDS" `
+-NoRebootOnCompletion:$false `
+-SafeModeAdministratorPassword (ConvertTo-SecureString "P@ssword1!" -AsPlainText -Force) `
+-SysvolPath "C:\Windows\SYSVOL" `
+-Force:$true
+
+# My golden images has two users accounts along with default administrator account.  
+# If you have local computer accounts on the DC that is promoted, they are added to the domain.
+# Add accounts to enterprise admin group
+$newAdmins = "megaman","Rush"
+$adminPermissions = (Get-ADUser administrator -Properties memberof).memberof
+foreach($admin in $newAdmins){
+    foreach($perm in $adminPermissions){
+        Add-ADGroupMember -Identity "$perm" -Members $admin -Verbose *>&1
+    }
+}
+(Get-ADUser megaman -Properties memberof).memberof
+(Get-ADUser rush -Properties memberof).memberof
+
+
+    # 3 - minecraftmoose.com privileged access workstation(Management Server)
+New-Lab_VM YAHOO-NestedHost-PAW01 -HyperVSwitch ANC-NET -GeneralizedImageDE
+Install-WindowsFeature -Name RSAT-Clustering-MGMT -Confirm:$false -Verbose *>&1
+Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
+Install-WindowsFeature -Name RSAT-DNS-Server -Confirm:$false -Verbose *>&1
+Install-WindowsFeature -Name GPMC -Confirm:$false -Verbose *>&1
+Rename-Computer -NewName YAHOO-NestedHost-PAW01 -Restart -Verbose *>&1
+#
+$computerName = "YAHOO-NestedHost-PAW01"
+New-Lab_VM -VMNames  $computerName  -HyperVSwitch Linux-Net -Ram 4GB -GeneralizedImageDE
+Stop-VM -VMName $computerName -Force -Verbose *>&1 
+Set-VMProcessor -VMName $computerName  -ExposeVirtualizationExtensions $true -Verbose *>&1
+Start-VM -VMName $computerName  -Verbose *>&1
+Get-VMProcessor -VMName $computerName  | Select-Object VMName, ExposeVirtualizationExtensions
+
+Get-WindowsFeature RSAT-Clustering*, RSAT-AD-*, RSAT-DNS-Server, GPMC | Select-Object DisplayName, Name, Installed
+Get-Module -ListAvailable *cluster*, ActiveDirectory, Hyper-V
+#
+New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
+    -Direction Inbound `
+    -Protocol ICMPv4 `
+    -IcmpType 8 `
+    -Action Allow
+#
+Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator  -Restart -Verbose *>&1
+
+
 # ===================================================
 # Step 1 - Create 3 Server Core VMs for Storage Spaces Direct Cluster
 # ===================================================
-New-Lab_VM -VMNames ANC-Clus01 -HyperVSwitch ANC-NET -nonOSdiskcount 5 -nonOSdiskSizeGB 200 -GeneralizedImageCore
-New-Lab_VM -VMNames ANC-Clus02 -HyperVSwitch ANC-NET -nonOSdiskcount 5 -nonOSdiskSizeGB 200 -GeneralizedImageCore
-New-Lab_VM -VMNames ANC-Clus03 -HyperVSwitch ANC-NET -nonOSdiskcount 5 -nonOSdiskSizeGB 200 -GeneralizedImageCore
+New-Lab_VM -VMNames YAHOO-Clus01 -HyperVSwitch ANC-NET -nonOSdiskcount 5 -nonOSdiskSizeGB 200 -GeneralizedImageCore
+New-Lab_VM -VMNames YAHOO-Clus02 -HyperVSwitch ANC-NET -nonOSdiskcount 5 -nonOSdiskSizeGB 200 -GeneralizedImageCore
+New-Lab_VM -VMNames YAHOO-Clus03 -HyperVSwitch ANC-NET -nonOSdiskcount 5 -nonOSdiskSizeGB 200 -GeneralizedImageCore
 
 #NOTE: Cluster Servers get IP via DCHP from RRAS Server.  
 
 # ===================================================
 # Step 2 - Rename cluster servers and join to minecraftmoose.com
 # ===================================================
-# Change computer name to ANC-Clus01 and join to domain
-# From the ANC-Clus01 VM run:
-Rename-Computer -NewName ANC-Clus01 -Restart -Verbose *>&1
-
+# Change computer name to YAHOO-Clus01 and join to domain
+# From the YAHOO-Clus01 VM run:
+New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
+    -Direction Inbound `
+    -Protocol ICMPv4 `
+    -IcmpType 8 `
+    -Action Allow
+Rename-Computer -NewName YAHOO-Clus01 -Restart -Verbose *>&1
 Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator  -Restart -Verbose *>&1
 
-# Change computer name to ANC-Clus02 and join to domain
-# From the ANC-Clus02 VM run:
-Rename-Computer -NewName ANC-Clus02 -Restart -Verbose *>&1
-
+# Change computer name to YAHOO-Clus02 and join to domain
+# From the YAHOO-Clus02 VM run:
+New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
+    -Direction Inbound `
+    -Protocol ICMPv4 `
+    -IcmpType 8 `
+    -Action Allow
+Rename-Computer -NewName YAHOO-Clus02 -Restart -Verbose *>&1
 Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator -Restart  -Verbose *>&1
 
-# Change computer name to ANC-Clus03 and join to domain
-# From the ANC-Clus03 VM run:
-Rename-Computer -NewName ANC-Clus03 -Restart -Verbose *>&1
-
+# Change computer name to YAHOO-Clus03 and join to domain
+# From the YAHOO-Clus03 VM run:
+New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
+    -Direction Inbound `
+    -Protocol ICMPv4 `
+    -IcmpType 8 `
+    -Action Allow
+Rename-Computer -NewName YAHOO-Clus03 -Restart -Verbose *>&1
 Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator -Restart -Verbose *>&1
 
+
+# Now we can leverage Invoke-Command
+# Test via PowerShell Direct - Run from host
+$cred = Get-Credential minecraftmoose\megaman
+Invoke-Command -VMName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03 -ScriptBlock {
+    $ENV:COMPUTERNAME
+} -Credential $cred -Verbose *>&1
 # ===================================================
 # Step 3 -  Install 'File Services' and 'Fail Over Cluster' Roles
 # ===================================================
@@ -56,16 +164,17 @@ Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\adm
 # For this example we will use YAHOO-WAC01 to run the commands.  
 # YAHOO-WAC01 is domain joined to minecraftmoose.com
 
-Invoke-Command -ComputerName ANC-Clus01, ANC-Clus02, ANC-Clus03 -ScriptBlock {
+
+Invoke-Command -ComputerName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03 -ScriptBlock {
     Install-WindowsFeature -Name File-Services, Failover-Clustering -IncludeManagementTools -Confirm:$false -Verbose *>&1
 } -Verbose *>&1
 
 # Reboot all cluster 
-Invoke-Command -ComputerName ANC-Clus01, ANC-Clus02, ANC-Clus03  -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03 -ScriptBlock {
     Restart-Computer -Force -Verbose *>&1
 } -Verbose *>&1
 
-Invoke-Command -ComputerName ANC-Clus01, ANC-Clus02, ANC-Clus03 -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03 -ScriptBlock {
     Get-WindowsFeature | ? -Property Name -Like "File-Services" | Select-Object PSComputerName, Name, Installed
     Get-WindowsFeature | ? -Property Name -Like "Failover-Clustering" | Select-Object PSComputerName, Name, Installed
 } -Verbose *>&1
@@ -83,19 +192,23 @@ Invoke-Command -ComputerName ANC-Clus01, ANC-Clus02, ANC-Clus03 -ScriptBlock {
 #           Enable S2D
 #           Configure cluster with 'Scale Out File Server' role
 # ===================================================
-#Install Management tools on WAC or MGMT Server
-Install-WindowsFeature -Name RSAT-Clustering-MGMT -Verbose *>&1
+# 
+# The YAHOO-PAW01 server is domain joined and has powershell commands to test and Create Cluster
+# You can run commands from YAHOO-PAW01 or any of the YAHOO-CLUS0X servers.  
+# 
 
-# Test prerequisites
-Test-Cluster -Node ANC-Clus01, ANC-Clus02, ANC-Clus03  -Include "Storage Spaces Direct", Inventory, Network, "System Configuration" -Verbose *>&1 
+Test-Cluster -Node YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03  -Include "Storage Spaces Direct", Inventory, Network, "System Configuration" -Verbose *>&1 
+
 
 #Create the fail-over cluster
-New-Cluster -Name S2DCluster01 -Node ANC-CLUS01, ANC-CLUS02, ANC-CLUS03 -NoStorage -StaticAddress 192.168.77.133 -Verbose *>&1
+New-Cluster -Name S2DCluster01 -Node YAHOO-CLUS01, YAHOO-CLUS02, YAHOO-CLUS03 -NoStorage -StaticAddress 192.168.77.133 -Verbose *>&1
 
+# We can now connect to S2DCluster01.minecraftmoose.com in fail-over cluster manager
 Get-Cluster -Name "S2DCluster01.minecraftmoose.com"
 
+
 # The fail over cluster is now a computer in AD DS
-Invoke-Command -ComputerName Anc-DC01 -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-DC01 -ScriptBlock {
     Get-AdComputer -filter * | ? -Property Name -like *S2D* -Verbose *>&1
 } -Verbose *>&1
 
@@ -106,18 +219,18 @@ Invoke-Command -ComputerName Anc-DC01 -ScriptBlock {
 # You run it exactly once, from any one node in the cluster.
 
 # From any domain joined server run:
-Invoke-Command -ComputerName ANC-Clus01 -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus01 -ScriptBlock {
     Enable-ClusterS2D -CacheState Disabled -AutoConfig:0 -SkipEligibilityChecks -Confirm:$false -Verbose *>&1
 } -Verbose *>&1
 
 # Check Status
-Invoke-Command -ComputerName ANC-Clus01 -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03 -ScriptBlock {
     Get-ClusterS2D -Verbose *>&1
 } -Verbose *>&1
 
 # After running 'Enable-ClusterS2D' you will see C:\ClusterStorage on each node in the cluster
 # Note: The root of C:\ClusterStorage is read‑only by design
-Invoke-Command -ComputerName ANC-Clus01, ANC-Clus02, ANC-Clus03  -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03  -ScriptBlock {
     HOSTNAME.EXE
     dir C:\
 } -Verbose *>&1
@@ -130,11 +243,11 @@ Invoke-Command -ComputerName ANC-Clus01, ANC-Clus02, ANC-Clus03  -ScriptBlock {
 # uint64              System.UInt64       Unsigned    0 to 18,446,744,073,709,551,615
 # ================================================================================
 # PowerShell Alias | .NET Type     | Signed?  | Max Value                  | Max Value / 1 GB
-# -----------------|---------------|----------|----------------------------|-------------------
+# ---------|--------|-----|--------------|----------
 # uint64           | System.UInt64 | Unsigned | 18,446,744,073,709,551,615 | 17,179,869,184 GB
 
 # The following shows how big each disk is
-Invoke-Command -ComputerName ANC-Clus01 -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus01 -ScriptBlock {
      $s2d_disks = (Get-StorageSubSystem -Name "s2dcluster01.minecraftmoose.com" | Get-PhysicalDisk).Size
      foreach($disk in $s2d_disks){
         $size = [uint64]$disk/1GB
@@ -145,7 +258,7 @@ Invoke-Command -ComputerName ANC-Clus01 -ScriptBlock {
 
 # Make Stoarge Pool
 # From any domain joined server run:
-Invoke-Command -ComputerName ANC-Clus01 -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus01 -ScriptBlock {
     $s2d_disks = Get-StorageSubSystem -Name "s2dcluster01.minecraftmoose.com" | Get-PhysicalDisk 
     New-StoragePool -StorageSubSystemName "s2dcluster01.minecraftmoose.com" -FriendlyName "s2d-StoragePool01" -ProvisioningTypeDefault Fixed -ResiliencySettingNameDefault Mirror -PhysicalDisks $s2d_disks -Verbose *>&1
 
@@ -155,71 +268,89 @@ Invoke-Command -ComputerName ANC-Clus01 -ScriptBlock {
 #if you need to reset
 # Get-StoragePool -FriendlyName s2d-StoragePool01 | Remove-StoragePool -Verbose *>&1
 
-# Create Volume from Storage pool 
-Invoke-Command -ComputerName Anc-clus01 -ScriptBlock {
+# Create Clusterd Shared Volumes from a Storage pool 
+Invoke-Command -ComputerName YAHOO-clus01 -ScriptBlock {
     New-Volume -StoragePoolFriendlyName "s2d-StoragePool01" -FriendlyName "CSV01" -FileSystem CSVFS_ReFS -Size 25GB -Verbose *>&1
     New-Volume -StoragePoolFriendlyName "s2d-StoragePool01" -FriendlyName "CSV02" -FileSystem CSVFS_ReFS -Size 25GB -Verbose *>&1
     New-Volume -StoragePoolFriendlyName "s2d-StoragePool01" -FriendlyName "CSV03" -FileSystem CSVFS_ReFS -Size 25GB -Verbose *>&1
 } -Verbose *>&1
 
-Invoke-Command -ComputerName ANC-Clus01, ANC-Clus02, ANC-Clus03  -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus01 -ScriptBlock {
+    Get-ClusterSharedVolume | Select Name, OwnerNode
+} -Verbose *>&1
+
+Invoke-Command -ComputerName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03  -ScriptBlock {
     HOSTNAME.EXE
     dir C:\ClusterStorage
 } -Verbose *>&1
 
-Invoke-Command -ComputerName ANC-Clus01  -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus01  -ScriptBlock {
     Get-VirtualDisk
 } -Verbose *>&1
 
 
-# Invoke-Command -ComputerName ANC-Clus01  -ScriptBlock {
+# Invoke-Command -ComputerName YAHOO-Clus01  -ScriptBlock {
 #     Get-VirtualDisk | Remove-VirtualDisk -Verbose *>&1
 # } -Verbose *>&1
 
 
-# Create Shares
-Invoke-Command -ComputerName Anc-Clus01 -ScriptBlock {
-    # Create folders
-    mkdir "C:\ClusterStorage\CSV01\VM01000"
-    mkdir "C:\ClusterStorage\CSV02\VM02000"
-    mkdir "C:\ClusterStorage\CSV03\VM03000"
-    # Create Shares
-    New-SmbShare -Name "VM01000" -Path "C:\ClusterStorage\CSV01\VM01000" -FullAccess "minecraftmoose\Administrator" -Verbose *>&1
-    New-SmbShare -Name "VM02000" -Path "C:\ClusterStorage\CSV02\VM02000" -FullAccess "minecraftmoose\Administrator" -Verbose *>&1
-    New-SmbShare -Name "VM03000" -Path "C:\ClusterStorage\CSV03\VM03000" -FullAccess "minecraftmoose\Administrator" -Verbose *>&1
-    Grant-SmbShareAccess -Name VM01000 -AccountName "minecraftmoose\Domain Users" -AccessRight Read -Force -Verbose *>&1
-    Grant-SmbShareAccess -Name VM02000 -AccountName "minecraftmoose\Domain Users" -AccessRight Read -Force -Verbose *>&1
-    Grant-SmbShareAccess -Name VM03000 -AccountName "minecraftmoose\Domain Users" -AccessRight Read -Force -Verbose *>&1
-
-    # Fix underlying ACLs (best practice)
-    Set-SmbPathAcl -ShareName "VM01000" -Verbose *>&1
-    Set-SmbPathAcl -ShareName "VM02000" -Verbose *>&1
-    Set-SmbPathAcl -ShareName "VM03000" -Verbose *>&1
-} -Verbose *>&1
-
-Invoke-Command -ComputerName Anc-Clus01 -ScriptBlock {
-    Get-ClusterSharedVolume -Verbose *>&1
-} -Verbose *>&1
-
 
 # Enable scale out file server role (SOFS)
-Invoke-Command -ComputerName Anc-Clus01 -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus01 -ScriptBlock {
     New-StorageFileServer -StorageSubSystemName "s2dcluster01.minecraftmoose.com" -FriendlyName "S2D-SOFS01" -HostName "S2D-SOFS01" -Protocols SMB -Verbose *>&1
 } -Verbose *>&1
 
 # S2D-SOFS01 is now a computer in AD DS
-Invoke-Command -ComputerName Anc-DC01 -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-DC01 -ScriptBlock {
     Get-AdComputer -filter * | ? -Property Name -like *S2D* -Verbose *>&1
+} -Verbose *>&1
+
+
+# Create Shares to be used in SOFS
+Invoke-Command -ComputerName YAHOO-Clus01 -ScriptBlock {
+    # Create folders
+    mkdir "C:\ClusterStorage\CSV01\SQL1000"
+    mkdir "C:\ClusterStorage\CSV02\SQL2000"
+    mkdir "C:\ClusterStorage\CSV03\SQL3000"
+    mkdir "C:\ClusterStorage\CSV01\VM1000"
+    mkdir "C:\ClusterStorage\CSV02\VM2000"
+    mkdir "C:\ClusterStorage\CSV03\VM3000"
+    # Create Shares
+    New-SmbShare -Name "SQL1000" -Path "C:\ClusterStorage\CSV01\SQL1000" -FullAccess "minecraftmoose\megaman" -Verbose *>&1
+    New-SmbShare -Name "SQL2000" -Path "C:\ClusterStorage\CSV02\SQL2000" -FullAccess "minecraftmoose\megaman" -Verbose *>&1
+    New-SmbShare -Name "SQL3000" -Path "C:\ClusterStorage\CSV03\SQL3000" -FullAccess "minecraftmoose\megaman" -Verbose *>&1
+    New-SmbShare -Name "VM1000" -Path "C:\ClusterStorage\CSV01\VM1000" -FullAccess "minecraftmoose\megaman" -Verbose *>&1
+    New-SmbShare -Name "VM2000" -Path "C:\ClusterStorage\CSV02\VM2000" -FullAccess "minecraftmoose\megaman" -Verbose *>&1
+    New-SmbShare -Name "VM3000" -Path "C:\ClusterStorage\CSV03\VM3000" -FullAccess "minecraftmoose\megaman" -Verbose *>&1
+    Grant-SmbShareAccess -Name SQL1000 -AccountName "minecraftmoose.com\Domain Users" -AccessRight Read -Force -Verbose *>&1
+    Grant-SmbShareAccess -Name SQL2000 -AccountName "minecraftmoose.com\Domain Users" -AccessRight Read -Force -Verbose *>&1
+    Grant-SmbShareAccess -Name SQL3000 -AccountName "minecraftmoose.com\Domain Users" -AccessRight Read -Force -Verbose *>&1
+    Grant-SmbShareAccess -Name VM1000 -AccountName "minecraftmoose.com\Domain Users" -AccessRight Read -Force -Verbose *>&1
+    Grant-SmbShareAccess -Name VM2000 -AccountName "minecraftmoose.com\Domain Users" -AccessRight Read -Force -Verbose *>&1
+    Grant-SmbShareAccess -Name VM3000 -AccountName "minecraftmoose.com\Domain Users" -AccessRight Read -Force -Verbose *>&1
+
+    # Fix underlying ACLs (best practice)
+    Set-SmbPathAcl -ShareName "SQL1000" -Verbose *>&1
+    Set-SmbPathAcl -ShareName "SQL2000" -Verbose *>&1
+    Set-SmbPathAcl -ShareName "SQL3000" -Verbose *>&1
+    Set-SmbPathAcl -ShareName "VM1000" -Verbose *>&1
+    Set-SmbPathAcl -ShareName "VM2000" -Verbose *>&1
+    Set-SmbPathAcl -ShareName "VM3000" -Verbose *>&1
+} -Verbose *>&1
+
+Invoke-Command -ComputerName YAHOO-Clus01 -ScriptBlock {
+    Get-ClusterSharedVolume -Verbose *>&1
 } -Verbose *>&1
 
 
 # Check out the SOFS SMB PATH! <@:D
 # In File Explorer navitage to \\S2D-SOFS01
-Test-Path \\S2D-SOFS01\VM01
+Test-Path \\S2D-SOFS01\Share1000
+
 
 
 #Test HA
-Invoke-Command -ComputerName ANC-Clus03  -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus03  -ScriptBlock {
     Stop-Computer -Force -Verbose *>&1
 }
 
@@ -230,69 +361,73 @@ Invoke-Command -ComputerName ANC-Clus03  -ScriptBlock {
 # Step 5 - Add node to scale out file server
 # ===================================================
 # Add server node to SOFS cluster
-New-Lab_VM -VMNames ANC-Clus04 -HyperVSwitch ANC-NET -nonOSdiskcount 5 -nonOSdiskSizeGB 700 -GeneralizedImageCore
+New-Lab_VM -VMNames YAHOO-Clus04 -HyperVSwitch ANC-NET -nonOSdiskcount 5 -nonOSdiskSizeGB 700 -GeneralizedImageCore
 
-# Change computer name to ANC-Clus03 and join to domain
-# From the ANC-Clus04 VM run:
-Rename-Computer -NewName ANC-Clus04 -Restart -Verbose *>&1
-
+# Change computer name to YAHOO-Clus03 and join to domain
+# From the YAHOO-Clus04 VM run:
+New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
+    -Direction Inbound `
+    -Protocol ICMPv4 `
+    -IcmpType 8 `
+    -Action Allow
+Rename-Computer -NewName YAHOO-Clus04 -Restart -Verbose *>&1
 Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator -Restart -Verbose *>&1
 
 # Install Roles
 # From any domain joined server
-Invoke-Command -ComputerName ANC-Clus04 -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus04 -ScriptBlock {
     Install-WindowsFeature -Name File-Services, Failover-Clustering -IncludeManagementTools -Confirm:$false -Verbose *>&1
 } -Verbose *>&1
 
 # Reboot Server
-Invoke-Command -ComputerName ANC-Clus04 -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-Clus04 -ScriptBlock {
     Restart-Computer -Force -Verbose *>&1
 } -Verbose *>&1
 
-# Test if ANC-Clus04 is ready to join cluster
-Test-Cluster -Node ANC-Clus01, ANC-Clus02, ANC-Clus03, ANC-Clus04  -Include "Storage Spaces Direct", Inventory, Network, "System Configuration" -Verbose *>&1 
+# Test if YAHOO-Clus04 is ready to join cluster
+Test-Cluster -Node YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03, YAHOO-Clus04  -Include "Storage Spaces Direct", Inventory, Network, "System Configuration" -Verbose *>&1 
 
-# add node to cluster
-Invoke-Command -ComputerName ANC-Clus01 -ScriptBlock {
-    Add-ClusterNode -Name ANC-Clus04 -Cluster S2DCluster01 -Verbose *>&1
+
+# Some failover clustering cmdlets do not work remotely
+# Access YAHOO-CLUS04 from Hyper-V Manager and run this
+Add-ClusterNode -Name YAHOO-Clus04 -Cluster S2DCluster01 -Verbose *>&1
+
+# Check YAHOO-Clus04 is now part of the cluster
+Invoke-Command -ComputerName YAHOO-Clus01 -ScriptBlock {
+    Get-ClusterNode | Select-Object PSComputerName, Cluster, State
 } -Verbose *>&1
 
-# Check ANC-Clus04 is now part of the cluster
-Invoke-Command -ComputerName ANC-Clus04 -ScriptBlock {
-    Get-ClusterNode
-} -Verbose *>&1
 
-
-#Check Allocation size before adding, watch it increase
-
-# These are ANC-Clus04 disks.  These new drives can pool
-Invoke-Command -ComputerName ANC-Clus04 -ScriptBlock {
+# Check Allocation size Before adding, watch it increase
+Invoke-Command -ComputerName YAHOO-Clus04 -ScriptBlock {
     Get-StoragePool -FriendlyName "s2d-StoragePool01"
 } -Verbose *>&1
 
-# Add disks from ANC-Clus04
-# Rebalance data across all 4 nodes -> This redistributes slabs so performance and capacity benefit from the new node.
-Invoke-Command -ComputerName ANC-Clus04 -ScriptBlock {
+# These are YAHOO-Clus04 disks.  These new drives can pool
+Get-StorageSubSystem -Name "s2dcluster01.minecraftmoose.com" | Get-PhysicalDisk -CanPool $true
+
+# Add disks from YAHOO-Clus04
+# Rebalance data across all 4 nodes
+# → This redistributes storage pool slabs so performance and capacity are evenly utilized after adding the n
+Invoke-Command -ComputerName YAHOO-Clus04 -ScriptBlock {
     $disks = Get-StorageSubSystem -Name "s2dcluster01.minecraftmoose.com" | Get-PhysicalDisk -CanPool $true
     Get-StoragePool -FriendlyName "s2d-StoragePool01" | Add-PhysicalDisk -PhysicalDisks $disks -Verbose *>&1
     Optimize-StoragePool -FriendlyName "s2d-StoragePool01" -Verbose *>&1
 } -Verbose *>&1
 
-Invoke-Command -ComputerName ANC-Clus04 -ScriptBlock {
+# Check Allocation size AFTER adding, watch it increase
+Invoke-Command -ComputerName YAHOO-Clus04 -ScriptBlock {
     Get-StoragePool -FriendlyName "s2d-StoragePool01"
 } -Verbose *>&1
 
 
-
-
-
 # NOTE
 
-# The ClusterPerformanceHistory CSV is deliberately hidden from File Explorer (and from most GUI tools) so that administrators don’t accidentally browse it, put files in it, or delete the performance-history database files.
-# Disable Performance History collection completely - Not recommeneded
+# The ClusterPerformYAHOO-eHistory CSV is deliberately hidden from File Explorer (and from most GUI tools) so that administrators don’t accidentally browse it, put files in it, or delete the performYAHOO-e-history database files.
+# Disable PerformYAHOO-e History collection completely - Not recommeneded
 # Stop-Service ClusPerfHist
 # Set-Service ClusPerfHist -StartupType Disabled
-# Remove-ClusterSharedVolume "ClusterPerformanceHistory"   # only after stopping the service
+# Remove-ClusterSharedVolume "ClusterPerformYAHOO-eHistory"   # only after stopping the service
 #######################################################
 ########################################################
 ########################################################
