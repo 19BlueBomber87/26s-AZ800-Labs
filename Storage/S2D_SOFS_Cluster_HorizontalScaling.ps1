@@ -82,7 +82,7 @@ foreach($admin in $newAdmins){
 
 
     # 3 - minecraftmoose.com privileged access workstation(Management Server)
-New-Lab_VM YAHOO-NestedHost-PAW01 -HyperVSwitch ANC-NET -GeneralizedImageDE
+New-Lab_VM YAHOO-NestedHost-PAW01 -HyperVSwitch ANC-NET -RAM 2GB -GeneralizedImageDE
 Install-WindowsFeature -Name RSAT-Clustering-MGMT -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name RSAT-DNS-Server -Confirm:$false -Verbose *>&1
@@ -90,7 +90,6 @@ Install-WindowsFeature -Name GPMC -Confirm:$false -Verbose *>&1
 Rename-Computer -NewName YAHOO-NestedHost-PAW01 -Restart -Verbose *>&1
 #
 $computerName = "YAHOO-NestedHost-PAW01"
-New-Lab_VM -VMNames  $computerName  -HyperVSwitch Linux-Net -Ram 4GB -GeneralizedImageDE
 Stop-VM -VMName $computerName -Force -Verbose *>&1 
 Set-VMProcessor -VMName $computerName  -ExposeVirtualizationExtensions $true -Verbose *>&1
 Start-VM -VMName $computerName  -Verbose *>&1
