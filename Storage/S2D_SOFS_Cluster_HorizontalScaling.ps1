@@ -95,6 +95,8 @@ Set-VMProcessor -VMName $computerName  -ExposeVirtualizationExtensions $true -Ve
 Start-VM -VMName $computerName  -Verbose *>&1
 Get-VMProcessor -VMName $computerName  | Select-Object VMName, ExposeVirtualizationExtensions
 
+Install-WindowsFeature -Name Hyper-V -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
+
 Get-WindowsFeature RSAT-Clustering*, RSAT-AD-*, RSAT-DNS-Server, GPMC | Select-Object DisplayName, Name, Installed
 Get-Module -ListAvailable *cluster*, ActiveDirectory, Hyper-V
 #
@@ -432,14 +434,39 @@ Invoke-Command -ComputerName YAHOO-Clus04 -ScriptBlock {
 ########################################################
 #########################
 ###
-#9
+# #9                  ┌──────────────────────────────┐
+#                     │        CLIENTS / USERS       │
+#                     │ (Apps, VMs, SQL, File Share)│
+#                     └──────────────┬───────────────┘
+#                                    │
+#                      Management / Production Network
+#                                    │
+#         ┌──────────────────────────┼──────────────────────────┐
+#         │                          │                          │
+# ┌───────────────┐        ┌───────────────┐        ┌───────────────┐
+# │   NODE 1      │        │   NODE 2      │        │   NODE 3      │
+# │ (Server)      │        │ (Server)      │        │ (Server)      │
+# │               │        │               │        │               │
+# │  VMs / Roles  │        │  VMs / Roles  │        │  VMs / Roles  │
+# │               │        │               │        │               │
+# └──────┬────────┘        └──────┬────────┘        └──────┬────────┘
+#        │                        │                        │
+#        └──────────────┬─────────┴─────────┬──────────────┘
+#                       │                   │
+#              Heartbeat / Cluster Network
+#          (Health checks & node communication)
 
-########################################################
-########################################################
-########################################################
-#########################
-###
-#10
+#                       │
+#          ┌────────────┴────────────┐
+#          │   Cluster Shared Volume │
+#          │        (CSV Storage)    │
+#          │  Accessible by ALL nodes│
+#          └────────────┬────────────┘
+#                       │
+#                 ┌─────┴─────┐
+#                 │  QUORUM    │
+#                 │ (Witness)  │
+#                 │ File / Disk│
 
 ########################################################
 ########################################################
