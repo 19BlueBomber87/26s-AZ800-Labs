@@ -13,7 +13,7 @@
 # ===================================================
 #  Prerequisites
 # ===================================================
-# YAHOO-RRAS01 -> One RRAS server for routing
+# YAHOO-RRAS01 -> One RRAS server for routing (Or User External Hyper-V Switch) -> https://github.com/19BlueBomber87/26s-AZ800-Labs/tree/main/HyperV-Router
 # ANC-DC01     -> One domain controller 
 # ANC-PAW01    -> One server to be privileged access workstation(PAW) management server
 
@@ -24,22 +24,16 @@
 # ===================================================
 
 # From Host run:
-New-Lab_VM -VMNames YAHOO-FILE01 -HyperVSwitch ANC-NET -nonOSdiskcount 4 -nonOSdiskSizeGB 250 -GeneralizedImageCore
-New-Lab_VM -VMNames YAHOO-PAW01 -HyperVSwitch ANC-NET -GeneralizedImageDE
+New-Lab_VM -VMNames YAHOO-VSCALE01 -HyperVSwitch ANC-NET -nonOSdiskcount 4 -nonOSdiskSizeGB 250 -RAM 2GB -GeneralizedImageDE
 
 # Change computer name to ANC-Clus01 and join to domain
-# From the YAHOO-FILE01 VM run:
-Rename-Computer -NewName YAHOO-FILE01 -Restart -Verbose *>&1
-Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator  -Restart -Verbose *>&1
+# From the YAHOO-VSCALE01 VM run:
+Rename-Computer -NewName YAHOO-VSCALE01 -Restart -Verbose *>&1
 
-
-# Change computer name to ANC-Clus01 and join to domain
-# From the YAHOO-PAW01 VM run:
-Rename-Computer -NewName YAHOO-PAW01 -Restart -Verbose *>&1
-Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator  -Restart -Verbose *>&1
 # ===============================================================
-#  Step 2 - Initialize any Raw Offline Disks on YAHOO-FILE01 - RUN AS ADMIN
+#  Step 2 - Initialize any Raw Offline Disks on YAHOO-VSCALE01 - RUN AS ADMIN
 # ==============================================================
+Get-StorageSubSystem  | Get-PhysicalDisk -CanPool $true
 function Initialize-RawOfflineDisks {
     <#
     .SYNOPSIS
@@ -73,7 +67,7 @@ function Initialize-RawOfflineDisks {
     param()
 
     $disks = Get-Disk | 
-        Where-Object -Property OperationalStatus -eq "Offline" | 
+       # Where-Object -Property OperationalStatus -eq "Offline" | 
         Where-Object -Property PartitionStyle -eq "RAW"
 
     foreach($disk in $disks){
@@ -88,30 +82,19 @@ function Initialize-RawOfflineDisks {
 
 
 
-# On YAHOO-FILE01 Run the function:
+# On YAHOO-VSCALE01 Run the function:
 Initialize-RawOfflineDisks
 Get-PSDrive
 
 # On YAHOO-PAW01, test visability
-Test-Path \\YAHOO-FILE01\E$
-Test-Path \\YAHOO-FILE01\F$
-Test-Path \\YAHOO-FILE01\G$
-Test-Path \\YAHOO-FILE01\H$
-
-# Test from File explore on ANC-PAW01 the 
-# ADD YAHOO-File01 to Server Manger to see and manage disks
-
-Invoke-Command -ComputerName YAHOO-FILE01 -ScriptBlock {
-    Get-Disk | Format-Table;
-    Get-Volume | Sort-Object DriveLetter | Format-Table;
-    Get-Volume | ? -Property FileSystemType -Like "ReFS" | Sort-Object DriveLetter | Format-Table
-}
-
-
+Test-Path \\YAHOO-VSCALE01\E$
+Test-Path \\YAHOO-VSCALE01\F$
+Test-Path \\YAHOO-VSCALE01\G$
+Test-Path \\YAHOO-VSCALE01\H$
 # ===============================================================
 # Step 3 Add extra 17 data disks to existing VM - RUN AS ADMIN from host- This is vertical scaling
 # ===============================================================
-
+# Run From Hyper-V Host
 function Add-Disks2VM{
     <#
     .SYNOPSIS
@@ -168,117 +151,165 @@ function Add-Disks2VM{
 
 
 
-Add-Disks2VM -VMName "Yahoo-File01" -DiskSetName "Expand" -DiskCount 17 -DiskSize 350
+Add-Disks2VM -VMName "YAHOO-VSCALE01" -DiskSetName "Expand" -DiskCount 18 -DiskSize 350
 
 # ===============================================================
-#  Step 4 - Initialize the new Raw Offline Disks that were just added on YAHOO-FILE01 - RUN AS ADMIN
+#  Step 4 - Initialize the new Raw Offline Disks that were just added on YAHOO-VSCALE01 - RUN AS ADMIN
 # ==============================================================
-# On YAHOO-FILE01 Run the function:
+# On YAHOO-VSCALE01 Run the function:
 Initialize-RawOfflineDisks
 
 
 
 # On YAHOO-PAW01, test visability
 Get-PSDrive
-Test-Path \\YAHOO-FILE01\X$
-Test-Path \\YAHOO-FILE01\Y$
-Test-Path \\YAHOO-FILE01\Z$
-
-# Test from File explore on ANC-PAW01 the 
-# ADD YAHOO-File01 to Server Manger to see and manage disks
-
-Invoke-Command -ComputerName YAHOO-FILE01 -ScriptBlock {
-    Get-Disk | Format-Table;
-    Get-Volume | Sort-Object DriveLetter | Format-Table;
-    Get-Volume | ? -Property FileSystemType -Like "ReFS" | Sort-Object DriveLetter | Format-Table
-}
+Test-Path \\YAHOO-VSCALE01\X$
+Test-Path \\YAHOO-VSCALE01\Y$
+Test-Path \\YAHOO-VSCALE01\Z$
 
 
-# ===============================================================
-#  Step 5 - Create File Shares
-# ==============================================================
+
+# Check From Server Manager along with PowerShell
+Get-Disk | Format-Table;
+Get-Volume | Sort-Object DriveLetter | Format-Table;
+Get-Volume | ? -Property FileSystemType -Like "ReFS" | Sort-Object DriveLetter | Format-Table
+
+
 
 # Create one folder per volume to share
-
 $volumes = (Get-Volume | ? -Property FileSystemType -Like "ReFS" | Sort-Object DriveLetter ).DriveLetter
-$domainUsers  = "MINECRAFTMOOSE\Domain Users"
-$domainAdmins = "MINECRAFTMOOSE\Domain Admins"
-
 foreach($volume in $volumes){
     $shareName = $volume + " Share01"
     $path = $volume + ":\Share01"
     New-Item -ItemType Directory $Path -Verbose *>&1
-    New-SmbShare -Name $shareName -Path $path -ReadAccess "Everyone" -FullAccess $domainAdmins -Verbose
+    New-SmbShare -Name $shareName -Path $path -ReadAccess "Everyone" -FullAccess "Administrators" -Verbose
 
 }
 
 
 
 # ===============================================================
-#  Ste5  -  Create Storage Spaces Drives - Use Gui or Powershell
+#  Step5  - Reset disks - From Vertical scaling lab 
 # ==============================================================
+# Reset disks - From Vertical scaling lab 
 
-# Reset disks - 
+# Remove Shares
+Get-SmbShare | ? -Property Name -NotLike "*$*" | Remove-SmbShare -Verbose *>&1
+
+# Remove Partitions
 $volumes = (Get-Volume | ? -Property FileSystemType -Like "ReFS" | Sort-Object DriveLetter ).DriveLetter
-
 foreach($volume in $volumes){
     Get-Partition -DriveLetter $volume | Remove-Partition -Confirm:$false -Verbose *>&1
-
 }
 
-
-# PowerShell
+# Clear-Disk Returns to a partition style of "RAW"
+$Disks = Get-Disk | ? -Property Number -ne 0  
+foreach($disknumber in $Disks.Number){
+    #Clear-Disk -Number $disknumber -RemoveData -Confirm:$false -Verbose *>&1
+    Set-Disk -Number $disknumber -IsOffline $true
+}
+# Make Sure Disks are Offline and RAW
+Get-Disk
+# ==============================================================
+#  Step 6  - Configure Storage Spaces with PowerShell
+# ==============================================================
+# What is Storage Spaces?
+# Storage Spaces is a built-in Windows Server and Windows 10+ storage virtualization feature. It has two main components:
+# Storage Pools: Groups of physical disks combined into a single manageable logical unit. Disks can vary in type and size; each disk can belong to only one pool.
+# Storage Spaces: Virtual disks created from pool space. They support resiliency (mirroring/parity), tiers, caching, thin/fixed provisioning, and act like LUNs on a SAN.
 # Create Storage pool.  
-Invoke-Command -ComputerName YAHOO-FILE01 -ScriptBlock {
-    $poolName = "MegaPool01"
-    $subsystem = (Get-StorageSubSystem).FriendlyName
-    $disks = Get-PhysicalDisk -CanPool $true
-    New-StoragePool -FriendlyName $poolName -StorageSubSystemFriendlyName $subsystem -PhysicalDisks $disks -ResiliencySettingNameDefault Parity -ProvisioningTypeDefault Thin -Verbose *>&1
-    
-} -Verbose *>&1
+
+# Check available disks
+Get-StorageSubSystem  | Get-PhysicalDisk -CanPool $true
+
+
+
+# You do not specify cluster size in New-StoragePool command
+# you specify it in New-VirtualDisk, which creates the actual usable storage.
+# Create Storage Pool
+$poolName = "MegaPool01"
+$subsystem = (Get-StorageSubSystem).FriendlyName
+$disks = Get-PhysicalDisk -CanPool $true
+New-StoragePool -FriendlyName $poolName -StorageSubSystemFriendlyName $subsystem -PhysicalDisks $disks -ResiliencySettingNameDefault Parity -ProvisioningTypeDefault Thin -Verbose *>&1
+
+# Check available disks
+Get-StorageSubSystem  | Get-PhysicalDisk -CanPool $true
 
 # Check Storage Pool
-Invoke-Command -ComputerName YAHOO-FILE01 -ScriptBlock {
-    Get-StoragePool
-} -Verbose *>&1
-
+Get-StoragePool
+Get-StoragePool | fl *
+Get-StoragePool | Select-Object FriendlyName, ProvisioningTypeDefault, Version, PhysicalSectorSize ,LogicalSectorSize
 
 # Create large virtual disk from storage pool
-Invoke-Command -ComputerName YAHOO-FILE01 -ScriptBlock {
+$vdName   = "MegaDisk01"
+$poolName = "MegaPool01"
+New-VirtualDisk -FriendlyName $vdName -StoragePoolFriendlyName $poolName -Size 2TB -ResiliencySettingName Parity -ProvisioningType Thin -Verbose *>&1
+Get-Disk | Format-Table
 
-    $vdName   = "MegaDisk01"
-    $poolName = "MegaPool01"
+# Check Cluster Size
+Get-Volume | Where-Object DriveLetter | 
+    Select-Object DriveLetter, FileSystemType, FriendlyName, 
+           @{Name='Size GB'; Expression={[math]::Round($_.Size/1GB,2)}},
+           @{Name='Cluster Size'; Expression={"$([math]::Round($_.AllocationUnitSize / 1KB)) KB"}} | 
+    Format-Table -AutoSize
 
-    New-VirtualDisk -FriendlyName $vdName -StoragePoolFriendlyName $poolName -Size 1TB -ResiliencySettingName Parity -ProvisioningType Thin -Verbose *>&1
-
-} -Verbose *>&1
-
-Invoke-Command -ComputerName YAHOO-FILE01 -ScriptBlock {
-    Get-Disk | Format-Table
-}
+# Update Cluster size on New Virtual Disk
+Format-Volume -DriveLetter E -FileSystem NTFS -AllocationUnitSize 256KB -NewFileSystemLabel "Data" -Confirm:$false -Verbose *>&1
 
 # Use custom function to format disk volume
 Initialize-RawOfflineDisks
+Get-Volume | ? -Property FileSystemType -Like "ReFS" | Sort-Object DriveLetter | Format-Table
 
-Invoke-Command -ComputerName YAHOO-FILE01 -ScriptBlock {
-    Get-Volume | ? -Property FileSystemType -Like "ReFS" | Sort-Object DriveLetter | Format-Table
-}
-
-Invoke-Command -ComputerName YAHOO-FILE01 -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-VSCALE01 -ScriptBlock {
     New-Item -ItemType Directory "E:\MegaShare01" -Verbose *>&1
     New-SmbShare -Name "MegaShare01" -Path "E:\MegaShare01" -ReadAccess "Everyone" -FullAccess "Minecraftmoose\Domain Admins" -Verbose
 
 }
 
+$volumes = (Get-Volume | ? -Property FileSystemType -Like "ReFS" | Sort-Object DriveLetter ).DriveLetter
+foreach($volume in $volumes){
+    $shareName = $volume + " Share01"
+    $path = $volume + ":\Share01"
+    New-Item -ItemType Directory $Path -Verbose *>&1
+    New-SmbShare -Name $shareName -Path $path -ReadAccess "Everyone" -FullAccess "Administrators" -Verbose
 
-# GUI 
-# 1 - Add Yahoo-File01 to Server manager on YAHOO-PAW01
+}
+
+
+# ==============================================================
+#  Step6  - Configure Storage Spaces with GUI
+# ==============================================================
+
+# Remove Shares
+Get-SmbShare | ? -Property Name -NotLike "*$*" | Remove-SmbShare -Confirm:$false -Force -Verbose *>&1
+
+# Remove Partitions
+$volumes = (Get-Volume | ? -Property FileSystemType -Like "ReFS" | Sort-Object DriveLetter ).DriveLetter
+foreach($volume in $volumes){
+    Get-Partition -DriveLetter $volume | Remove-Partition -Confirm:$false -Verbose *>&1
+}
+# Remove Virtual Disk
+Get-VirtualDisk | Remove-VirtualDisk -Confirm:$false -Verbose *>&1
+
+# Clear-Disk Returns to a partition style of "RAW"
+$Disks = Get-Disk | ? -Property Number -ne 0  
+foreach($disknumber in $Disks.Number){
+    Clear-Disk -Number $disknumber -RemoveData -Confirm:$false -Verbose *>&1
+    Set-Disk -Number $disknumber -IsOffline $true
+}
+# Make Sure Disks are Offline and RAW
+Get-Disk
+
+
+
+# GUI
+# 1 - Add YAHOO-VSCALE01 to Server manager on YAHOO-PAW01
 # 2 - Click on Storage Pools -> Tasks -> New Storage Pool -> The Wizard Starts -> Name Pool -> Select available Disks -> Create
 # 3 - Click on the new Storage Pool -> From the 'VIRTUAL DISKS' pane click on Tasks -> New Virtual Disk -> Name The disk -> We have no enclousers, click next -> For Storage Layout pick Parity -> Thin Provisioning -> 1TB -> Create
-# 4 - New Volume Wizard -> YAHOO-FILE01 and pick the 1TB disk -> Volume Size: 1024 GB -> Pick Drive Letter -> Use ReFS for File System and Name Volume -> Create
+# 4 - New Volume Wizard -> YAHOO-VSCALE01 and pick the 1TB disk -> Volume Size: 1024 GB -> Pick Drive Letter -> Use ReFS for File System and Name Volume -> Create
 # 5 - Share out the Volume
 
-Invoke-Command -ComputerName YAHOO-FILE01 -ScriptBlock {
+Invoke-Command -ComputerName YAHOO-VSCALE01 -ScriptBlock {
     New-Item -ItemType Directory "E:\GUI-Share01" -Verbose *>&1
     New-SmbShare -Name "GUI-Share01" -Path "E:\GUI-Share01" -ReadAccess "Everyone" -FullAccess "Minecraftmoose\Domain Admins" -Verbose
 
