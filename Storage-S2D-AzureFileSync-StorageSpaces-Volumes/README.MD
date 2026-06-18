@@ -13,9 +13,9 @@ All Windows file systems are built around three core storage components:
 - **Directories (Folders)** — Containers used to organize files and other directories.
 - **Volumes** — Logical partitions that hold directories and files.
 
-### Windows File System Types
+![Windows File System Types](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSync-StorageSpaces-Volumes/VisualizationDiagrams/01-WhatIsAFileSystem.jpg)
 
-![Windows File System Types](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage/VisualizationDiagrams/02-WindowsFileSystemTypes.jpg)
+### Windows File System Types
 
 #### FAT, FAT32, and exFAT
 Oldest and simplest. Not suitable for production servers (no file-level security). Best for removable media.
