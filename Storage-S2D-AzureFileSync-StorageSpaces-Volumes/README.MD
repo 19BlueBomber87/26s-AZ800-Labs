@@ -44,13 +44,13 @@ Microsoft’s modern file system for high reliability and large-scale storage.
 
 ## Sectors and Allocation Units
 
-![Sector Allocation units](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage/VisualizationDiagrams/03-SectorAllocationUnits.jpg)
+![Sector Allocation units](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSync-StorageSpaces-Volumes/VisualizationDiagrams/03-SectorAllocationUnits.jpg)
 
 **Sector** = Smallest physical unit the disk can read/write (usually 4 KB on modern drives).
 
 **Cluster (Allocation Unit)** = Smallest amount of disk space a file system can allocate to a file.
 
-![Physical vs. Logical Sector Size](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage/VisualizationDiagrams/04-Physical%20vs.%20Logical%20SectorSize.jpg)
+![Physical vs. Logical Sector Size](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSync-StorageSpaces-Volumes/VisualizationDiagrams/04-Physical%20vs.%20Logical%20SectorSize.jpg)
 
 **Best Practice:** Match cluster size to your workload and ensure alignment with physical sectors.
 
