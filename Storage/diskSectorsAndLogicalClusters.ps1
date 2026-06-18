@@ -15,6 +15,7 @@
 # 1GB / 1000MB = 1.024
 # 1024KB / 1MB = 1
 # 1024MB / 1GB = 1
+# 1024TB / 1PB = 1
 # For powershell commands you can use 1KB to represent 1024 bytes or 4KB to represent 4096
 # Term                  Meaning
 # --------------------  -----------------------------------------------
