@@ -2,9 +2,7 @@
 # Storage Labs
 # =====================
 # Author:   Mark Kruse
-# Purpose:  Create a File Server with 4 non-OS disks fromated as ReFs
-#           Add 16 diks to the file server fromated as ReFs
-#           Example of Vertical scaling
+# Purpose:  Configuring Drives, Volumes, Allocation Size and Shares
 # Location: Anchorage, Alaska lab environment
 # ====================================================================================
 
