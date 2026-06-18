@@ -56,7 +56,7 @@ Microsoft’s modern file system for high reliability and large-scale storage.
 
 ## Storage Spaces (Normal / Traditional)
 
-![Storage Spaces Overview](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage/VisualizationDiagrams/05-StorageSpaces.jpg)
+![Storage Spaces Overview](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSync-StorageSpaces-Volumes/VisualizationDiagrams/05-StorageSpaces.jpg)
 
 Storage Spaces is Microsoft’s software-defined storage feature (introduced in Windows Server 2012). It pools physical disks and creates resilient virtual disks.
 
@@ -72,7 +72,7 @@ Storage Spaces is Microsoft’s software-defined storage feature (introduced in 
 
 ## SMB (Server Message Block)
 
-![SMB](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage/VisualizationDiagrams/06-SMB.jpg)
+![SMB](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSync-StorageSpaces-Volumes/VisualizationDiagrams/06-SMB.jpg)
 
 SMB is the standard Windows file-sharing protocol.
 
