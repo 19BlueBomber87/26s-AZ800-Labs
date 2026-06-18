@@ -10,6 +10,13 @@
 
 # 1 KB = 1024 bytes
 # 4 KB = 4096 bytes
+# 1KB  # 1024 bytes
+# 1MB  # 1024 * 1024 = 1,048,576 bytes
+# 1GB  # 1024 * 1024 * 1024 = 1,073,741,824 bytes
+# 1TB / 1000GB = 1.024
+# 1GB / 1000MB = 1.024
+# 1024KB / 1MB = 1
+# 1024MB / 1GB = 1
 # For powershell commands you can use 1KB to represent 1024 bytes or 4KB to represent 4096
 # Term                  Meaning
 # --------------------  -----------------------------------------------
