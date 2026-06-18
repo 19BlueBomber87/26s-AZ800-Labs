@@ -32,11 +32,6 @@
 
 # FAT32 Works on almost everything (cameras, consoles, BIOS tools, etc.)
 
-
-
-
-
-
 # The maximum volume size for exFAT is 128 petabytes (PB)
 # Bytes Per Sector : 512 → This is the Logical Sector Size
 # Bytes Per Physical Sector : 4096 → This is the Physical Sector Size
@@ -87,8 +82,5 @@ New-Partition -DiskNumber 2 -UseMaximumSize -AssignDriveLetter -Verbose *>&1
 Get-Partition
 Format-Volume -DriveLetter D -FileSystem NTFS -AllocationUnitSize 1024 -NewFileSystemLabel "Data" -Confirm:$false -Verbose *>&1
 Format-Volume -DriveLetter F -FileSystem FAT32 -AllocationUnitSize 2048 -NewFileSystemLabel "Data" -Confirm:$false -Verbose *>&1
-
-
-
 
 
