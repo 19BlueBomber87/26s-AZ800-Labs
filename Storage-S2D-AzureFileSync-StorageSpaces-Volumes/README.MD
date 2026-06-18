@@ -82,7 +82,7 @@ SMB is the standard Windows file-sharing protocol.
 
 ## Storage Spaces Direct (S2D)
 
-![S2D](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage/VisualizationDiagrams/07-S2D.jpg)
+![S2D](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSync-StorageSpaces-Volumes/VisualizationDiagrams/07-S2D.jpg)
 
 S2D is Microsoft’s hyper-converged software-defined storage (Windows Server 2016+). It pools local disks across multiple cluster nodes.
 
@@ -95,7 +95,7 @@ S2D is Microsoft’s hyper-converged software-defined storage (Windows Server 20
 
 ## Failover Clustering
 
-![Fail Over Cluster ADDS](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage/VisualizationDiagrams/08-FailOverCluster-%20ADDS.jpg)
+![Fail Over Cluster ADDS](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSync-StorageSpaces-Volumes/VisualizationDiagrams/08-FailOverCluster-%20ADDS.jpg)
 
 Failover Clustering provides high availability by allowing multiple servers (nodes) to act as one system. Essential for S2D.
 
@@ -107,7 +107,7 @@ Failover Clustering provides high availability by allowing multiple servers (nod
 
 ## Hybrid File Server Infrastructure with Azure Files
 
-![Hybrid File Server Infrastructure](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage/VisualizationDiagrams/09-Hybrid%20File%20Server%20Infrastructure.jpg)
+![Hybrid File Server Infrastructure](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSync-StorageSpaces-Volumes/VisualizationDiagrams/09-Hybrid%20File%20Server%20Infrastructure.jpg)
 
 **Azure Files** — Fully managed, serverless file shares in Azure (SMB, NFS, REST).
 
