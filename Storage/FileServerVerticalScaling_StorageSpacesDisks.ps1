@@ -1,5 +1,5 @@
 # =============================================================================
-# Hyper-V Lab Creation
+# Storage Labs
 # =====================
 # Author:   Mark Kruse
 # Purpose:  Create a File Server with 4 non-OS disks fromated as ReFs
@@ -206,8 +206,9 @@ foreach($volume in $volumes){
 $Disks = Get-Disk | ? -Property Number -ne 0  
 foreach($disknumber in $Disks.Number){
     #Clear-Disk -Number $disknumber -RemoveData -Confirm:$false -Verbose *>&1
-    Set-Disk -Number $disknumber -IsOffline $true
+    Set-Disk -Number $disknumber -IsOffline $true -Verbose *>&1
 }
+
 # Make Sure Disks are Offline and RAW
 Get-Disk
 # ==============================================================
@@ -246,6 +247,12 @@ $poolName = "MegaPool01"
 New-VirtualDisk -FriendlyName $vdName -StoragePoolFriendlyName $poolName -Size 2TB -ResiliencySettingName Parity -ProvisioningType Thin -Verbose *>&1
 Get-Disk | Format-Table
 
+
+# Use custom function to format disk volume
+Initialize-RawOfflineDisks
+Get-Volume | ? -Property FileSystemType -Like "ReFS" | Sort-Object DriveLetter | Format-Table
+
+
 # Check Cluster Size
 Get-Volume | Where-Object DriveLetter | 
     Select-Object DriveLetter, FileSystemType, FriendlyName, 
@@ -256,22 +263,12 @@ Get-Volume | Where-Object DriveLetter |
 # Update Cluster size on New Virtual Disk
 Format-Volume -DriveLetter E -FileSystem NTFS -AllocationUnitSize 256KB -NewFileSystemLabel "Data" -Confirm:$false -Verbose *>&1
 
-# Use custom function to format disk volume
-Initialize-RawOfflineDisks
-Get-Volume | ? -Property FileSystemType -Like "ReFS" | Sort-Object DriveLetter | Format-Table
+
+
 
 Invoke-Command -ComputerName YAHOO-VSCALE01 -ScriptBlock {
     New-Item -ItemType Directory "E:\MegaShare01" -Verbose *>&1
-    New-SmbShare -Name "MegaShare01" -Path "E:\MegaShare01" -ReadAccess "Everyone" -FullAccess "Minecraftmoose\Domain Admins" -Verbose
-
-}
-
-$volumes = (Get-Volume | ? -Property FileSystemType -Like "ReFS" | Sort-Object DriveLetter ).DriveLetter
-foreach($volume in $volumes){
-    $shareName = $volume + " Share01"
-    $path = $volume + ":\Share01"
-    New-Item -ItemType Directory $Path -Verbose *>&1
-    New-SmbShare -Name $shareName -Path $path -ReadAccess "Everyone" -FullAccess "Administrators" -Verbose
+    New-SmbShare -Name "MegaShare01" -Path "E:\MegaShare01" -ReadAccess "Everyone" -FullAccess "Administrators" -Verbose
 
 }
 
@@ -297,9 +294,12 @@ foreach($disknumber in $Disks.Number){
     Clear-Disk -Number $disknumber -RemoveData -Confirm:$false -Verbose *>&1
     Set-Disk -Number $disknumber -IsOffline $true
 }
+
+Get-StoragePool megapool01 | Remove-StoragePool -Confirm:$false
+
 # Make Sure Disks are Offline and RAW
 Get-Disk
-
+Get-StorageSubSystem  | Get-PhysicalDisk -CanPool $true
 
 
 # GUI
