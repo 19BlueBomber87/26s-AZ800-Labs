@@ -40,7 +40,7 @@ Microsoft’s modern file system for high reliability and large-scale storage.
 
 **Recommended** for data volumes in Windows Server 2025.
 
-![What is A File System](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage/VisualizationDiagrams/01-WhatIsAFileSystem.jpg)
+![What is A File System](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSync-StorageSpaces-Volumes/VisualizationDiagrams/02-WindowsFileSystemTypes.jpg)
 
 ## Sectors and Allocation Units
 
