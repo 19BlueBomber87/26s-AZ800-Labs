@@ -10,6 +10,10 @@
 # Use link below to get 'New-Lab_VM' command
 # https://github.com/19BlueBomber87/26s-AZ800-Labs/blob/main/HyperV-QuickCreate-GoldenImages/AZ-800Celebrate-HyperV%20Creation%20and%20Disk%20Functions.ps1
 # ==========================================================================================================================================================
+Vertical scaling (scaling up): You increase the resources (CPU, RAM, storage, etc.) of a single server.
+Adding more drives (HDDs/SSDs) to a Storage Spaces pool on one server is a classic example of vertical scaling for storage capacity and/or performance.
+Horizontal scaling (scaling out): You add more servers/nodes to distribute the load, improve redundancy, and increase overall capacity.
+Adding servers to a Windows Failover Cluster (especially with Storage Spaces Direct / S2D) is horizontal scaling. In S2D/hyper-converged setups, new nodes autom
 # ===================================================
 #  Prerequisites
 # ===================================================
