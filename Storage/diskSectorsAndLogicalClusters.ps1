@@ -16,6 +16,7 @@
 # 1024KB / 1MB = 1
 # 1024MB / 1GB = 1
 # 1024TB / 1PB = 1
+Write-Verbose -Message "1024TB / 1PB =  $(1024TB / 1PB)PB" -Verbose *>&1
 # For powershell commands you can use 1KB to represent 1024 bytes or 4KB to represent 4096
 # Term                  Meaning
 # --------------------  -----------------------------------------------
