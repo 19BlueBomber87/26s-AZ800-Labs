@@ -154,8 +154,6 @@ Once onboarded, Arc-enabled resources become native Azure Resource Manager (ARM)
 
 **Example:** Grant the Operations team *Contributor* access on an Arc Resource Group, while Auditors get *Reader* access.
 
-Perfect
-
 ## Lab Recommendations
 - Build Storage Spaces labs (single server)
 - Deploy a 2-node S2D cluster with Failover Clustering
