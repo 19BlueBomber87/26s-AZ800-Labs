@@ -114,6 +114,8 @@ Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\adm
 
 # Move Golden Images and ISOs to Nested Host
 
+# Enable Mac Address spoofing 
+Set-VMNetworkAdapter -VMName "YAHOO-NestedHost-PAW01" -MacAddressSpoofing On
 # ===================================================
 # Step 1 - Create 3 Server Core VMs for Storage Spaces Direct Cluster
 # ===================================================
