@@ -50,13 +50,13 @@ Microsoft’s modern file system for high reliability and large-scale storage.
 
 **Cluster (Allocation Unit)** = Smallest amount of disk space a file system can allocate to a file.
 
-![Physical vs. Logical Sector Size](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSync-StorageSpaces-Volumes/VisualizationDiagrams/04-Physical%20vs.%20Logical%20SectorSize.jpg)
+![Physical vs. Logical Sector Size](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSyncWithAzArc-StorageSpaces-Volumes/VisualizationDiagrams/04-Physical%20vs.%20Logical%20SectorSize.jpg)
 
 **Best Practice:** Match cluster size to your workload and ensure alignment with physical sectors.
 
 ## Storage Spaces (Normal / Traditional)
 
-![Storage Spaces Overview](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSync-StorageSpaces-Volumes/VisualizationDiagrams/05-StorageSpaces.jpg)
+![Storage Spaces Overview](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSyncWithAzArc-StorageSpaces-Volumes/VisualizationDiagrams/05-StorageSpaces.jpg)
 
 Storage Spaces is Microsoft’s software-defined storage feature (introduced in Windows Server 2012). It pools physical disks and creates resilient virtual disks.
 
