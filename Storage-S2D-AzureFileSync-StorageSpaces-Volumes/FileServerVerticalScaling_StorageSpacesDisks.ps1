@@ -209,7 +209,7 @@ foreach($volume in $volumes){
 # Clear-Disk Returns to a partition style of "RAW"
 $Disks = Get-Disk | ? -Property Number -ne 0  
 foreach($disknumber in $Disks.Number){
-    #Clear-Disk -Number $disknumber -RemoveData -Confirm:$false -Verbose *>&1
+    Clear-Disk -Number $disknumber -RemoveData -Confirm:$false -Verbose *>&1
     Set-Disk -Number $disknumber -IsOffline $true -Verbose *>&1
 }
 
