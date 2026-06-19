@@ -190,7 +190,12 @@ foreach($volume in $volumes){
 
 }
 
-
+# Check Cluster Size
+Get-Volume | Where-Object DriveLetter | 
+    Select-Object DriveLetter, FileSystemType, FriendlyName, 
+           @{Name='Size GB'; Expression={[math]::Round($_.Size/1GB,2)}},
+           @{Name='Cluster Size'; Expression={"$([math]::Round($_.AllocationUnitSize / 1KB)) KB"}} | 
+    Format-Table -AutoSize
 
 # ===============================================================
 #  Step5  - Reset disks - From Vertical scaling lab 
