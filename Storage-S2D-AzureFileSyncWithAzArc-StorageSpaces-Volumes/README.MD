@@ -135,22 +135,24 @@ Failover Clustering provides high availability by allowing multiple servers (nod
 - Cloud backup & snapshots
 - Disaster recovery
 
-
 ## Azure Arc + RBAC
 
-Azure Arc brings Azure security, governance, and services to hybrid/multicloud/edge (servers, Kubernetes, SQL, etc.).
+**Azure Arc** extends Azure’s security, governance, and cloud-native services to your hybrid, multicloud, and edge environments — including Windows/Linux servers, Kubernetes clusters, SQL Servers, and more.
 
-Arc-enabled resources become Azure Resource Manager (ARM) resources → **Full Azure RBAC support**.
+Once onboarded, Arc-enabled resources become native Azure Resource Manager (ARM) resources, giving you **full Azure RBAC support**.
 
 ![RBAC Basics](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSyncWithAzArc-StorageSpaces-Volumes/VisualizationDiagrams/10-RBAC-BasicDiagram.jpg)
 
 ![Azure Arc Overview](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSyncWithAzArc-StorageSpaces-Volumes/VisualizationDiagrams/11-AzArc.jpg)
 
 ### Key Capabilities
-- Azure Policy, Defender for Cloud, Sentinel, Monitor
-- Apply RBAC at Subscription, RG, or individual Arc resource level
+- Azure Policy (guest configuration)
+- Microsoft Defender for Cloud
+- Microsoft Sentinel
+- Azure Monitor
+- Azure RBAC at any scope
 
-**Example:** Ops team = Contributor on Arc RG | Auditors = Reader
+**Example:** Grant the Operations team *Contributor* access on an Arc Resource Group, while Auditors get *Reader* access.
 
 Perfect
 
