@@ -41,13 +41,70 @@
 
 
 # ===================================================
-#  Prerequisites -> []
+#  Prerequisites -> [DC]
 # ===================================================
-
-
-# YAHOO-RRAS01 -> One RRAS server for routing
+# # YAHOO-RRAS01 -> One RRAS server for routing
 # ANC-DC01     -> One domain controller 
 # ANC-PAW01    -> One server to be privileged access workstation(PAW) management server
+# ===================================================
+# Create DC
+New-Lab_VM YAHOO-DC01 -HyperVSwitch ANC-NET -GeneralizedImageCore
+# 
+Install-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1
+Rename-Computer -NewName YAHOO-DC01 -Restart -Verbose *>&1
+
+#
+Get-WindowsFeature -Name AD-Domain-Services
+New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
+    -Direction Inbound `
+    -Protocol ICMPv4 `
+    -IcmpType 8 `
+    -Action Allow
+
+# Set static IP + subnet + default gateway in one command
+New-NetIPAddress -InterfaceAlias "Ethernet" `
+    -IPAddress 192.168.77.7 `
+    -PrefixLength 24 `
+    -DefaultGateway 192.168.77.1 `
+    -AddressFamily IPv4 `
+    -Verbose *>&1
+
+# Set DNS server(s)
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
+    -ServerAddresses 127.0.0.1, 8.8.8.8 `
+    -Verbose *>&1
+
+
+#Promote DC
+Import-Module ADDSDeployment
+Install-ADDSForest `
+-CreateDnsDelegation:$false `
+-DatabasePath "C:\Windows\NTDS" `
+-DomainMode "WinThreshold" `
+-DomainName "minecraftmoose.com" `
+-DomainNetbiosName "minecraftmoose" `
+-ForestMode "WinThreshold" `
+-InstallDns:$true `
+-LogPath "C:\Windows\NTDS" `
+-NoRebootOnCompletion:$false `
+-SafeModeAdministratorPassword (ConvertTo-SecureString "P@ssword1!" -AsPlainText -Force) `
+-SysvolPath "C:\Windows\SYSVOL" `
+-Force:$true
+
+# My golden images has two users accounts along with default administrator account.  
+# If you have local computer accounts on the DC that is promoted, they are added to the domain.
+# Add accounts to enterprise admin group
+$newAdmins = "megaman","Rush"
+$adminPermissions = (Get-ADUser administrator -Properties memberof).memberof
+foreach($admin in $newAdmins){
+    foreach($perm in $adminPermissions){
+        Add-ADGroupMember -Identity "$perm" -Members $admin -Verbose *>&1
+    }
+}
+(Get-ADUser megaman -Properties memberof).memberof
+(Get-ADUser rush -Properties memberof).memberof
+
+# ===================================================
 
 # Variable index
 $resourceGroupName = "az-FileSyncResourceGroup"
