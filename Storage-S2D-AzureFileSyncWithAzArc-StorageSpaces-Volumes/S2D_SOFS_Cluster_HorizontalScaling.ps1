@@ -86,7 +86,7 @@ foreach($admin in $newAdmins){
 
 
     # 3 - minecraftmoose.com privileged access workstation(Management Server)
-New-Lab_VM YAHOO-Nest-PAW -HyperVSwitch ANC-NET -RAM 2GB -GeneralizedImageDE
+New-Lab_VM YAHOO-Nest-PAW -HyperVSwitch ANC-NET -GeneralizedImageDE
 Install-WindowsFeature -Name RSAT-Clustering-MGMT -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name RSAT-DNS-Server -Confirm:$false -Verbose *>&1
