@@ -84,7 +84,7 @@ Horizontal scaling is often considered more cost-effective because you can grow 
 * Lower upgrade risk: Adding a node is typically easier than migrating to a larger server.
 * Cloud-friendly: Easily add or remove instances in Azure, AWS, etc.
 
-![Vertical vs Horizontal Scaling](05.1-Vertical scaling vs.Horizontal scaling.jpg)
+![Vertical Scaling vs Horizontal Scaling](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSyncWithAzArc-StorageSpaces-Volumes/VisualizationDiagrams/05.1-Vertical%20scaling%20vs.Horizontal%20scaling.jpg)
 
 
 
