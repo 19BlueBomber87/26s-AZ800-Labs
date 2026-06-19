@@ -92,6 +92,9 @@ Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature -Confirm:$false
 Install-WindowsFeature -Name RSAT-DNS-Server -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name GPMC -Confirm:$false -Verbose *>&1
 Rename-Computer -NewName YAHOO-NestedHost-PAW01 -Restart -Verbose *>&1
+
+# Move Golden Images and ISOs to Nested Host
+
 #
 $computerName = "YAHOO-NestedHost-PAW01"
 Stop-VM -VMName $computerName -Force -Verbose *>&1 
@@ -111,8 +114,6 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Action Allow
 #
 Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator  -Restart -Verbose *>&1
-
-# Move Golden Images and ISOs to Nested Host
 
 # Enable Mac Address spoofing 
 Set-VMNetworkAdapter -VMName "YAHOO-NestedHost-PAW01" -MacAddressSpoofing On
