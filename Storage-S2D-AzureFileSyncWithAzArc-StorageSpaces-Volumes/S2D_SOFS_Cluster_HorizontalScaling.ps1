@@ -115,8 +115,8 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
 #
 Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator  -Restart -Verbose *>&1
 
-# Enable Mac Address spoofing 
-Set-VMNetworkAdapter -VMName "YAHOO-NestedHost-PAW01" -MacAddressSpoofing On
+# On Hyper-V Host, Enable Mac Address spoofing 
+Set-VMNetworkAdapter -VMName "YAHOO-Nest-PAW" -MacAddressSpoofing On
 # ===================================================
 # Step 1 - Create 3 Server Core VMs for Storage Spaces Direct Cluster
 # ===================================================
