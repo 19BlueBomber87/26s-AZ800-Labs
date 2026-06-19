@@ -96,7 +96,7 @@ Rename-Computer -NewName  YAHOO-Nest-PAW -Restart -Verbose *>&1
 # Move Golden Images and ISOs to Nested Host
 
 #
-$computerName = "YAHOO-NestedHost-PAW01"
+$computerName = "YAHOO-Nest-PAW"
 Stop-VM -VMName $computerName -Force -Verbose *>&1 
 Set-VMProcessor -VMName $computerName  -ExposeVirtualizationExtensions $true -Verbose *>&1
 Start-VM -VMName $computerName  -Verbose *>&1
