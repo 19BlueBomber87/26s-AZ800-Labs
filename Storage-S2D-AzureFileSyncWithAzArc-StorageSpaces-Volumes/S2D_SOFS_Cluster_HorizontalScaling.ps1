@@ -162,10 +162,12 @@ Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\adm
 
 # Now we can leverage Invoke-Command
 # Test via PowerShell Direct - Run from host
+# If signed in as admin, you dont need to use the  -Credential parameter
 $cred = Get-Credential minecraftmoose\megaman
 Invoke-Command -VMName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03 -ScriptBlock {
     $ENV:COMPUTERNAME
 } -Credential $cred -Verbose *>&1
+
 # ===================================================
 # Step 3 -  Install 'File Services' and 'Fail Over Cluster' Roles
 # ===================================================
@@ -173,7 +175,7 @@ Invoke-Command -VMName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03 -ScriptBlock {
 # For this example we will use YAHOO-WAC01 to run the commands.  
 # YAHOO-WAC01 is domain joined to minecraftmoose.com
 
-
+# If signed in as admin, you dont need to use the  -Credential parameter
 Invoke-Command -ComputerName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03 -ScriptBlock {
     Install-WindowsFeature -Name File-Services, Failover-Clustering -IncludeManagementTools -Confirm:$false -Verbose *>&1
 } -Verbose *>&1
