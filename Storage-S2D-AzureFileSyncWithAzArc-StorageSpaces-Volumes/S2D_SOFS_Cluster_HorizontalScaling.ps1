@@ -101,7 +101,7 @@ Get-VMProcessor -VMName $computerName  | Select-Object VMName, ExposeVirtualizat
 
 Install-WindowsFeature -Name Hyper-V -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
 
-Get-WindowsFeature RSAT-Clustering*, RSAT-AD-*, RSAT-DNS-Server, GPMC | Select-Object DisplayName, Name, Installed
+Get-WindowsFeature RSAT-Clustering*, RSAT-AD-*, RSAT-DNS-Server, GPMC, Hyper-V | Select-Object DisplayName, Name, Installed
 Get-Module -ListAvailable *cluster*, ActiveDirectory, Hyper-V
 #
 New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
