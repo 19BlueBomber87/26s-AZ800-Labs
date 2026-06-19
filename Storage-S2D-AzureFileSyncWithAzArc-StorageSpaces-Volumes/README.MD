@@ -135,6 +135,25 @@ Failover Clustering provides high availability by allowing multiple servers (nod
 - Cloud backup & snapshots
 - Disaster recovery
 
+
+## Azure Arc + RBAC
+
+Azure Arc brings Azure security, governance, and services to hybrid/multicloud/edge (servers, Kubernetes, SQL, etc.).
+
+Arc-enabled resources become Azure Resource Manager (ARM) resources → **Full Azure RBAC support**.
+
+![RBAC Basics](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSyncWithAzArc-StorageSpaces-Volumes/VisualizationDiagrams/10-RBAC-BasicDiagram.jpg)
+
+![Azure Arc Overview](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSyncWithAzArc-StorageSpaces-Volumes/VisualizationDiagrams/11-AzArc.jpg)
+
+### Key Capabilities
+- Azure Policy, Defender for Cloud, Sentinel, Monitor
+- Apply RBAC at Subscription, RG, or individual Arc resource level
+
+**Example:** Ops team = Contributor on Arc RG | Auditors = Reader
+
+Perfect
+
 ## Lab Recommendations
 - Build Storage Spaces labs (single server)
 - Deploy a 2-node S2D cluster with Failover Clustering
