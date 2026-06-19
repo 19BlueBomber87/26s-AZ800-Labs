@@ -70,6 +70,24 @@ Storage Spaces is Microsoft’s software-defined storage feature (introduced in 
 
 **Regular Storage Spaces does NOT require SMB 3.0** — storage is local to one server.
 
+
+## Horizontal Scaling vs Vertical Scaling
+
+Horizontal scaling is often considered more cost-effective because you can grow incrementally using commodity hardware, while vertical scaling usually requires increasingly expensive high-end hardware.
+
+### Why Horizontal Scaling Can Be More Cost-Effective
+
+* Scale gradually: Add servers only when needed.
+* Use cheaper hardware: Several standard servers are often less expensive than one high-performance enterprise server.
+* Avoid large upfront investments: Buy one additional server instead of replacing an entire server.
+* Better availability: If one server fails, others continue serving users.
+* Lower upgrade risk: Adding a node is typically easier than migrating to a larger server.
+* Cloud-friendly: Easily add or remove instances in Azure, AWS, etc.
+
+![Vertical vs Horizontal Scaling](05.1-Vertical scaling vs.Horizontal scaling.jpg)
+
+
+
 ## SMB (Server Message Block)
 
 ![SMB](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Storage-S2D-AzureFileSyncWithAzArc-StorageSpaces-Volumes/VisualizationDiagrams/06-SMB.jpg)
