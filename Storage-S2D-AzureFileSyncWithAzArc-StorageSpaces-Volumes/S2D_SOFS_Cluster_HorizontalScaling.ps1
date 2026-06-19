@@ -86,12 +86,12 @@ foreach($admin in $newAdmins){
 
 
     # 3 - minecraftmoose.com privileged access workstation(Management Server)
-New-Lab_VM YAHOO-NestedHost-PAW01 -HyperVSwitch ANC-NET -RAM 2GB -GeneralizedImageDE
+New-Lab_VM YAHOO-Nest-PAW - YAHOO-Nest-PAW -HyperVSwitch ANC-NET -RAM 2GB -GeneralizedImageDE
 Install-WindowsFeature -Name RSAT-Clustering-MGMT -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name RSAT-DNS-Server -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name GPMC -Confirm:$false -Verbose *>&1
-Rename-Computer -NewName YAHOO-NestedHost-PAW01 -Restart -Verbose *>&1
+Rename-Computer -NewName  YAHOO-Nest-PAW -Restart -Verbose *>&1
 
 # Move Golden Images and ISOs to Nested Host
 
