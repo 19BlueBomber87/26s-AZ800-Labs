@@ -5,7 +5,7 @@
 # Purpose:  Configuring Drives, Volumes, Allocation Size and Shares
 # Location: Anchorage, Alaska lab environment
 # ====================================================================================
-
+# Run all commands as Admin
 # 1 KB = 1024 bytes
 # 4 KB = 4096 bytes
 # 1KB  # 1024 bytes
