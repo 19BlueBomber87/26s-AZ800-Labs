@@ -1,5 +1,5 @@
 # =============================================================================
-# Hyper-V Lab Creation
+# S2D Failover Cluster
 # =====================
 # Author:   Mark Kruse
 # Purpose:  Create a 3-node Storage Spaces Direct (S2D) failover cluster
@@ -95,28 +95,16 @@ Rename-Computer -NewName  YAHOO-Nest-PAW -Restart -Verbose *>&1
 
 # Move Golden Images and ISOs to Nested Host
 
-#
-$computerName = "YAHOO-Nest-PAW"
-Stop-VM -VMName $computerName -Force -Verbose *>&1 
-Set-VMProcessor -VMName $computerName  -ExposeVirtualizationExtensions $true -Verbose *>&1
-Start-VM -VMName $computerName  -Verbose *>&1
-Get-VMProcessor -VMName $computerName  | Select-Object VMName, ExposeVirtualizationExtensions
-
-Install-WindowsFeature -Name Hyper-V -IncludeAllSubFeature -IncludeManagementTools -Verbose *>&1 -Restart
-
-Get-WindowsFeature RSAT-Clustering*, RSAT-AD-*, RSAT-DNS-Server, GPMC, Hyper-V | Select-Object DisplayName, Name, Installed
-Get-Module -ListAvailable *cluster*, ActiveDirectory, Hyper-V
+Get-WindowsFeature RSAT-Clustering*, RSAT-AD-*, RSAT-DNS-Server, GPMC | Select-Object DisplayName, Name, Installed
+Get-Module -ListAvailable *cluster*, ActiveDirectory
 #
 New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Direction Inbound `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
-#
 Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator  -Restart -Verbose *>&1
 
-# On Hyper-V Host, Enable Mac Address spoofing 
-Set-VMNetworkAdapter -VMName "YAHOO-Nest-PAW" -MacAddressSpoofing On
 # ===================================================
 # Step 1 - Create 3 Server Core VMs for Storage Spaces Direct Cluster
 # ===================================================
