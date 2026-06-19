@@ -180,7 +180,7 @@ Invoke-Command -ComputerName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03 -ScriptBlo
     Install-WindowsFeature -Name File-Services, Failover-Clustering -IncludeManagementTools -Confirm:$false -Verbose *>&1
 } -Verbose *>&1
 
-# Reboot all cluster 
+# Reboot all cluster servers
 Invoke-Command -ComputerName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03 -ScriptBlock {
     Restart-Computer -Force -Verbose *>&1
 } -Verbose *>&1
