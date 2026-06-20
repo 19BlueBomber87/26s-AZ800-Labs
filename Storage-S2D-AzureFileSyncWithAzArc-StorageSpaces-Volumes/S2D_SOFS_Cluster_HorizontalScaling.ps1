@@ -93,8 +93,6 @@ Install-WindowsFeature -Name RSAT-DNS-Server -Confirm:$false -Verbose *>&1
 Install-WindowsFeature -Name GPMC -Confirm:$false -Verbose *>&1
 Rename-Computer -NewName  YAHOO-Nest-PAW -Restart -Verbose *>&1
 
-# Move Golden Images and ISOs to Nested Host
-
 Get-WindowsFeature RSAT-Clustering*, RSAT-AD-*, RSAT-DNS-Server, GPMC | Select-Object DisplayName, Name, Installed
 Get-Module -ListAvailable *cluster*, ActiveDirectory
 #
