@@ -103,6 +103,14 @@ foreach($admin in $newAdmins){
 }
 (Get-ADUser megaman -Properties memberof).memberof
 (Get-ADUser rush -Properties memberof).memberof
+    
+# 3 - minecraftmoose.com privileged access workstation(Management Server)
+New-Lab_VM YAHOO-PAW -HyperVSwitch ANC-NET -GeneralizedImageDE
+Install-WindowsFeature -Name RSAT-Clustering-MGMT -Confirm:$false -Verbose *>&1
+Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature -Confirm:$false -Verbose *>&1
+Install-WindowsFeature -Name RSAT-DNS-Server -Confirm:$false -Verbose *>&1
+Install-WindowsFeature -Name GPMC -Confirm:$false -Verbose *>&1
+Rename-Computer -NewName  YAHOO-PAW -Restart -Verbose *>&1
 
 # ===================================================
 
