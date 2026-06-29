@@ -164,3 +164,6 @@ Once onboarded, Arc-enabled resources become native Azure Resource Manager (ARM)
 
 **Repo:** [26s-AZ800-Labs](https://github.com/19BlueBomber87/26s-AZ800-Labs)  
 **YouTube Series:** Search for "26s AZ-800 Labs" on YouTube for video walkthroughs.
+## YouTube Playlist
+
+Full video series: [26s-AZ-800 Labs Playlist](https://www.youtube.com/playlist?list=PLNCpp1kkXtdLMO55tSqb15Ra-CC6wAAcC)
