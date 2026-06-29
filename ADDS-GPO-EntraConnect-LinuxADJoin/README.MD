@@ -90,5 +90,13 @@ GitHub: https://github.com/19BlueBomber87
 X: [@19BlueBomber87](https://x.com/19BlueBomber87)
 
 ---
+## YouTube Videos
 
+### Latest Video
+**AZ-800 Lab Video**  
+[Watch on YouTube](https://youtu.be/cQnUAGSW8Qs)
+
+### Full Series Playlist
+[26s-AZ-800 Labs Playlist](https://www.youtube.com/playlist?list=PLNCpp1kkXtdLMO55tSqb15Ra-CC6wAAcC)
 ⭐ Star the repo if this lab helped you!
+
