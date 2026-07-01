@@ -94,7 +94,7 @@ X: [@19BlueBomber87](https://x.com/19BlueBomber87)
 
 ### Latest Video
 **AZ-800 Lab Video**  
-[(Hyper-V Lab: Active Directory Domain Services & Entra Connect Lab](https://youtu.be/cQnUAGSW8Qs)
+[Active Directory Domain Services & Entra Connect Lab Video](https://youtu.be/cQnUAGSW8Qs)
 
 ### Full Series Playlist
 [26s-AZ-800 Labs Playlist](https://www.youtube.com/playlist?list=PLNCpp1kkXtdLMO55tSqb15Ra-CC6wAAcC)
