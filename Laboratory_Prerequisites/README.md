@@ -87,5 +87,13 @@ After completing the scripts in this folder, continue with the rest of the **26s
 **GitHub**: [19BlueBomber87](https://github.com/19BlueBomber87)
 
 ---
+## YouTube Videos
 
+### Latest Video
+**AZ-800 Lab Video**  
+[AZ 800 Hyper-V Windows Server as Lab Router, PromoteDC, DomainJoin and WAC Demo](https://youtu.be/XytLCQXKcNU?si=GKiYzkb9bvpOMRPH)
+
+### Full Series Playlist
+[26s-AZ-800 Labs Playlist](https://www.youtube.com/playlist?list=PLNCpp1kkXtdLMO55tSqb15Ra-CC6wAAcC)
+---
 **Happy Lab Building!** 🧪❄️
