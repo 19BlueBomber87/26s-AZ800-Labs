@@ -171,5 +171,5 @@ Once onboarded, Arc-enabled resources become native Azure Resource Manager (ARM)
 **05 AZ-800 Storage Lab** – Storage Spaces, S2D, ReFS, Azure File Sync & more  
 [Watch on YouTube](https://youtu.be/IGe08UdTjTc)
 
-### Full Series Playlist
+### Full Video Series Playlist
 [26s-AZ-800 Labs Playlist](https://www.youtube.com/playlist?list=PLNCpp1kkXtdLMO55tSqb15Ra-CC6wAAcC)
