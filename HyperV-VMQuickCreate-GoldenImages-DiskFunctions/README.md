@@ -219,6 +219,8 @@ The Python section is optional and mainly used for Unicode/character testing in 
 
 Happy Lab Building!
 
+---
+
 ## YouTube Videos
 
 ### Latest Video
