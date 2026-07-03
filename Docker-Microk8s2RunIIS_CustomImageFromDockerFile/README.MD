@@ -111,5 +111,5 @@ Technical flowchart showing the full Docker lifecycle from Dockerfile to pushing
 **AZ-800 Lab Video**  
 [AZ 800 Containers, K8s, Nested VMs and Images built from Docker Files Video](https://youtu.be/S_TRvjmDOtg)
 
-### Full Series Playlist
+### Full Video Series Playlist
 [26s-AZ-800 Labs Playlist](https://www.youtube.com/playlist?list=PLNCpp1kkXtdLMO55tSqb15Ra-CC6wAAcC)
