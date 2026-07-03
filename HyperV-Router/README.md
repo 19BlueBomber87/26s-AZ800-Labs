@@ -74,6 +74,15 @@ It creates a multi-homed **RRAS server** that acts as a router, DHCP server, and
 - DNS servers in DHCP scopes point to the future domain controllers (adjust if needed)
 - Run this script **after** the root domain controller (`minecraftmoose.com`) is online if possible
 
+
+## YouTube Videos
+
+### Latest Video
+**AZ-800 Lab Video**  
+[AZ 800 Hyper-V Windows Server as Lab Router, PromoteDC, DomainJoin and WAC Demo](https://youtu.be/XytLCQXKcNU?si=GKiYzkb9bvpOMRPH)
+
+### Full Series Playlist
+[26s-AZ-800 Labs Playlist](https://www.youtube.com/playlist?list=PLNCpp1kkXtdLMO55tSqb15Ra-CC6wAAcC)
 ---
 
 ## Author
@@ -81,9 +90,3 @@ Mark Kruse
 Anchorage, Alaska
 
 ---
-
-**Part of the AZ-800 Hyper-V Lab Series**
-
----
-
-**Next:** Proceed to deploy domain controllers and other servers in each network.
