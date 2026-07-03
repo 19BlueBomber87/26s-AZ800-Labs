@@ -152,7 +152,7 @@ These images are then used by the main `New-Lab_VM` function for extremely fast 
 **AZ-800 Lab Video**  
 [AZ 800 Labs HyperV VMQuickCreate GoldenImages DiskFunctions](https://youtu.be/bEgB61Q-PMs?si=Sq0qTz3u5t8s_WbP)
 
-### Full Series Playlist
+### Full Video Series Playlist
 [26s-AZ-800 Labs Playlist](https://www.youtube.com/playlist?list=PLNCpp1kkXtdLMO55tSqb15Ra-CC6wAAcC)
 
 ## Step-by-Step Guide
