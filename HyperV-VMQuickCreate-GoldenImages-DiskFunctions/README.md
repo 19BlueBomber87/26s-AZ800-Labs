@@ -144,6 +144,16 @@ These images are then used by the main `New-Lab_VM` function for extremely fast 
 - Internet access (for downloading Python and wallpaper)
 
 ---
+---
+
+## YouTube Videos
+
+### Latest Video
+**AZ-800 Lab Video**  
+[AZ 800 Labs HyperV VMQuickCreate GoldenImages DiskFunctions](https://youtu.be/bEgB61Q-PMs?si=Sq0qTz3u5t8s_WbP)
+
+### Full Series Playlist
+[26s-AZ-800 Labs Playlist](https://www.youtube.com/playlist?list=PLNCpp1kkXtdLMO55tSqb15Ra-CC6wAAcC)
 
 ## Step-by-Step Guide
 
@@ -218,14 +228,3 @@ The Python section is optional and mainly used for Unicode/character testing in 
 
 
 Happy Lab Building!
-
----
-
-## YouTube Videos
-
-### Latest Video
-**AZ-800 Lab Video**  
-[AZ 800 Labs HyperV VMQuickCreate GoldenImages DiskFunctions](https://youtu.be/bEgB61Q-PMs?si=Sq0qTz3u5t8s_WbP)
-
-### Full Series Playlist
-[26s-AZ-800 Labs Playlist](https://www.youtube.com/playlist?list=PLNCpp1kkXtdLMO55tSqb15Ra-CC6wAAcC)
