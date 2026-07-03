@@ -73,6 +73,14 @@ You can scale the deployment live:
 ```bash
 kubectl scale deployment custom-static-site --replicas=20
 ```
+## YouTube Videos
+
+### Latest Video
+**AZ-800 Lab Video**  
+[AZ 800 Containers, K8s, Nested VMs and Images built from Docker Files](https://youtu.be/S_TRvjmDOtg?si=6-V1MTjo56cJn3oB)
+
+### Full Video Series Playlist
+[26s-AZ-800 Labs Playlist](https://www.youtube.com/playlist?list=PLNCpp1kkXtdLMO55tSqb15Ra-CC6wAAcC)
 ---
 
 ## Author
