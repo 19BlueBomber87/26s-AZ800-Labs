@@ -81,7 +81,7 @@ It creates a multi-homed **RRAS server** that acts as a router, DHCP server, and
 **AZ-800 Lab Video**  
 [AZ 800 Hyper-V Windows Server as Lab Router, PromoteDC, DomainJoin and WAC Demo](https://youtu.be/XytLCQXKcNU?si=GKiYzkb9bvpOMRPH)
 
-### Full Series Playlist
+### Full Video Series Playlist
 [26s-AZ-800 Labs Playlist](https://www.youtube.com/playlist?list=PLNCpp1kkXtdLMO55tSqb15Ra-CC6wAAcC)
 ---
 
