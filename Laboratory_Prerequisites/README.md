@@ -66,6 +66,7 @@ These scripts are designed to be run **in order** and prepare the networking, Ac
 - Windows Admin Center is installed on Server Core and accessed via HTTPS.
 
 ---
+![Network Topology Diagram](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/Laboratory_Prerequisites/00-NetworkTopologyDiagram.jpg)
 
 ## 📍 Lab Location Theme
 
