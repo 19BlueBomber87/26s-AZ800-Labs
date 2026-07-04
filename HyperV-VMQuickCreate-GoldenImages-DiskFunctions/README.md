@@ -225,6 +225,6 @@ Always run sysprep from Audit Mode (CTRL+SHIFT+F3 at OOBE).
 The golden images must be generalized — never boot them directly after sysprep.
 You can rerun the entire process anytime you want to update the golden images.
 The Python section is optional and mainly used for Unicode/character testing in labs.
-
+```
 
 Happy Lab Building!
