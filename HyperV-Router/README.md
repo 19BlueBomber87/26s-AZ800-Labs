@@ -31,6 +31,8 @@ It creates a multi-homed **RRAS server** that acts as a router, DHCP server, and
 **External Interface:** `EXT-INT` (connected to host Wi-Fi for internet access)
 
 ---
+![Network Topology Diagram](https://raw.githubusercontent.com/19BlueBomber87/26s-AZ800-Labs/refs/heads/main/HyperV-Router/00-NetworkTopologyDiagram.jpg)
+---
 
 ## Prerequisites
 
