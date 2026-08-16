@@ -123,7 +123,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -IcmpType 8 `
     -Action Allow
 Rename-Computer -NewName YAHOO-Clus01 -Restart -Verbose *>&1
-Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator  -Restart -Verbose *>&1
+Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\megaman  -Restart -Verbose *>&1
 
 # Change computer name to YAHOO-Clus02 and join to domain
 # From the YAHOO-Clus02 VM run:
@@ -133,7 +133,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -IcmpType 8 `
     -Action Allow
 Rename-Computer -NewName YAHOO-Clus02 -Restart -Verbose *>&1
-Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator -Restart  -Verbose *>&1
+Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\megaman -Restart  -Verbose *>&1
 
 # Change computer name to YAHOO-Clus03 and join to domain
 # From the YAHOO-Clus03 VM run:
@@ -143,7 +143,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -IcmpType 8 `
     -Action Allow
 Rename-Computer -NewName YAHOO-Clus03 -Restart -Verbose *>&1
-Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator -Restart -Verbose *>&1
+Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\megaman -Restart -Verbose *>&1
 
 
 # Now we can leverage Invoke-Command
