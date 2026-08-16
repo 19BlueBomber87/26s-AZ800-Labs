@@ -101,7 +101,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -Protocol ICMPv4 `
     -IcmpType 8 `
     -Action Allow
-Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator  -Restart -Verbose *>&1
+Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\megaman  -Restart -Verbose *>&1
 
 # ===================================================
 # Step 1 - Create 3 Server Core VMs for Storage Spaces Direct Cluster
@@ -368,7 +368,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping (Echo Request)" `
     -IcmpType 8 `
     -Action Allow
 Rename-Computer -NewName YAHOO-Clus04 -Restart -Verbose *>&1
-Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\administrator -Restart -Verbose *>&1
+Add-Computer -DomainName minecraftmoose.com -DomainCredential minecraftmoose\megaman -Restart -Verbose *>&1
 
 # Install Roles
 # From any domain joined server
