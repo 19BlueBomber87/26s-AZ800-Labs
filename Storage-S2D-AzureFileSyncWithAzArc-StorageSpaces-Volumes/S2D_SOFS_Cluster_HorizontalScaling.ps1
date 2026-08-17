@@ -203,6 +203,8 @@ New-Cluster -Name S2DCluster01 -Node YAHOO-CLUS01, YAHOO-CLUS02, YAHOO-CLUS03 -N
 # We can now connect to S2DCluster01.minecraftmoose.com in fail-over cluster manager
 Get-Cluster -Name "S2DCluster01.minecraftmoose.com"
 
+# After running 'New-Cluster' you will see C:\ClusterStorage on each node in the cluster
+# Note: The root of C:\ClusterStorage is read‑only by design
 
 # The fail over cluster is now a computer in AD DS
 Invoke-Command -ComputerName YAHOO-DC01 -ScriptBlock {
@@ -225,8 +227,6 @@ Invoke-Command -ComputerName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03 -ScriptBlo
     Get-ClusterS2D -Verbose *>&1
 } -Verbose *>&1
 
-# After running 'Enable-ClusterS2D' you will see C:\ClusterStorage on each node in the cluster
-# Note: The root of C:\ClusterStorage is read‑only by design
 Invoke-Command -ComputerName YAHOO-Clus01, YAHOO-Clus02, YAHOO-Clus03  -ScriptBlock {
     HOSTNAME.EXE
     dir C:\
