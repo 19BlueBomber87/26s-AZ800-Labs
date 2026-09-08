@@ -221,6 +221,7 @@ $OUPath = "DC=$DC_Value2, DC=$DC_Value1,DC=fun"   # Replace with your domain DN
 New-ADOrganizationalUnit -Name $OUName -Path $OUPath -ProtectedFromAccidentalDeletion $true
 
 foreach($boss in $megaman4){
+    $distinguishedName = $domain.TrimEnd(".com")
     $office = "Eagle River"
     $city = $office
     $zip = 99577
@@ -254,6 +255,7 @@ foreach($boss in $megaman4){
 # Domain Local -> Members: from anywhere in forest -> Permissions: only in its own domain
 # Global -> Members: only from its own domain -> Permissions: can be assigned anywhere in the forest
 
+$distinguishedName = $domain.TrimEnd(".com")
 New-ADGroup -Name "Dev-RDS-Users" -GroupScope Global -GroupCategory Security -Description "Group for Remote Desktop access" -Path "OU=Entra Synced Users,DC=$DC_Value2,DC=$DC_Value1,DC=fun"
 $rdsUsers = Get-ADUser -SearchBase "OU=Entra Synced Users,DC=$DC_Value2,DC=$DC_Value1,DC=fun" -Filter *
 foreach ($user in $rdsUsers) {
